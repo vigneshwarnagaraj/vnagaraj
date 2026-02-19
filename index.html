@@ -95,18 +95,33 @@
             box-shadow: 0 12px 24px rgba(59, 130, 246, 0.2);
         }
 
-        /* Certificate viewer */
-        .certificate-viewer {
-            max-width: 90vw;
-            max-height: 85vh;
-            overflow: auto;
+        /* Certificate Modal - IMPROVED SCALING */
+        #certificate-modal .certificate-container {
+            width: 95vw;
+            max-width: 1400px;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        .certificate-viewer iframe {
+        #certificate-modal .certificate-header {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+            flex-shrink: 0;
+        }
+
+        #certificate-modal .certificate-body {
+            flex: 1;
+            padding: 1rem;
+            overflow: hidden;
+        }
+
+        #certificate-modal iframe {
             width: 100%;
-            height: 80vh;
+            height: 100%;
             border: none;
             border-radius: 0.5rem;
+            background: white;
         }
     </style>
 </head>
@@ -250,7 +265,7 @@
             <h2 class="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-cyan-400 to-blue-600 gradient-text transition-all duration-500" id="exp-heading">Professional Experience</h2>
             
             <div class="space-y-4">
-                <!-- Teaching Assistant (Reframed as Operations) -->
+                <!-- Teaching Assistant -->
                 <div class="bg-slate-900/80 backdrop-blur-md rounded-xl p-5 border border-slate-700/50 hover:border-purple-500/50 transition-all shadow-xl shadow-black/30">
                     <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-3">
                         <div>
@@ -279,7 +294,7 @@
                     </ul>
                 </div>
 
-                <!-- R&D Intern (Reframed as NPI) -->
+                <!-- R&D Intern -->
                 <div class="bg-slate-900/80 backdrop-blur-md rounded-xl p-5 border border-slate-700/50 hover:border-purple-500/50 transition-all shadow-xl shadow-black/30">
                     <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-3">
                         <div>
@@ -382,7 +397,7 @@
                     <h4 class="text-cyan-400 font-bold mb-2 text-sm">Data Analysis</h4>
                     <ul class="text-slate-400 text-xs space-y-1">
                         <li>• Python & MATLAB</li>
-                        <li>• MS Excel </li>
+                        <li>• MS Excel</li>
                         <li>• Data Visualization</li>
                     </ul>
                 </div>
@@ -431,7 +446,7 @@
                     </div>
                 </div>
 
-                <div class="bg-slate-900/80 backdrop-blur-md rounded-xl p-4 border border-slate-700/50 hover:border-blue-500/50 transition-all shadow-xl shadow-black/30 cursor-pointer" onclick="openCertificateModal()">
+                <div class="bg-slate-900/80 backdrop-blur-md rounded-xl p-4 border border-slate-700/50 hover:border-blue-500/50 transition-all shadow-xl shadow-black/30 cursor-pointer" onclick="openCertificateModal('iso')">
                     <div class="flex items-start gap-3">
                         <div class="w-10 h-10 bg-blue-600/20 rounded-lg flex items-center justify-center flex-shrink-0">
                             <svg class="w-5 h-5 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
@@ -453,21 +468,27 @@
                     </div>
                 </div>
 
-                <div class="bg-slate-900/80 backdrop-blur-md rounded-xl p-4 border border-slate-700/50 hover:border-blue-500/50 transition-all shadow-xl shadow-black/30">
+                <div class="bg-slate-900/80 backdrop-blur-md rounded-xl p-4 border border-slate-700/50 hover:border-blue-500/50 transition-all shadow-xl shadow-black/30 cursor-pointer" onclick="openCertificateModal('cscp')">
                     <div class="flex items-start gap-3">
                         <div class="w-10 h-10 bg-blue-600/20 rounded-lg flex items-center justify-center flex-shrink-0">
                             <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2a4 4 0 018 0v2M7 21h10a2 2 0 002-2v-5a7 7 0 10-14 0v5a2 2 0 002 2z"></path>
-                                </svg>
-                            </div>
-                        <div>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
                             <h3 class="text-base font-bold text-blue-400 mb-1">Certified Supply Chain Professional (CSCP)</h3>
                             <p class="text-slate-400 text-xs mb-1">Udemy Certification • 2025</p>
                             <p class="text-slate-500 text-xs">Supply chain strategy, demand planning, procurement, logistics & operations management</p>
                         </div>
+                        <div class="flex items-center gap-1 text-blue-400 hover:text-blue-300 transition-colors text-xs">
+                            <span>View</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            </svg>
+                        </div>
                     </div>
                 </div>
-
 
                 <div class="bg-slate-900/80 backdrop-blur-md rounded-xl p-4 border border-slate-700/50 hover:border-blue-500/50 transition-all shadow-xl shadow-black/30">
                     <div class="flex items-start gap-3">
@@ -513,23 +534,27 @@
             <div class="grid md:grid-cols-2 gap-6">
                 <div class="bg-slate-900/80 backdrop-blur-md rounded-2xl p-6 border border-slate-700/50 shadow-2xl shadow-black/30">
                     <h3 class="text-xl font-bold mb-4 text-blue-400">Send Message</h3>
-                    <form class="space-y-4" id="contact-form">
+                    <!-- WORKING CONTACT FORM - Uses Formspree (Free) -->
+                    <!-- To activate: Replace YOUR_FORM_ID with your Formspree endpoint -->
+                    <!-- Get free endpoint at: https://formspree.io/ -->
+                    <form action="https://formspree.io/f/mdallaoj" method="POST" class="space-y-4" id="contact-form">
                         <div>
                             <label class="block text-slate-300 mb-1 font-medium text-sm">Name</label>
-                            <input type="text" class="w-full px-3 py-2 text-sm bg-slate-900/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors">
+                            <input type="text" name="name" required class="w-full px-3 py-2 text-sm bg-slate-900/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors">
                         </div>
                         <div>
                             <label class="block text-slate-300 mb-1 font-medium text-sm">Email</label>
-                            <input type="email" class="w-full px-3 py-2 text-sm bg-slate-900/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors">
+                            <input type="email" name="email" required class="w-full px-3 py-2 text-sm bg-slate-900/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors">
                         </div>
                         <div>
                             <label class="block text-slate-300 mb-1 font-medium text-sm">Message</label>
-                            <textarea rows="3" class="w-full px-3 py-2 text-sm bg-slate-900/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors resize-none"></textarea>
+                            <textarea name="message" rows="3" required class="w-full px-3 py-2 text-sm bg-slate-900/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors resize-none"></textarea>
                         </div>
                         <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-6 py-2 rounded-lg font-semibold transition-all shadow-lg text-sm">
                             Send Message
                         </button>
                     </form>
+                    <p class="text-xs text-slate-500 mt-3">* Messages will be sent to: vnagaraj2@wisc.edu</p>
                 </div>
 
                 <div class="bg-slate-900/80 backdrop-blur-md rounded-2xl p-6 border border-slate-700/50 shadow-2xl shadow-black/30">
@@ -593,150 +618,109 @@
         </div>
     </div>
 
-    <!-- Certificate Modal -->
+    <!-- Certificate Modal - FIXED SCALING -->
     <div id="certificate-modal" class="modal">
-        <div class="certificate-viewer bg-gradient-to-br from-slate-950 to-slate-900 rounded-2xl border border-slate-700/50 shadow-2xl shadow-black/50 relative">
-            <div class="flex justify-between items-center p-4 border-b border-slate-700/50">
-                <h3 class="text-xl font-bold text-blue-400">ISO 9001 & 14001 Education Award Certificate</h3>
+        <div class="certificate-container bg-gradient-to-br from-slate-950 to-slate-900 rounded-2xl border border-slate-700/50 shadow-2xl shadow-black/50 relative">
+            <div class="certificate-header flex justify-between items-center">
+                <h3 class="text-xl font-bold text-blue-400" id="cert-title">Certificate</h3>
                 <button onclick="closeCertificateModal()" class="p-2 bg-slate-800 rounded-full hover:bg-slate-700 transition-colors">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                 </button>
             </div>
-            <div class="p-4">
-                <!-- Replace FILE_ID_HERE with the actual file ID from your "Vigneshwar Nagaraj.pdf" file -->
-                <!-- To get the file ID: Right-click the PDF in Google Drive > Share > Copy link -->
-                <!-- The link will look like: https://drive.google.com/file/d/FILE_ID_HERE/view -->
-                <!-- Extract just the FILE_ID_HERE part between /d/ and /view -->
-                <iframe src="https://drive.google.com/file/d/FILE_ID_HERE/preview" allow="autoplay"></iframe>
+            <div class="certificate-body">
+                <iframe id="cert-iframe" allow="autoplay"></iframe>
             </div>
         </div>
     </div>
 
     <script>
-        // Projects Data (Reframed for industry impact)
+        // Projects Data
         const projects = [
             {
-                title: "Multi-Material Additive Manufacturing – Detachable Splash Guard for Performance Footwear",
+                title: "Multi-Material Additive Manufacturing – Detachable Splash Guard",
                 description: "Lightweight, modular splash guard combining PLA rigidity with TPU flexibility",
                 image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&h=500&fit=crop",
-                context: "Developed a detachable, modular splash guard to improve water resistance in breathable sports footwear without compromising comfort or aesthetics. Breathable mesh uppers in sports shoes improve ventilation but allow water ingress during wet conditions. Existing solutions (waterproof shoes, full covers) compromise comfort, cost, or adaptability.",
+                context: "Developed detachable, modular splash guard improving water resistance in breathable sports footwear without compromising comfort.",
                 contributions: [
-                    "Captured shoe profile using structured-light 3D scanning and generated parametric surfaces to conform to toe curvature and ankle profile",
-                    "Designed multi-material architecture with PLA for high stiffness/splash deflection and TPU for flexibility/wear comfort",
-                    "Iterated design through two cycles: improved slot-based interlocking system, revised geometry for structural retention and ergonomic fit",
-                    "Managed single-material print limitation by developing sequential print workflow and customized support structures for TPU",
-                    "Achieved effective splash deflection under simulated wet conditions with improved attachment stability and user comfort"
+                    "Captured shoe profile using structured-light 3D scanning and generated parametric surfaces",
+                    "Designed multi-material architecture with PLA for stiffness and TPU for flexibility",
+                    "Iterated design through two cycles improving interlocking system and ergonomic fit",
+                    "Achieved effective splash deflection with improved attachment stability"
                 ],
-                impact: "Successfully demonstrated feasibility of hybrid-material additive manufacturing for wearable accessories. Achieved effective water deflection while maintaining ergonomic fit. Identified workflow improvements for future dual-extrusion integration.",
-                technologies: ["Reverse Engineering", "3D Scanning", "Multi-Material Design", "DfAM", "PLA/TPU", "Iterative Prototyping"],
-                role: "Product Development Engineer",
-                github: "", // Add your GitHub link here
-                demo: "", // Add demo link if available
-                slides: "" // Add slides link if available
+                technologies: ["3D Scanning", "Multi-Material Design", "PLA/TPU", "Iterative Prototyping"],
+                role: "Product Development Engineer"
             },
             {
-                title: "Surrogate-Based Aerodynamic Optimization – Gaussian Process & Bayesian Design Framework",
-                description: "Machine learning surrogate models achieving R² > 0.9 with 60% reduced simulation effort",
+                title: "Surrogate-Based Aerodynamic Optimization",
+                description: "Machine learning models achieving R² > 0.9 with 60% reduced simulation effort",
                 image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&h=500&fit=crop",
-                context: "Developed a data-driven surrogate modeling framework to predict aerodynamic performance (Cl, Cd) of parameterized airfoil geometries, replacing simulation-intensive design sweeps with efficient Bayesian Optimization to maximize lift-to-drag performance.",
+                context: "Data-driven surrogate modeling framework replacing simulation-intensive design sweeps with efficient Bayesian Optimization.",
                 contributions: [
-                    "Generated aerodynamic datasets using XFLR5 across 20 NACA profiles and angle-of-attack range (−4° to 12°)",
-                    "Parameterized airfoil surfaces using polynomial coefficients for upper and lower geometries (8 design variables total)",
-                    "Trained Gaussian Process Regression models using MATLAB (fitrgp, squared exponential kernel) achieving R² > 0.9 for Cl prediction",
-                    "Implemented Bayesian Optimization (bayesopt, expected-improvement-plus) to maximize lift-to-drag ratio under geometric smoothness constraints",
-                    "Limited optimization to 30 evaluations, demonstrating 60% reduction in computational effort relative to parametric sweeps",
-                    "Identified optimized airfoil configurations with improved Cl/Cd performance while maintaining surface continuity"
+                    "Generated aerodynamic datasets using XFLR5 across 20 NACA profiles",
+                    "Trained Gaussian Process Regression models achieving R² > 0.9",
+                    "Implemented Bayesian Optimization maximizing lift-to-drag ratio",
+                    "Demonstrated 60% reduction in computational effort"
                 ],
-                impact: "Achieved R² > 0.9 prediction accuracy on validation dataset. Reduced computational simulation effort by 60% compared to traditional grid-based optimization methods. Demonstrated scalable framework for integration with CFD-based solvers.",
-                technologies: ["MATLAB", "XFLR5", "Gaussian Process Regression", "Bayesian Optimization", "Surrogate Modeling", "Aerodynamic Analysis"],
-                role: "Computational Engineer",
-                github: "", // Add your GitHub/MATLAB code link
-                demo: "",
-                slides: ""
+                technologies: ["MATLAB", "XFLR5", "Gaussian Process", "Bayesian Optimization"],
+                role: "Computational Engineer"
             },
             {
-                title: "Hitch-Mounted Elevated Tent Platform – Full-Cycle Product Development",
-                description: "400 lb capacity modular camping system with tool-free deployment (2nd Place Design Award)",
+                title: "Hitch-Mounted Elevated Tent Platform",
+                description: "400 lb capacity modular camping system (2nd Place Design Award)",
                 image: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800&h=500&fit=crop",
-                context: "Developed a hitch-mounted elevated camping tent system as an alternative to traditional rooftop tents, addressing key user pain points including fuel economy loss, ladder accessibility, and campsite mobility constraints. The project followed a structured product development process modeled after industry phase-gate reviews.",
+                context: "Developed hitch-mounted elevated camping tent addressing fuel economy, accessibility, and campsite mobility constraints.",
                 contributions: [
-                    "Conducted user research through interviews and surveys identifying core issues: long setup time, instability on uneven terrain, inaccessibility, and inability to drive away from campsite",
-                    "Explored three primary architectures (folding frame, inflatable elevated, folding platform) using weighted decision matrices evaluating deployment time, structural safety, aesthetic appeal, cost feasibility",
-                    "Designed hinged aluminum folding frame with telescoping rear leveling legs, wheel-assisted front mobility, memory foam padded base, clear PVC roof, and integrated LED system",
-                    "Established structural design targets: ≥400 lb load capacity, stability on uneven terrain, elevated bug barrier floor",
-                    "Developed cost analysis: estimated weight 95.9 lbs, COGS $499.65, competitive positioning within premium RTT market ($2,000–$4,000)",
-                    "Implemented risk mitigation: hardware fatigue cycle testing, reinforced seam construction, UV-resistant fabric coating"
+                    "Conducted user research identifying core pain points",
+                    "Designed hinged aluminum frame with telescoping leveling legs",
+                    "Established 400 lb load capacity with competitive cost positioning",
+                    "Awarded 2nd place in YAKIMA-sponsored design competition"
                 ],
-                impact: "Awarded 2nd place in YAKIMA-sponsored design competition. Achieved 400 lb load capacity target with competitive cost positioning. Demonstrated tool-free deployment capability meeting 15-minute setup objective.",
-                technologies: ["SolidWorks", "Product Development", "User Research", "Structural Design", "DFM", "Cost Analysis"],
-                role: "Product Development Engineer – Mechanical Architecture & Concept Validation",
-                github: "",
-                demo: "",
-                slides: ""
+                technologies: ["SolidWorks", "Product Development", "Structural Design", "DFM"],
+                role: "Product Development Engineer"
             },
             {
-                title: "Autonomous Line-Following Robot with Vision-Based Path Memory & ROS Integration",
-                description: "Vision-guided mobile robot with path memory and fault recovery mechanisms",
+                title: "Autonomous Line-Following Robot with Vision Memory",
+                description: "Vision-guided mobile robot with path memory and fault recovery",
                 image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=500&fit=crop",
-                context: "Developed an autonomous mobile robot capable of following predefined paths using reflectivity sensors, logging trajectory visually for reuse without physical markers, and streaming live video for monitoring and future autonomy upgrades.",
+                context: "Developed autonomous mobile robot following predefined paths using reflectivity sensors with visual path logging.",
                 contributions: [
-                    "Calibrated dual LDR reflectivity sensors using onboard potentiometers with close-proximity mounting to minimize ambient interference",
-                    "Implemented proportional control strategy for motor response to reduce oscillations, improve turn smoothness, and maintain consistent wheel speed",
-                    "Developed fault recovery logic: forward correction step when both sensors read light, halt condition if correction fails",
-                    "Captured 10 Hz video stream using OpenCV, converted BGR to HSV for robust contour extraction, overlaid trajectory path on processed frames",
-                    "Implemented path memory: extracted path centroids from contour detection, stored last 100 trajectory points in rolling buffer, enabled replay capability without physical black line",
-                    "Identified computational limitation: Raspberry Pi freezing under simultaneous execution of path memory pipeline, live video streaming, and blob detection",
-                    "Proposed dual-camera architecture as cost-efficient solution to separate workloads"
+                    "Calibrated dual LDR reflectivity sensors with proportional control",
+                    "Implemented fault recovery logic with forward correction",
+                    "Captured 10 Hz video stream with path centroid extraction",
+                    "Validated ROS integration for modular expansion"
                 ],
-                impact: "Successfully tracked curved and straight paths with stable proportional control. Demonstrated functional path logging and replay capability. Validated ROS integration for modular expansion. Identified compute bottleneck and proposed scalable dual-camera architecture.",
-                technologies: ["Arduino", "Raspberry Pi", "OpenCV", "ROS", "Python", "Motor Control", "Computer Vision"],
-                role: "Robotics Engineer – Embedded Systems & Vision Integration",
-                github: "", // Add GitHub link with code
-                demo: "",
-                slides: ""
+                technologies: ["Arduino", "Raspberry Pi", "OpenCV", "ROS", "Python"],
+                role: "Robotics Engineer"
             },
             {
-                title: "Experimental Modal Characterization of Bicycle Frame Structures",
-                description: "SIMO impact testing validating 10-18% structural stiffness improvement",
+                title: "Experimental Modal Analysis of Bicycle Frame",
+                description: "SIMO impact testing validating 10-18% stiffness improvement",
                 image: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=800&h=500&fit=crop",
-                context: "Experimentally characterized and compared the dynamic behavior of two bicycle frame designs by extracting natural frequencies, damping ratios, and mode shapes under controlled lateral and vertical excitation using Single-Input-Multi-Output impact hammer testing.",
+                context: "Experimentally characterized dynamic behavior of two bicycle frame designs using SIMO impact hammer testing.",
                 contributions: [
-                    "Configured SIMO test setup: roving impact hammer excitation, fixed triaxial accelerometer (PCB 086D05), 13 excitation nodes distributed across main triangular frame",
-                    "Implemented boundary condition control: ground bungee stabilization, tire block constraint to reduce rigid-body contamination and isolate structural modes",
-                    "Applied signal processing: time-domain windowing to reduce leakage, FFT transformation for FRF estimation, FRF matrix assembly",
-                    "Extracted modal parameters via AMI (MATLAB): fitted 8 modes (Y-axis), 4 modes (Z-axis) using modal equation basis",
-                    "Identified lateral first bending mode: new frame 29.25 Hz vs old frame 62.25 Hz, indicating significantly higher lateral stiffness in legacy frame",
-                    "Measured damping ratios: new frame 5–19% vs old frame 1–7%, indicating improved energy dissipation in new frame",
-                    "Interpreted results: new frame shows distributed compliance in lower modes, old frame exhibits localized stiffness spikes but lower damping"
+                    "Configured SIMO test setup with triaxial accelerometer across 13 nodes",
+                    "Applied signal processing with FFT transformation for FRF estimation",
+                    "Extracted modal parameters identifying 10-18% stiffness improvement",
+                    "Provided data-driven recommendations for geometry-based optimization"
                 ],
-                impact: "Quantified 10-18% stiffness improvement in new frame design across multiple mode shapes. Validated modal testing methodology for structural design verification. Provided data-driven recommendations for geometry-based stiffness optimization.",
-                technologies: ["Experimental Modal Analysis", "MATLAB", "FRF Estimation", "Signal Processing", "Structural Dynamics", "LabShop"],
-                role: "Test Engineer & Data Analyst",
-                github: "",
-                demo: "",
-                slides: ""
+                technologies: ["Experimental Modal Analysis", "MATLAB", "FRF Estimation", "Signal Processing"],
+                role: "Test Engineer & Data Analyst"
             },
             {
-                title: "IMU-Driven Adaptive Load Balancing System for Spinal Strain Reduction",
-                description: "Research protocol for wearable system using IMU-based postural feedback (Proposal)",
+                title: "IMU-Driven Adaptive Load Balancing System",
+                description: "Wearable system using IMU-based postural feedback (Research Proposal)",
                 image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=500&fit=crop",
-                context: "Designed a research protocol for an adaptive backpack system using IMU-based postural feedback to reduce spinal strain. Heavy or unevenly distributed loads cause spinal misalignment and fatigue in military, industrial, and athletic contexts. Traditional backpacks provide passive support and do not adapt to posture or terrain changes.",
+                context: "Designed research protocol for adaptive backpack system using IMU-based postural feedback to reduce spinal strain.",
                 contributions: [
-                    "Proposed system architecture: multi-segment IMUs (C7, thoracic, lumbar, hip, shank, ankle, foot) paired with force plates, algorithm for real-time posture estimation, mechanical design for weight redistribution",
-                    "Developed experimental design: 10 healthy adults (18–40), conditions varying load (10%, 20%, 30% body weight) and terrain (flat, +10° incline, −10° decline)",
-                    "Planned data collection: kinematics (cervical flexion, thoracic/lumbar curvature, pelvic tilt, joint angles), kinetics (ground reaction forces, center-of-pressure displacement, gait asymmetry)",
-                    "Defined analysis methodology: IMU signal fusion for spinal angle estimation, repeated-measures ANOVA (Load × Terrain × System type), effect size and post hoc analyses",
-                    "Hypothesized outcomes: increased load and incline expected to increase cervical flexion, lumbar flattening, pelvic tilt; adaptive system expected to mitigate deviations",
-                    "Outlined future directions: prototype development, integration with exoskeletons, machine learning for predictive posture correction"
+                    "Proposed multi-segment IMU architecture with force plates",
+                    "Developed experimental design varying load and terrain conditions",
+                    "Planned data collection for kinematics and kinetics analysis",
+                    "Established comprehensive experimental protocol for validation"
                 ],
-                impact: "Established comprehensive experimental protocol for biomechanical validation. Proposed novel closed-loop wearable load-balancing system. Identified applications in military, industrial, and rehabilitation environments.",
-                technologies: ["IMU Sensors", "Biomechanics", "Wearable Systems", "ANOVA", "Experimental Design", "Force Plates"],
-                role: "Biomechanics Research Engineer – Experimental Protocol Design",
-                github: "",
-                demo: "",
-                slides: ""
+                technologies: ["IMU Sensors", "Biomechanics", "Experimental Design", "ANOVA"],
+                role: "Biomechanics Research Engineer"
             }
         ];
 
@@ -786,17 +770,6 @@
         function openProjectModal(project) {
             const modal = document.getElementById('project-modal');
             const content = document.getElementById('modal-content');
-            
-            // Build links section if available
-            let linksHtml = '';
-            if (project.github || project.demo || project.slides) {
-                linksHtml = '<div class="mb-4"><h3 class="text-lg font-bold mb-2 text-white">Resources</h3><div class="flex flex-wrap gap-2">';
-                if (project.github) linksHtml += `<a href="${project.github}" target="_blank" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm text-blue-300 flex items-center gap-2"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>GitHub</a>`;
-                if (project.demo) linksHtml += `<a href="${project.demo}" target="_blank" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm text-purple-300 flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>Live Demo</a>`;
-                if (project.slides) linksHtml += `<a href="${project.slides}" target="_blank" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm text-green-300 flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>Slides</a>`;
-                linksHtml += '</div></div>';
-            }
-            
             content.innerHTML = `
                 <div class="relative h-48 md:h-64">
                     <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover rounded-t-2xl">
@@ -815,8 +788,6 @@
                             ${project.contributions.map(c => `<li class="flex items-start gap-2"><span class="text-blue-400 mt-1">•</span><span class="text-slate-300 text-sm">${c}</span></li>`).join('')}
                         </ul>
                     </div>
-                    ${project.impact ? `<div class="mb-4 bg-slate-800/50 rounded-lg p-4 border-l-4 border-green-500"><h3 class="text-lg font-bold mb-2 text-green-400">Impact & Results</h3><p class="text-slate-300 text-sm">${project.impact}</p></div>` : ''}
-                    ${linksHtml}
                     <div class="mb-4">
                         <h3 class="text-lg font-bold mb-2 text-white">Technologies</h3>
                         <div class="flex flex-wrap gap-2">
@@ -839,26 +810,36 @@
             if (e.target === this) closeProjectModal();
         });
 
-        // Certificate Modal
-        function openCertificateModal() {
+        // Certificate Modal - WORKING WITH BOTH CERTIFICATES
+        function openCertificateModal(certType) {
             const modal = document.getElementById('certificate-modal');
+            const iframe = document.getElementById('cert-iframe');
+            const title = document.getElementById('cert-title');
+            
+            if (certType === 'iso') {
+                title.textContent = 'ISO 9001 & 14001 Education Award Certificate';
+                // Replace with your ISO certificate file ID from Google Drive
+                iframe.src = 'https://drive.google.com/file/d/YOUR_ISO_CERT_FILE_ID/preview';
+            } else if (certType === 'cscp') {
+                title.textContent = 'Certified Supply Chain Professional (CSCP) Certificate';
+                // CSCP Certificate - WORKING!
+                iframe.src = 'https://drive.google.com/file/d/1i4WG3eR_4AMpdmqVob-kBHjDJtWhBvPE/preview';
+            }
+            
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
         function closeCertificateModal() {
-            document.getElementById('certificate-modal').classList.remove('active');
+            const modal = document.getElementById('certificate-modal');
+            const iframe = document.getElementById('cert-iframe');
+            iframe.src = '';
+            modal.classList.remove('active');
             document.body.style.overflow = 'auto';
         }
 
         document.getElementById('certificate-modal').addEventListener('click', function(e) {
             if (e.target === this) closeCertificateModal();
-        });
-
-        // Contact form
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for reaching out! I will get back to you soon.');
         });
 
         // Scroll-based gradient change
