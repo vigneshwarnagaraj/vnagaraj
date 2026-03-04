@@ -123,6 +123,77 @@
             border-radius: 0.5rem;
             background: white;
         }
+
+        /* Carousel for Certificates */
+        .cert-carousel {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .cert-carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .cert-slide {
+            min-width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cert-carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .cert-carousel-btn:hover {
+            background: rgba(59, 130, 246, 0.8);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+
+        .cert-carousel-btn.prev {
+            left: 10px;
+        }
+
+        .cert-carousel-btn.next {
+            right: 10px;
+        }
+
+        .cert-carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .cert-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(148, 163, 184, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cert-indicator.active {
+            background: rgb(59, 130, 246);
+            width: 24px;
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-gray-950 via-blue-950 to-gray-950 text-white min-h-screen">
@@ -431,17 +502,46 @@
             <h2 class="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-cyan-400 to-blue-600 gradient-text transition-all duration-500" id="cert-heading">Certifications & Professional Development</h2>
             
             <div class="grid md:grid-cols-2 gap-4">
-                <div class="bg-slate-900/80 backdrop-blur-md rounded-xl p-4 border border-slate-700/50 hover:border-blue-500/50 transition-all shadow-xl shadow-black/30">
+                <div class="bg-slate-900/80 backdrop-blur-md rounded-xl p-4 border border-slate-700/50 hover:border-blue-500/50 transition-all shadow-xl shadow-black/30 cursor-pointer" onclick="openBadgeModal('six-sigma')">
                     <div class="flex items-start gap-3">
                         <div class="w-10 h-10 bg-blue-600/20 rounded-lg flex items-center justify-center flex-shrink-0">
                             <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                         </div>
-                        <div>
-                            <h3 class="text-base font-bold text-blue-400 mb-1">Lean Six Sigma Green Belt</h3>
-                            <p class="text-slate-400 text-xs mb-1">AIGPE • Expected May 2026</p>
-                            <p class="text-slate-500 text-xs">Process improvement • Currently in Analyze phase with real manufacturing dataset application</p>
+                        <div class="flex-1">
+                            <h3 class="text-base font-bold text-blue-400 mb-1">Certified Six Sigma Green Belt</h3>
+                            <p class="text-slate-400 text-xs mb-1">AIGPE • March 2026</p>
+                            <p class="text-slate-500 text-xs">Process improvement methodology & statistical analysis</p>
+                        </div>
+                        <div class="flex items-center gap-1 text-blue-400 hover:text-blue-300 transition-colors text-xs">
+                            <span>View</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/80 backdrop-blur-md rounded-xl p-4 border border-slate-700/50 hover:border-blue-500/50 transition-all shadow-xl shadow-black/30 cursor-pointer" onclick="openBadgeModal('minitab')">
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 bg-blue-600/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-base font-bold text-blue-400 mb-1">Certified Minitab Expert</h3>
+                            <p class="text-slate-400 text-xs mb-1">AIGPE • March 2026</p>
+                            <p class="text-slate-500 text-xs">Statistical software & data analysis expertise</p>
+                        </div>
+                        <div class="flex items-center gap-1 text-blue-400 hover:text-blue-300 transition-colors text-xs">
+                            <span>View</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            </svg>
                         </div>
                     </div>
                 </div>
@@ -504,21 +604,6 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="bg-slate-900/80 backdrop-blur-md rounded-xl p-4 border border-slate-700/50 hover:border-blue-500/50 transition-all shadow-xl shadow-black/30">
-                    <div class="flex items-start gap-3">
-                        <div class="w-10 h-10 bg-blue-600/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="text-base font-bold text-blue-400 mb-1">Quality Tools & Methods</h3>
-                            <p class="text-slate-400 text-xs mb-1">Applied Coursework • Spring 2025</p>
-                            <p class="text-slate-500 text-xs">SPC, RCA, PFMEA, 8D problem solving</p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -534,27 +619,24 @@
             <div class="grid md:grid-cols-2 gap-6">
                 <div class="bg-slate-900/80 backdrop-blur-md rounded-2xl p-6 border border-slate-700/50 shadow-2xl shadow-black/30">
                     <h3 class="text-xl font-bold mb-4 text-blue-400">Send Message</h3>
-                    <!-- WORKING CONTACT FORM - Uses Formspree (Free) -->
-                    <!-- To activate: Replace YOUR_FORM_ID with your Formspree endpoint -->
-                    <!-- Get free endpoint at: https://formspree.io/ -->
-                    <form action="https://formspree.io/f/mdallaoj" method="POST" class="space-y-4" id="contact-form">
+                    <form class="space-y-4" id="contact-form">
                         <div>
                             <label class="block text-slate-300 mb-1 font-medium text-sm">Name</label>
-                            <input type="text" name="name" required class="w-full px-3 py-2 text-sm bg-slate-900/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors">
+                            <input type="text" id="contact-name" name="name" required class="w-full px-3 py-2 text-sm bg-slate-900/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors">
                         </div>
                         <div>
                             <label class="block text-slate-300 mb-1 font-medium text-sm">Email</label>
-                            <input type="email" name="email" required class="w-full px-3 py-2 text-sm bg-slate-900/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors">
+                            <input type="email" id="contact-email" name="email" required class="w-full px-3 py-2 text-sm bg-slate-900/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors">
                         </div>
                         <div>
                             <label class="block text-slate-300 mb-1 font-medium text-sm">Message</label>
-                            <textarea name="message" rows="3" required class="w-full px-3 py-2 text-sm bg-slate-900/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors resize-none"></textarea>
+                            <textarea id="contact-message" name="message" rows="3" required class="w-full px-3 py-2 text-sm bg-slate-900/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors resize-none"></textarea>
                         </div>
                         <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-6 py-2 rounded-lg font-semibold transition-all shadow-lg text-sm">
                             Send Message
                         </button>
                     </form>
-                    <p class="text-xs text-slate-500 mt-3">* Messages will be sent to: vnagaraj2@wisc.edu</p>
+                    <p class="text-xs text-slate-500 mt-3">* Messages will open in your email client</p>
                 </div>
 
                 <div class="bg-slate-900/80 backdrop-blur-md rounded-2xl p-6 border border-slate-700/50 shadow-2xl shadow-black/30">
@@ -635,6 +717,45 @@
         </div>
     </div>
 
+    <!-- Badge Modal - For Digital Badge Certificates with Carousel -->
+    <div id="badge-modal" class="modal">
+        <div class="certificate-container bg-gradient-to-br from-slate-950 to-slate-900 rounded-2xl border border-slate-700/50 shadow-2xl shadow-black/50 relative">
+            <div class="certificate-header flex justify-between items-center">
+                <h3 class="text-xl font-bold text-blue-400" id="badge-title">Certificate</h3>
+                <button onclick="closeBadgeModal()" class="p-2 bg-slate-800 rounded-full hover:bg-slate-700 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="certificate-body p-8">
+                <!-- Carousel Container -->
+                <div class="cert-carousel relative mb-6">
+                    <button class="cert-carousel-btn prev" onclick="prevCertSlide()">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    <button class="cert-carousel-btn next" onclick="nextCertSlide()">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                    <div class="cert-carousel-inner" id="cert-carousel-inner">
+                        <!-- Slides will be populated by JavaScript -->
+                    </div>
+                    <div class="cert-carousel-indicators" id="cert-indicators">
+                        <!-- Indicators will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <div id="badge-info" class="bg-slate-800/50 rounded-lg p-6">
+                    <!-- Badge info will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Projects Data
         const projects = [
@@ -642,85 +763,194 @@
                 title: "Multi-Material Additive Manufacturing – Detachable Splash Guard",
                 description: "Lightweight, modular splash guard combining PLA rigidity with TPU flexibility",
                 image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&h=500&fit=crop",
-                context: "Developed detachable, modular splash guard improving water resistance in breathable sports footwear without compromising comfort.",
-                contributions: [
-                    "Captured shoe profile using structured-light 3D scanning and generated parametric surfaces",
-                    "Designed multi-material architecture with PLA for stiffness and TPU for flexibility",
-                    "Iterated design through two cycles improving interlocking system and ergonomic fit",
-                    "Achieved effective splash deflection with improved attachment stability"
+                overview: "Developed a detachable, modular splash guard to improve water resistance in breathable sports footwear without compromising comfort or aesthetics.",
+                problemStatement: "Breathable mesh uppers in sports shoes improve ventilation but allow water ingress during wet conditions. Existing solutions (waterproof shoes, full covers) compromise comfort, cost, or adaptability.",
+                objectives: [
+                    "Design a removable splash guard that integrates with existing footwear",
+                    "Achieve effective water deflection while maintaining ergonomic fit",
+                    "Optimize multi-material architecture for structural retention and comfort",
+                    "Validate design through iterative prototyping and testing"
                 ],
-                technologies: ["3D Scanning", "Multi-Material Design", "PLA/TPU", "Iterative Prototyping"],
-                role: "Product Development Engineer"
+                methodology: [
+                    "Captured shoe profile using structured-light 3D scanning and generated parametric surfaces to conform to toe curvature and ankle profile",
+                    "Designed multi-material architecture with PLA for high stiffness/splash deflection and TPU for flexibility/wear comfort",
+                    "Iterated design through two cycles: improved slot-based interlocking system, revised geometry for structural retention and ergonomic fit",
+                    "Managed single-material print limitation by developing sequential print workflow and customized support structures for TPU"
+                ],
+                technologies: ["3D Scanning", "Multi-Material Design", "PLA/TPU", "Iterative Prototyping", "DfAM", "Reverse Engineering"],
+                results: [
+                    "Successfully demonstrated feasibility of hybrid-material additive manufacturing for wearable accessories",
+                    "Achieved effective water deflection under simulated wet conditions",
+                    "Improved attachment stability and user comfort through design iterations",
+                    "Identified workflow improvements for future dual-extrusion integration"
+                ],
+                insights: "Multi-material additive manufacturing requires careful consideration of material interfaces and sequential build strategies when dual-extrusion is unavailable. Iterative physical prototyping proved essential for validating ergonomic fit that computational models could not predict.",
+                role: "Product Development Engineer",
+                isComplete: true
             },
             {
                 title: "Surrogate-Based Aerodynamic Optimization",
                 description: "Machine learning models achieving R² > 0.9 with 60% reduced simulation effort",
                 image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&h=500&fit=crop",
-                context: "Data-driven surrogate modeling framework replacing simulation-intensive design sweeps with efficient Bayesian Optimization.",
-                contributions: [
-                    "Generated aerodynamic datasets using XFLR5 across 20 NACA profiles",
-                    "Trained Gaussian Process Regression models achieving R² > 0.9",
-                    "Implemented Bayesian Optimization maximizing lift-to-drag ratio",
-                    "Demonstrated 60% reduction in computational effort"
+                overview: "Developed a data-driven surrogate modeling framework to predict aerodynamic performance (Cl, Cd) of parameterized airfoil geometries, replacing simulation-intensive design sweeps with efficient Bayesian Optimization.",
+                problemStatement: "Traditional aerodynamic optimization requires hundreds of computationally expensive CFD simulations, limiting design space exploration and rapid iteration capabilities.",
+                objectives: [
+                    "Develop high-fidelity surrogate models for lift and drag prediction",
+                    "Reduce computational requirements while maintaining accuracy",
+                    "Implement Bayesian optimization for efficient design space exploration",
+                    "Validate surrogate model predictions against test dataset"
                 ],
-                technologies: ["MATLAB", "XFLR5", "Gaussian Process", "Bayesian Optimization"],
-                role: "Computational Engineer"
+                methodology: [
+                    "Generated aerodynamic datasets using XFLR5 across 20 NACA profiles and angle-of-attack range (−4° to 12°)",
+                    "Parameterized airfoil surfaces using polynomial coefficients for upper and lower geometries (8 design variables)",
+                    "Trained Gaussian Process Regression models using MATLAB (fitrgp, squared exponential kernel)",
+                    "Implemented Bayesian Optimization (bayesopt, expected-improvement-plus) to maximize lift-to-drag ratio",
+                    "Limited optimization to 30 evaluations, validating against holdout dataset"
+                ],
+                technologies: ["MATLAB", "XFLR5", "Gaussian Process Regression", "Bayesian Optimization", "Surrogate Modeling", "Aerodynamic Analysis"],
+                results: [
+                    "Achieved R² > 0.9 prediction accuracy on validation dataset for Cl prediction",
+                    "Reduced computational simulation effort by 60% compared to traditional grid-based methods",
+                    "Identified optimized airfoil configurations with improved Cl/Cd performance",
+                    "Maintained surface continuity and geometric smoothness constraints"
+                ],
+                insights: "Gaussian Process Regression with squared exponential kernels provides excellent interpolation for smooth aerodynamic response surfaces. Bayesian optimization's acquisition function balances exploration vs exploitation effectively, but requires careful selection of initial training points to avoid local optima in highly non-convex design spaces.",
+                role: "Computational Engineer",
+                isComplete: true
             },
             {
                 title: "Hitch-Mounted Elevated Tent Platform",
                 description: "400 lb capacity modular camping system (2nd Place Design Award)",
                 image: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800&h=500&fit=crop",
-                context: "Developed hitch-mounted elevated camping tent addressing fuel economy, accessibility, and campsite mobility constraints.",
-                contributions: [
-                    "Conducted user research identifying core pain points",
-                    "Designed hinged aluminum frame with telescoping leveling legs",
-                    "Established 400 lb load capacity with competitive cost positioning",
-                    "Awarded 2nd place in YAKIMA-sponsored design competition"
+                overview: "Developed a hitch-mounted elevated camping tent system as an alternative to traditional rooftop tents, addressing key user pain points through structured product development process.",
+                problemStatement: "Traditional rooftop tents cause fuel economy loss, accessibility challenges (ladder climbing), and prevent campsite mobility. Users need a solution that maintains vehicle independence while providing elevated sleeping platform.",
+                objectives: [
+                    "Design a hitch-mounted system achieving ≥400 lb load capacity",
+                    "Enable tool-free deployment within 15-minute setup target",
+                    "Maintain stability on uneven terrain with adjustable leveling",
+                    "Achieve competitive cost positioning within premium RTT market ($2,000-$4,000)"
                 ],
-                technologies: ["SolidWorks", "Product Development", "Structural Design", "DFM"],
-                role: "Product Development Engineer"
+                methodology: [
+                    "Conducted user research through interviews and surveys identifying core pain points",
+                    "Explored three primary architectures using weighted decision matrices evaluating deployment time, structural safety, aesthetic appeal, and cost",
+                    "Designed hinged aluminum folding frame with telescoping rear leveling legs and wheel-assisted front mobility",
+                    "Developed detailed cost analysis: estimated weight 95.9 lbs, COGS $499.65",
+                    "Implemented risk mitigation strategies including hardware fatigue testing and reinforced construction"
+                ],
+                technologies: ["SolidWorks", "Product Development", "User Research", "Structural Design", "DFM", "Cost Analysis"],
+                results: [
+                    "Awarded 2nd place in YAKIMA-sponsored design competition",
+                    "Achieved 400 lb load capacity target with structural validation",
+                    "Demonstrated tool-free deployment capability meeting setup objectives",
+                    "Established competitive cost positioning with target weight <50 lbs for portability"
+                ],
+                insights: "Phase-gate product development processes significantly reduce late-stage redesign costs by identifying manufacturability issues early. User research revealed that setup time and campsite mobility were more valued than weather protection, fundamentally shifting design priorities from material selection to mechanical deployment mechanisms.",
+                role: "Product Development Engineer",
+                isComplete: true
             },
             {
                 title: "Autonomous Line-Following Robot with Vision Memory",
                 description: "Vision-guided mobile robot with path memory and fault recovery",
                 image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=500&fit=crop",
-                context: "Developed autonomous mobile robot following predefined paths using reflectivity sensors with visual path logging.",
-                contributions: [
-                    "Calibrated dual LDR reflectivity sensors with proportional control",
-                    "Implemented fault recovery logic with forward correction",
-                    "Captured 10 Hz video stream with path centroid extraction",
-                    "Validated ROS integration for modular expansion"
+                overview: "Developed an autonomous mobile robot capable of following predefined paths using reflectivity sensors, logging trajectory visually for reuse without physical markers, and streaming live video for monitoring.",
+                problemStatement: "Traditional line-following robots require physical path markers and cannot adapt to changing environments. Need system that learns paths and operates autonomously without continuous physical guidance.",
+                objectives: [
+                    "Implement proportional control for smooth path following",
+                    "Develop vision-based path memory system for marker-free navigation",
+                    "Integrate fault recovery logic for robust operation",
+                    "Enable ROS integration for modular expansion capabilities"
                 ],
-                technologies: ["Arduino", "Raspberry Pi", "OpenCV", "ROS", "Python"],
-                role: "Robotics Engineer"
+                methodology: [
+                    "Calibrated dual LDR reflectivity sensors using onboard potentiometers with close-proximity mounting",
+                    "Implemented proportional control strategy for motor response to reduce oscillations",
+                    "Developed fault recovery logic: forward correction when both sensors read light, halt if correction fails",
+                    "Captured 10 Hz video stream using OpenCV, converted BGR to HSV for robust contour extraction",
+                    "Implemented path memory: extracted centroids from contour detection, stored last 100 trajectory points in rolling buffer"
+                ],
+                technologies: ["Arduino", "Raspberry Pi", "OpenCV", "ROS", "Python", "Motor Control", "Computer Vision"],
+                results: [
+                    "Successfully tracked curved and straight paths with stable proportional control",
+                    "Demonstrated functional path logging and replay capability without physical markers",
+                    "Validated ROS integration architecture for future autonomous features",
+                    "Identified computational bottleneck: Raspberry Pi freezing under simultaneous pipeline load"
+                ],
+                insights: "Real-time computer vision on resource-constrained hardware requires careful task allocation. Proposed dual-camera architecture separates path memory and live streaming workloads. Proportional control tuning revealed that aggressive response gains cause wheel slippage on smooth surfaces—damping coefficient selection is surface-dependent.",
+                role: "Robotics Engineer",
+                isComplete: true
             },
             {
                 title: "Experimental Modal Analysis of Bicycle Frame",
                 description: "SIMO impact testing validating 10-18% stiffness improvement",
                 image: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=800&h=500&fit=crop",
-                context: "Experimentally characterized dynamic behavior of two bicycle frame designs using SIMO impact hammer testing.",
-                contributions: [
-                    "Configured SIMO test setup with triaxial accelerometer across 13 nodes",
-                    "Applied signal processing with FFT transformation for FRF estimation",
-                    "Extracted modal parameters identifying 10-18% stiffness improvement",
-                    "Provided data-driven recommendations for geometry-based optimization"
+                overview: "Experimentally characterized and compared the dynamic behavior of two bicycle frame designs by extracting natural frequencies, damping ratios, and mode shapes under controlled excitation.",
+                problemStatement: "New bicycle frame design claims improved stiffness, but lacks experimental validation. Need quantitative modal data to verify structural improvements and guide future design iterations.",
+                objectives: [
+                    "Extract natural frequencies and mode shapes for both frame designs",
+                    "Quantify stiffness improvements through modal parameter comparison",
+                    "Validate experimental methodology for structural design verification",
+                    "Provide data-driven recommendations for geometry-based optimization"
                 ],
-                technologies: ["Experimental Modal Analysis", "MATLAB", "FRF Estimation", "Signal Processing"],
-                role: "Test Engineer & Data Analyst"
+                methodology: [
+                    "Configured SIMO test setup: roving impact hammer excitation, fixed triaxial accelerometer (PCB 086D05), 13 excitation nodes",
+                    "Implemented boundary condition control: ground bungee stabilization, tire block constraint to isolate structural modes",
+                    "Applied signal processing: time-domain windowing, FFT transformation for FRF estimation, FRF matrix assembly",
+                    "Extracted modal parameters via AMI (MATLAB): fitted 8 modes (Y-axis), 4 modes (Z-axis) using modal equation basis",
+                    "Measured damping ratios and identified mode shape differences"
+                ],
+                technologies: ["Experimental Modal Analysis", "MATLAB", "FRF Estimation", "Signal Processing", "Structural Dynamics", "LabShop"],
+                results: [
+                    "Quantified 10-18% stiffness improvement in new frame across multiple mode shapes",
+                    "Identified lateral first bending mode: new frame 29.25 Hz vs old frame 62.25 Hz",
+                    "Measured damping ratios: new frame 5–19% vs old frame 1–7% (improved energy dissipation)",
+                    "Validated modal testing methodology with repeatable measurements"
+                ],
+                insights: "Lower natural frequencies in the new frame indicate distributed compliance rather than increased stiffness—marketing claims require careful interpretation. Higher damping in the new design suggests material or joint differences that dissipate vibration energy more effectively, potentially improving ride comfort despite appearing 'softer' in modal analysis. Boundary conditions critically affect rigid-body mode contamination.",
+                role: "Test Engineer & Data Analyst",
+                isComplete: true
             },
             {
                 title: "IMU-Driven Adaptive Load Balancing System",
                 description: "Wearable system using IMU-based postural feedback (Research Proposal)",
                 image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=500&fit=crop",
-                context: "Designed research protocol for adaptive backpack system using IMU-based postural feedback to reduce spinal strain.",
-                contributions: [
-                    "Proposed multi-segment IMU architecture with force plates",
-                    "Developed experimental design varying load and terrain conditions",
-                    "Planned data collection for kinematics and kinetics analysis",
-                    "Established comprehensive experimental protocol for validation"
+                overview: "Designed research protocol for an adaptive backpack system using IMU-based postural feedback to reduce spinal strain during load carrying activities.",
+                problemStatement: "Heavy or unevenly distributed loads cause spinal misalignment and fatigue in military, industrial, and athletic contexts. Traditional backpacks provide passive support without adapting to posture or terrain changes.",
+                objectives: [
+                    "Develop IMU-based system architecture for real-time posture estimation",
+                    "Design experimental protocol to quantify spinal strain under varying conditions",
+                    "Establish statistical methodology for validating adaptive load redistribution",
+                    "Propose mechanical design for weight redistribution mechanism"
                 ],
-                technologies: ["IMU Sensors", "Biomechanics", "Experimental Design", "ANOVA"],
-                role: "Biomechanics Research Engineer"
+                methodology: [
+                    "Proposed multi-segment IMU architecture (C7, thoracic, lumbar, hip, shank, ankle, foot) paired with force plates",
+                    "Developed experimental design: 10 healthy adults, conditions varying load (10%, 20%, 30% body weight) and terrain (flat, ±10° slopes)",
+                    "Planned data collection: kinematics (cervical flexion, thoracic/lumbar curvature, pelvic tilt), kinetics (GRF, CoP displacement, gait asymmetry)",
+                    "Defined analysis methodology: IMU signal fusion, repeated-measures ANOVA (Load × Terrain × System type)",
+                    "Outlined future directions: prototype development, exoskeleton integration, ML-based predictive correction"
+                ],
+                technologies: ["IMU Sensors", "Biomechanics", "Wearable Systems", "ANOVA", "Experimental Design", "Force Plates"],
+                results: [
+                    "Established comprehensive experimental protocol for biomechanical validation",
+                    "Proposed novel closed-loop wearable load-balancing system architecture",
+                    "Identified applications in military, industrial, and rehabilitation environments",
+                    "Defined clear hypotheses for load-terrain interaction effects on spinal alignment"
+                ],
+                insights: "IMU-based posture estimation requires sensor fusion algorithms to compensate for drift in long-duration trials. Experimental design reveals that load magnitude and terrain slope likely interact non-linearly—factorial ANOVA is appropriate, but may require post-hoc polynomial contrast testing. Adaptive load redistribution must balance responsiveness (fast weight shifts) against stability (avoiding oscillations that worsen postural control).",
+                role: "Biomechanics Research Engineer",
+                isComplete: true
+            },
+            {
+                title: "ANSYS Structural & Thermal Analysis Projects",
+                description: "Advanced FEA simulations for structural integrity and thermal management",
+                image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=500&fit=crop",
+                isComplete: false,
+                category: "ANSYS"
+            },
+            {
+                title: "Product Design & Development Portfolio",
+                description: "CAD-driven product development from concept to manufacturing",
+                image: "https://images.unsplash.com/photo-1586864387634-8582c40dd6bb?w=800&h=500&fit=crop",
+                isComplete: false,
+                category: "Product Design"
             }
         ];
 
@@ -728,15 +958,24 @@
         const projectsContainer = document.getElementById('projects-container');
         projects.forEach(project => {
             const card = document.createElement('div');
-            card.className = 'bg-slate-900/90 backdrop-blur-md rounded-xl overflow-hidden border border-slate-700/50 hover:border-blue-500/50 transition-all hover:transform hover:scale-105 shadow-xl shadow-black/40 cursor-pointer';
+            
+            // Different styling for incomplete projects
+            if (!project.isComplete) {
+                card.className = 'bg-slate-900/90 backdrop-blur-md rounded-xl overflow-hidden border border-amber-500/50 hover:border-amber-400 transition-all hover:transform hover:scale-105 shadow-xl shadow-amber-900/20 cursor-pointer relative';
+            } else {
+                card.className = 'bg-slate-900/90 backdrop-blur-md rounded-xl overflow-hidden border border-slate-700/50 hover:border-blue-500/50 transition-all hover:transform hover:scale-105 shadow-xl shadow-black/40 cursor-pointer';
+            }
+            
             card.onclick = () => openProjectModal(project);
+            
             card.innerHTML = `
-                <img src="${project.image}" alt="${project.title}" class="w-full h-40 object-cover">
+                ${!project.isComplete ? '<div class="absolute top-2 right-2 z-10 bg-amber-500 text-slate-900 px-2 py-1 rounded text-xs font-bold">Coming Soon</div>' : ''}
+                <img src="${project.image}" alt="${project.title}" class="w-full h-40 object-cover ${!project.isComplete ? 'opacity-70' : ''}">
                 <div class="p-4">
-                    <h3 class="text-base font-bold text-blue-400 mb-2">${project.title}</h3>
+                    <h3 class="text-base font-bold ${!project.isComplete ? 'text-amber-400' : 'text-blue-400'} mb-2">${project.title}</h3>
                     <p class="text-slate-400 text-xs mb-3">${project.description}</p>
-                    <button class="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors text-xs">
-                        View Details
+                    <button class="inline-flex items-center gap-2 ${!project.isComplete ? 'text-amber-400 hover:text-amber-300' : 'text-blue-400 hover:text-blue-300'} transition-colors text-xs">
+                        ${!project.isComplete ? 'View Status' : 'View Details'}
                         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                         </svg>
@@ -770,33 +1009,123 @@
         function openProjectModal(project) {
             const modal = document.getElementById('project-modal');
             const content = document.getElementById('modal-content');
-            content.innerHTML = `
-                <div class="relative h-48 md:h-64">
-                    <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover rounded-t-2xl">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
-                </div>
-                <div class="p-6 md:p-8">
-                    <h2 class="text-2xl md:text-3xl font-bold mb-2 bg-gradient-to-r from-cyan-400 to-blue-600 gradient-text">${project.title}</h2>
-                    <p class="text-slate-400 mb-4 text-sm">${project.role}</p>
-                    <div class="mb-4">
-                        <h3 class="text-lg font-bold mb-2 text-white">Context</h3>
-                        <p class="text-slate-300 text-sm">${project.context}</p>
-                    </div>
-                    <div class="mb-4">
-                        <h3 class="text-lg font-bold mb-2 text-white">Key Contributions</h3>
-                        <ul class="space-y-1">
-                            ${project.contributions.map(c => `<li class="flex items-start gap-2"><span class="text-blue-400 mt-1">•</span><span class="text-slate-300 text-sm">${c}</span></li>`).join('')}
-                        </ul>
-                    </div>
-                    <div class="mb-4">
-                        <h3 class="text-lg font-bold mb-2 text-white">Technologies</h3>
-                        <div class="flex flex-wrap gap-2">
-                            ${project.technologies.map(t => `<span class="px-3 py-1 bg-slate-800 rounded-lg text-xs text-blue-300">${t}</span>`).join('')}
+            
+            // Check if project is incomplete
+            if (!project.isComplete) {
+                content.innerHTML = `
+                    <div class="relative h-48 md:h-64">
+                        <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover rounded-t-2xl opacity-50">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                        <div class="absolute top-4 right-4 bg-amber-500 text-slate-900 px-4 py-2 rounded-lg font-bold">
+                            Coming Soon
                         </div>
                     </div>
-                    <button onclick="closeProjectModal()" class="w-full bg-slate-700 hover:bg-slate-600 text-white px-6 py-2 rounded-lg font-semibold transition-colors text-sm">Close</button>
-                </div>
-            `;
+                    <div class="p-6 md:p-8">
+                        <h2 class="text-2xl md:text-3xl font-bold mb-2 bg-gradient-to-r from-amber-400 to-orange-600 gradient-text">${project.title}</h2>
+                        <p class="text-slate-400 mb-6 text-sm">${project.category} Projects</p>
+                        
+                        <div class="bg-amber-900/20 border border-amber-500/30 rounded-xl p-6 mb-6">
+                            <div class="flex items-start gap-4">
+                                <div class="flex-shrink-0">
+                                    <svg class="w-12 h-12 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-amber-400 mb-2">Project Currently Being Updated</h3>
+                                    <p class="text-slate-300 text-sm mb-4">
+                                        This project portfolio is currently being compiled and will be uploaded as soon as possible. 
+                                        It will include detailed documentation of ${project.category.toLowerCase()} work, technical specifications, and comprehensive case studies.
+                                    </p>
+                                    <div class="bg-slate-800/50 rounded-lg p-4">
+                                        <p class="text-xs text-slate-400 mb-2">Expected to include:</p>
+                                        <ul class="text-sm text-slate-300 space-y-1">
+                                            ${project.category === 'ANSYS' ? `
+                                                <li>• Structural analysis case studies</li>
+                                                <li>• Thermal simulation projects</li>
+                                                <li>• Modal and fatigue analysis</li>
+                                                <li>• Design optimization workflows</li>
+                                            ` : `
+                                                <li>• CAD-driven product development</li>
+                                                <li>• Concept generation and evaluation</li>
+                                                <li>• Design-for-manufacturing projects</li>
+                                                <li>• Prototyping and validation work</li>
+                                            `}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4">
+                            <button onclick="closeProjectModal()" class="flex-1 bg-slate-700 hover:bg-slate-600 text-white px-6 py-2 rounded-lg font-semibold transition-colors text-sm">
+                                Close
+                            </button>
+                            <a href="mailto:vnagaraj2@wisc.edu?subject=Question about ${project.category} Projects" class="flex-1 border border-amber-500 hover:bg-amber-900/20 text-amber-400 px-6 py-2 rounded-lg font-semibold transition-colors text-sm text-center">
+                                Contact for Details
+                            </a>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Complete project - show full structured details
+                content.innerHTML = `
+                    <div class="relative h-48 md:h-64">
+                        <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover rounded-t-2xl">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                    </div>
+                    <div class="p-6 md:p-8">
+                        <h2 class="text-2xl md:text-3xl font-bold mb-2 bg-gradient-to-r from-cyan-400 to-blue-600 gradient-text">${project.title}</h2>
+                        <p class="text-slate-400 mb-4 text-sm">${project.role}</p>
+                        
+                        <div class="mb-4">
+                            <h3 class="text-lg font-bold mb-2 text-white">1. Project Overview</h3>
+                            <p class="text-slate-300 text-sm">${project.overview}</p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h3 class="text-lg font-bold mb-2 text-white">2. Problem Statement</h3>
+                            <p class="text-slate-300 text-sm">${project.problemStatement}</p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h3 class="text-lg font-bold mb-2 text-white">3. Objectives</h3>
+                            <ul class="space-y-1">
+                                ${project.objectives.map(o => `<li class="flex items-start gap-2"><span class="text-blue-400 mt-1">•</span><span class="text-slate-300 text-sm">${o}</span></li>`).join('')}
+                            </ul>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h3 class="text-lg font-bold mb-2 text-white">4. Methodology / Approach</h3>
+                            <ul class="space-y-1">
+                                ${project.methodology.map(m => `<li class="flex items-start gap-2"><span class="text-cyan-400 mt-1">•</span><span class="text-slate-300 text-sm">${m}</span></li>`).join('')}
+                            </ul>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h3 class="text-lg font-bold mb-2 text-white">5. Tools & Technologies</h3>
+                            <div class="flex flex-wrap gap-2">
+                                ${project.technologies.map(t => `<span class="px-3 py-1 bg-slate-800 rounded-lg text-xs text-blue-300">${t}</span>`).join('')}
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h3 class="text-lg font-bold mb-2 text-white">6. Key Results</h3>
+                            <ul class="space-y-1">
+                                ${project.results.map(r => `<li class="flex items-start gap-2"><span class="text-green-400 mt-1">✓</span><span class="text-slate-300 text-sm">${r}</span></li>`).join('')}
+                            </ul>
+                        </div>
+                        
+                        <div class="mb-4 bg-purple-900/20 border border-purple-500/30 rounded-lg p-4">
+                            <h3 class="text-lg font-bold mb-2 text-purple-400">7. Engineering Insights</h3>
+                            <p class="text-slate-300 text-sm italic">${project.insights}</p>
+                        </div>
+                        
+                        <button onclick="closeProjectModal()" class="w-full bg-slate-700 hover:bg-slate-600 text-white px-6 py-2 rounded-lg font-semibold transition-colors text-sm">Close</button>
+                    </div>
+                `;
+            }
+            
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -818,7 +1147,7 @@
             
             if (certType === 'iso') {
                 title.textContent = 'ISO 9001 & 14001 Education Award Certificate';
-                // Replace with your ISO certificate file ID from Google Drive
+                // ISO Certificate - WORKING!
                 iframe.src = 'https://drive.google.com/file/d/1rhTbbBvq5I67luqE9EC4gPTbexcMjw_y/preview';
             } else if (certType === 'cscp') {
                 title.textContent = 'Certified Supply Chain Professional (CSCP) Certificate';
@@ -840,6 +1169,188 @@
 
         document.getElementById('certificate-modal').addEventListener('click', function(e) {
             if (e.target === this) closeCertificateModal();
+        });
+
+        // Badge Modal Functions - With Carousel for Certificate + Badge
+        let currentCertSlide = 0;
+        let certSlides = [];
+        
+        function openBadgeModal(badgeType) {
+            const modal = document.getElementById('badge-modal');
+            const title = document.getElementById('badge-title');
+            const info = document.getElementById('badge-info');
+            const carouselInner = document.getElementById('cert-carousel-inner');
+            const indicators = document.getElementById('cert-indicators');
+            
+            // Reset carousel
+            currentCertSlide = 0;
+            certSlides = [];
+            
+            if (badgeType === 'six-sigma') {
+                title.textContent = 'Certified Six Sigma Green Belt';
+                
+                // Define slides: Certificate PDF first, then Badge image
+                certSlides = [
+                    {
+                        type: 'pdf',
+                        url: 'https://drive.google.com/file/d/1uFE4HJmJaGQCK3gnGpoSiikJ4zNK9OYS/preview',
+                        label: 'Certificate'
+                    },
+                    {
+                        type: 'image',
+                        url: 'https://drive.google.com/thumbnail?id=1Afif70fCB64T7hGbsqrvmrKn09fJ8hR7&sz=w800',
+                        label: 'Badge'
+                    }
+                ];
+                
+                info.innerHTML = `
+                    <h4 class="text-lg font-bold text-blue-400 mb-3">Certificate Details</h4>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Issued By:</span>
+                            <span class="text-slate-200">AIGPE</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Issue Date:</span>
+                            <span class="text-slate-200">March 1, 2026</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Recipient:</span>
+                            <span class="text-slate-200">Vigneshwar Nagaraj</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Credential ID:</span>
+                            <span class="text-slate-200 font-mono text-xs">57853640713404</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Verification:</span>
+                            <span class="text-slate-200">Open Badges v2 Standard</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-slate-700">
+                        <p class="text-xs text-slate-400">
+                            <strong>Note:</strong> Use the arrows to view the official certificate and digital badge. 
+                            The verification URL confirms authenticity through Open Badges standard.
+                        </p>
+                    </div>
+                `;
+            } else if (badgeType === 'minitab') {
+                title.textContent = 'Certified Minitab Expert';
+                
+                // Define slides: Certificate PDF first, then Badge image
+                certSlides = [
+                    {
+                        type: 'pdf',
+                        url: 'https://drive.google.com/file/d/1JhRcQqGFCXXrgSiXTLIWGcFD0vATRXQ9/preview',
+                        label: 'Certificate'
+                    },
+                    {
+                        type: 'image',
+                        url: 'https://drive.google.com/thumbnail?id=1aPSU3iD7IotTsDB2qXWNIFs8JFLzqxiC&sz=w800',
+                        label: 'Badge'
+                    }
+                ];
+                
+                info.innerHTML = `
+                    <h4 class="text-lg font-bold text-blue-400 mb-3">Certificate Details</h4>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Issued By:</span>
+                            <span class="text-slate-200">AIGPE</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Issue Date:</span>
+                            <span class="text-slate-200">March 2, 2026</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Recipient:</span>
+                            <span class="text-slate-200">Vigneshwar Nagaraj</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Credential ID:</span>
+                            <span class="text-slate-200 font-mono text-xs">97455268182132</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Verification:</span>
+                            <span class="text-slate-200">Open Badges v2 Standard</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-slate-700">
+                        <p class="text-xs text-slate-400">
+                            <strong>Note:</strong> Use the arrows to view the official certificate and digital badge. 
+                            The verification URL confirms authenticity through Open Badges standard.
+                        </p>
+                    </div>
+                `;
+            }
+            
+            // Build carousel
+            carouselInner.innerHTML = certSlides.map((slide, index) => {
+                if (slide.type === 'pdf') {
+                    return `
+                        <div class="cert-slide">
+                            <iframe src="${slide.url}" style="width: 100%; height: 600px; border: none; border-radius: 0.5rem; background: white;"></iframe>
+                        </div>
+                    `;
+                } else {
+                    return `
+                        <div class="cert-slide">
+                            <img src="${slide.url}" alt="${slide.label}" style="max-width: 600px; width: 100%; border-radius: 0.5rem; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+                        </div>
+                    `;
+                }
+            }).join('');
+            
+            // Build indicators
+            indicators.innerHTML = certSlides.map((slide, index) => 
+                `<div class="cert-indicator ${index === 0 ? 'active' : ''}" onclick="gotoCertSlide(${index})"></div>`
+            ).join('');
+            
+            updateCarousel();
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function prevCertSlide() {
+            currentCertSlide = (currentCertSlide - 1 + certSlides.length) % certSlides.length;
+            updateCarousel();
+        }
+
+        function nextCertSlide() {
+            currentCertSlide = (currentCertSlide + 1) % certSlides.length;
+            updateCarousel();
+        }
+
+        function gotoCertSlide(index) {
+            currentCertSlide = index;
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            const carouselInner = document.getElementById('cert-carousel-inner');
+            const indicators = document.querySelectorAll('.cert-indicator');
+            
+            carouselInner.style.transform = `translateX(-${currentCertSlide * 100}%)`;
+            
+            indicators.forEach((indicator, index) => {
+                if (index === currentCertSlide) {
+                    indicator.classList.add('active');
+                } else {
+                    indicator.classList.remove('active');
+                }
+            });
+        }
+
+        function closeBadgeModal() {
+            const modal = document.getElementById('badge-modal');
+            const carouselInner = document.getElementById('cert-carousel-inner');
+            carouselInner.innerHTML = ''; // Clear iframes to stop loading
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('badge-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeBadgeModal();
         });
 
         // Scroll-based gradient change
@@ -866,6 +1377,26 @@
                     el.className = el.className.replace(/from-\w+-\d+ to-\w+-\d+/, newGradient);
                 });
             }
+        });
+
+        // Contact Form Handler
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            const message = document.getElementById('contact-message').value;
+            
+            // Create mailto link with pre-filled content
+            const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
+            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+            const mailtoLink = `mailto:vnagaraj2@wisc.edu?subject=${subject}&body=${body}`;
+            
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Show confirmation
+            alert('Opening your email client... If it doesn\'t open automatically, please email vnagaraj2@wisc.edu directly.');
         });
     </script>
 </body>
