@@ -4,1767 +4,1350 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vigneshwar Nagaraj — Manufacturing & Quality Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- CHANGE: Added Google Fonts for a more professional, distinctive type pairing -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #080c14;
-            --surface: #0d1420;
-            --surface2: #111827;
-            --border: rgba(255,255,255,0.06);
-            --border-accent: rgba(56,189,248,0.3);
-            --text: #e2e8f0;
-            --muted: #64748b;
-            --accent: #38bdf8;
-            --accent2: #818cf8;
-            --accent3: #34d399;
-            --warn: #fbbf24;
-            --danger: #f87171;
-            --glow: rgba(56,189,248,0.12);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html { scroll-behavior: smooth; }
-
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* CHANGE: Replaced generic system font stack with Inter + DM Mono */
         body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            overflow-x: hidden;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
-        /* Grid overlay texture */
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(56,189,248,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(56,189,248,0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
-            pointer-events: none;
-            z-index: 0;
+        /* CHANGE: Added mono utility class for labels, dates, and code-like elements */
+        .font-mono-custom {
+            font-family: 'DM Mono', 'Courier New', monospace;
         }
-
-        /* ─── NAV ─────────────────────────────── */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 100;
-            background: rgba(8,12,20,0.92);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border);
+        
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-
-        .nav-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .nav-logo {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.9rem;
-            color: var(--accent);
-            text-decoration: none;
-            letter-spacing: 0.05em;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            font-size: 0.78rem;
-            color: var(--muted);
-            text-decoration: none;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover { color: var(--accent); }
-
-        .nav-cta {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.72rem;
-            color: var(--accent);
-            border: 1px solid var(--border-accent);
-            padding: 0.4rem 1rem;
-            border-radius: 4px;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-
-        .nav-cta:hover {
-            background: var(--glow);
-        }
-
-        /* Mobile menu */
-        .hamburger {
+        
+        /* Project Modal */
+        .modal {
             display: none;
-            background: none;
-            border: none;
-            color: var(--text);
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
-        .mobile-menu {
-            display: none;
-            position: absolute;
-            top: 60px;
-            right: 0;
-            background: rgba(8,12,20,0.98);
-            border: 1px solid var(--border);
-            border-radius: 0 0 8px 8px;
-            min-width: 200px;
-            padding: 0.5rem 0;
-        }
-
-        .mobile-menu.open { display: block; }
-
-        .mobile-menu a {
-            display: block;
-            padding: 0.75rem 1.5rem;
-            font-size: 0.82rem;
-            color: var(--muted);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .mobile-menu a:hover { color: var(--accent); }
-
-        /* ─── LAYOUT ──────────────────────────── */
-        section {
-            position: relative;
-            z-index: 1;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 5rem 2rem;
-        }
-
-        /* ─── HERO ────────────────────────────── */
-        #hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding-top: 100px;
-        }
-
-        .hero-eyebrow {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.72rem;
-            color: var(--accent);
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .hero-eyebrow::before {
-            content: '';
-            width: 32px;
-            height: 1px;
-            background: var(--accent);
-        }
-
-        .hero-name {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(3rem, 8vw, 6.5rem);
-            font-weight: 800;
-            line-height: 0.95;
-            letter-spacing: -0.03em;
-            color: #fff;
-            margin-bottom: 1.25rem;
-        }
-
-        .hero-name span {
-            color: var(--accent);
-        }
-
-        .hero-title {
-            font-family: 'DM Sans', sans-serif;
-            font-size: clamp(1rem, 2.5vw, 1.35rem);
-            font-weight: 300;
-            color: var(--muted);
-            max-width: 620px;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-        }
-
-        .hero-value {
-            background: rgba(56,189,248,0.06);
-            border-left: 3px solid var(--accent);
-            padding: 0.9rem 1.2rem;
-            border-radius: 0 6px 6px 0;
-            font-size: 0.88rem;
-            color: var(--text);
-            max-width: 560px;
-            margin-bottom: 2.5rem;
-            line-height: 1.6;
-        }
-
-        .hero-value strong { color: var(--accent); }
-
-        .hero-contacts {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .hero-contacts a {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.72rem;
-            color: var(--muted);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            transition: color 0.2s;
-        }
-
-        .hero-contacts a:hover { color: var(--accent); }
-
-        .hero-actions {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.75rem;
-            background: var(--accent);
-            color: #080c14;
-            padding: 0.7rem 1.5rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            transition: opacity 0.2s;
-        }
-
-        .btn-primary:hover { opacity: 0.85; }
-
-        .btn-secondary {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.75rem;
-            background: transparent;
-            color: var(--text);
-            padding: 0.7rem 1.5rem;
-            border-radius: 4px;
-            border: 1px solid var(--border);
-            text-decoration: none;
-            letter-spacing: 0.05em;
-            transition: border-color 0.2s, color 0.2s;
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        /* Stats bar */
-        .hero-stats {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            margin-top: 4rem;
-            padding-top: 2.5rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .stat {
-            display: flex;
-            flex-direction: column;
-            gap: 0.2rem;
-        }
-
-        .stat-num {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--accent);
-            line-height: 1;
-        }
-
-        .stat-label {
-            font-size: 0.72rem;
-            color: var(--muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        /* ─── SECTION HEADERS ─────────────────── */
-        .section-header {
-            margin-bottom: 3rem;
-        }
-
-        .section-tag {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.68rem;
-            color: var(--accent);
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .section-tag::before {
-            content: '';
-            width: 20px;
-            height: 1px;
-            background: var(--accent);
-        }
-
-        .section-title {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(1.8rem, 4vw, 2.8rem);
-            font-weight: 800;
-            color: #fff;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-        }
-
-        /* ─── CURRENTLY WORKING ON ────────────── */
-        #current {
-            padding-top: 2rem;
-            padding-bottom: 3rem;
-        }
-
-        .wip-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.25rem;
-        }
-
-        .wip-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 1.25rem 1.5rem;
-            display: flex;
-            gap: 1rem;
-            align-items: flex-start;
-            transition: border-color 0.2s;
-        }
-
-        .wip-card:hover { border-color: var(--warn); }
-
-        .wip-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--warn);
-            margin-top: 0.35rem;
-            flex-shrink: 0;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-        .wip-title {
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: var(--text);
-            margin-bottom: 0.3rem;
-        }
-
-        .wip-desc {
-            font-size: 0.78rem;
-            color: var(--muted);
-            line-height: 1.5;
-        }
-
-        .wip-badge {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.6rem;
-            color: var(--warn);
-            border: 1px solid rgba(251,191,36,0.3);
-            padding: 0.15rem 0.5rem;
-            border-radius: 3px;
-            margin-top: 0.6rem;
-            display: inline-block;
-        }
-
-        /* ─── EXPERIENCE ──────────────────────── */
-        .exp-list {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .exp-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 2rem;
-            transition: border-color 0.25s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .exp-card::before {
-            content: '';
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
-            width: 3px;
+            width: 100%;
             height: 100%;
-            background: var(--accent);
-            border-radius: 12px 0 0 12px;
-        }
-
-        .exp-card:hover { border-color: var(--border-accent); }
-
-        .exp-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.25rem;
-        }
-
-        .exp-role {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 0.2rem;
-        }
-
-        .exp-company {
-            font-size: 0.82rem;
-            color: var(--accent);
-        }
-
-        .exp-date {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.68rem;
-            color: var(--muted);
-            text-align: right;
-        }
-
-        .exp-bullets {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .exp-bullets li {
-            display: flex;
-            gap: 0.75rem;
-            font-size: 0.85rem;
-            color: #94a3b8;
-            line-height: 1.6;
-        }
-
-        .exp-bullets li::before {
-            content: '→';
-            color: var(--accent);
-            flex-shrink: 0;
-            font-family: 'Space Mono', monospace;
-        }
-
-        .exp-bullets li strong { color: var(--text); }
-
-        .exp-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1.25rem;
-        }
-
-        .tag {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.62rem;
-            color: var(--accent2);
-            border: 1px solid rgba(129,140,248,0.2);
-            padding: 0.2rem 0.6rem;
-            border-radius: 3px;
-        }
-
-        /* ─── PROJECTS ────────────────────────── */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .project-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: border-color 0.25s, transform 0.25s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-card:hover {
-            border-color: var(--border-accent);
-            transform: translateY(-3px);
-        }
-
-        .project-card.wip-card-proj {
-            border-color: rgba(251,191,36,0.2);
-        }
-
-        .project-card.wip-card-proj:hover {
-            border-color: rgba(251,191,36,0.5);
-        }
-
-        .project-img {
-            width: 100%;
-            height: 160px;
-            object-fit: cover;
-            opacity: 0.75;
-            transition: opacity 0.25s;
-        }
-
-        .project-card:hover .project-img { opacity: 0.9; }
-
-        .project-body {
-            padding: 1.25rem 1.5rem;
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-        }
-
-        .project-label {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.6rem;
-            color: var(--accent);
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-        }
-
-        .project-label.wip-label { color: var(--warn); }
-
-        .project-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 0.5rem;
-            line-height: 1.3;
-        }
-
-        .project-problem {
-            font-size: 0.78rem;
-            color: var(--muted);
-            line-height: 1.55;
-            margin-bottom: 1rem;
-            flex: 1;
-        }
-
-        .project-metrics {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
-            margin-bottom: 1rem;
-        }
-
-        .metric-chip {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.62rem;
-            background: rgba(52,211,153,0.1);
-            color: var(--accent3);
-            border: 1px solid rgba(52,211,153,0.2);
-            padding: 0.2rem 0.6rem;
-            border-radius: 3px;
-        }
-
-        .project-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .project-tools {
-            font-size: 0.7rem;
-            color: #475569;
-        }
-
-        .project-link {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.65rem;
-            color: var(--accent);
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        /* ─── MODAL ───────────────────────────── */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.85);
+            background: rgba(0, 0, 0, 0.9);
             backdrop-filter: blur(8px);
-            z-index: 200;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .modal-overlay.open { display: flex; }
-
-        .modal-box {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            max-width: 760px;
-            width: 100%;
-            max-height: 90vh;
+            z-index: 1000;
             overflow-y: auto;
-            position: relative;
         }
-
-        .modal-close {
-            position: sticky;
-            top: 1rem;
-            float: right;
-            margin: 1rem 1rem 0 0;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid var(--border);
-            color: var(--muted);
-            border-radius: 50%;
-            width: 36px;
-            height: 36px;
+        
+        .modal.active {
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: color 0.2s;
-            z-index: 1;
-        }
-
-        .modal-close:hover { color: var(--text); }
-
-        .modal-img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            border-radius: 16px 16px 0 0;
-            opacity: 0.6;
-        }
-
-        .modal-content {
             padding: 2rem;
         }
 
-        .modal-badge {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.62rem;
-            color: var(--accent);
-            border: 1px solid var(--border-accent);
-            padding: 0.2rem 0.6rem;
-            border-radius: 3px;
-            display: inline-block;
-            margin-bottom: 0.75rem;
-        }
-
-        .modal-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: #fff;
-            margin-bottom: 0.4rem;
-            line-height: 1.2;
-        }
-
-        .modal-role {
-            font-size: 0.8rem;
-            color: var(--muted);
-            margin-bottom: 1.75rem;
-        }
-
-        .modal-section {
-            margin-bottom: 1.5rem;
-        }
-
-        .modal-section-label {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.65rem;
-            color: var(--accent);
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            margin-bottom: 0.6rem;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .modal-section-label::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--border);
-        }
-
-        .modal-section p, .modal-section li {
-            font-size: 0.85rem;
-            color: #94a3b8;
-            line-height: 1.65;
-        }
-
-        .modal-section ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .modal-section ul li {
-            display: flex;
-            gap: 0.6rem;
-        }
-
-        .modal-section ul li::before {
-            content: '›';
-            color: var(--accent);
-            font-family: 'Space Mono', monospace;
-        }
-
-        .modal-section ul li strong { color: var(--text); }
-
-        .modal-tools {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .modal-tool {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.62rem;
-            background: rgba(56,189,248,0.08);
-            color: var(--accent);
-            border: 1px solid rgba(56,189,248,0.2);
-            padding: 0.25rem 0.65rem;
-            border-radius: 3px;
-        }
-
-        .modal-results {
-            background: rgba(52,211,153,0.06);
-            border: 1px solid rgba(52,211,153,0.2);
-            border-radius: 8px;
-            padding: 1.1rem 1.25rem;
-        }
-
-        .modal-results ul li::before {
-            content: '✓';
-            color: var(--accent3);
-        }
-
-        .modal-insight {
-            background: rgba(129,140,248,0.06);
-            border: 1px solid rgba(129,140,248,0.2);
-            border-radius: 8px;
-            padding: 1.1rem 1.25rem;
-            font-size: 0.83rem;
-            color: #a5b4fc;
-            line-height: 1.6;
-            font-style: italic;
-        }
-
-        /* ─── SKILLS ──────────────────────────── */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 1.25rem;
-        }
-
-        .skill-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 1.25rem;
-            transition: border-color 0.2s;
-        }
-
-        .skill-card:hover { border-color: var(--border-accent); }
-
-        .skill-cat {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.65rem;
-            color: var(--accent);
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            margin-bottom: 0.75rem;
-        }
-
-        .skill-items {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
-        }
-
-        .skill-item {
-            font-size: 0.75rem;
-            color: #94a3b8;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid var(--border);
-            padding: 0.25rem 0.6rem;
-            border-radius: 4px;
-        }
-
-        /* ─── CERTIFICATIONS ──────────────────── */
-        .certs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.25rem;
-        }
-
-        .cert-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 1.25rem 1.5rem;
-            display: flex;
-            gap: 1rem;
-            align-items: flex-start;
-            cursor: pointer;
-            transition: border-color 0.2s;
-        }
-
-        .cert-card:hover { border-color: var(--border-accent); }
-
-        .cert-icon {
-            width: 36px;
-            height: 36px;
-            background: rgba(56,189,248,0.1);
-            border: 1px solid var(--border-accent);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            color: var(--accent);
-            font-size: 1rem;
-        }
-
-        .cert-name {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text);
-            margin-bottom: 0.2rem;
-        }
-
-        .cert-issuer {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.65rem;
-            color: var(--muted);
-        }
-
-        /* ─── CONTACT ─────────────────────────── */
-        #contact {
-            padding-bottom: 4rem;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-
-        .contact-form-box {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 2rem;
-        }
-
-        .contact-form-box h3 {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.75rem;
-            color: var(--muted);
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 0.4rem;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 0.65rem 0.9rem;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.85rem;
-            color: var(--text);
-            transition: border-color 0.2s;
-            outline: none;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            border-color: var(--border-accent);
-        }
-
-        .form-group textarea { resize: none; }
-
-        .contact-info-box {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .contact-availability {
-            background: rgba(52,211,153,0.06);
-            border: 1px solid rgba(52,211,153,0.2);
-            border-radius: 10px;
-            padding: 1.25rem;
-        }
-
-        .avail-dot {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: var(--accent3);
-            border-radius: 50%;
-            margin-right: 0.4rem;
-            animation: pulse 2s infinite;
-        }
-
-        .avail-text {
-            font-size: 0.82rem;
-            color: var(--accent3);
-            font-weight: 600;
-            margin-bottom: 0.4rem;
-        }
-
-        .avail-sub {
-            font-size: 0.75rem;
-            color: var(--muted);
-        }
-
-        .contact-links {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .contact-link {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            color: var(--muted);
-            text-decoration: none;
-            font-size: 0.82rem;
-            transition: color 0.2s;
-        }
-
-        .contact-link:hover { color: var(--text); }
-
-        .contact-link-icon {
-            width: 32px;
-            height: 32px;
-            background: var(--surface2);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.85rem;
-            flex-shrink: 0;
-        }
-
-        /* ─── FOOTER ──────────────────────────── */
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 2rem;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        footer p {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.65rem;
-            color: var(--muted);
-            letter-spacing: 0.1em;
-        }
-
-        /* ─── CERT MODAL ──────────────────────── */
-        .cert-modal-overlay {
+        /* Menu dropdown */
+        .menu-dropdown {
             display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.9);
+            position: absolute;
+            top: 100%;
+            right: 0;
+            min-width: 200px;
+            background: rgba(15, 23, 42, 0.98);
             backdrop-filter: blur(12px);
-            z-index: 300;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 0.5rem;
+            margin-top: 0.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
 
-        .cert-modal-overlay.open { display: flex; }
+        .menu-dropdown.active {
+            display: block;
+        }
 
-        .cert-modal-box {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 14px;
+        .menu-dropdown a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: all 0.2s;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .menu-dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .menu-dropdown a:hover {
+            background: rgba(59, 130, 246, 0.1);
+            color: #60a5fa;
+            padding-left: 1.5rem;
+        }
+
+        /* Skill card hover */
+        .skill-card {
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(59, 130, 246, 0.15);
+        }
+
+        /* Certificate Modal */
+        #certificate-modal .certificate-container {
             width: 95vw;
-            max-width: 1100px;
-            height: 88vh;
+            max-width: 1400px;
+            height: 90vh;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
         }
 
-        .cert-modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .cert-modal-header h3 {
-            font-family: 'Syne', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--text);
-        }
-
-        .cert-modal-body {
-            flex: 1;
-            overflow: hidden;
+        #certificate-modal .certificate-header {
             padding: 1rem;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+            flex-shrink: 0;
         }
 
-        .cert-modal-body iframe {
+        #certificate-modal .certificate-body {
+            flex: 1;
+            padding: 1rem;
+            overflow: hidden;
+        }
+
+        #certificate-modal iframe {
             width: 100%;
             height: 100%;
             border: none;
-            border-radius: 8px;
+            border-radius: 0.5rem;
             background: white;
         }
 
-        /* ─── RESPONSIVE ──────────────────────── */
-        @media (max-width: 768px) {
-            .nav-links, .nav-cta { display: none; }
-            .hamburger { display: flex; }
-            .contact-grid { grid-template-columns: 1fr; }
-            .projects-grid { grid-template-columns: 1fr; }
-            .skills-grid { grid-template-columns: 1fr 1fr; }
-            .certs-grid { grid-template-columns: 1fr; }
+        /* Carousel for Certificates */
+        .cert-carousel {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
         }
 
-        @media (max-width: 480px) {
-            section { padding: 4rem 1.25rem; }
-            .skills-grid { grid-template-columns: 1fr; }
+        .cert-carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .cert-slide {
+            min-width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cert-carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .cert-carousel-btn:hover {
+            background: rgba(59, 130, 246, 0.8);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+
+        .cert-carousel-btn.prev { left: 10px; }
+        .cert-carousel-btn.next { right: 10px; }
+
+        .cert-carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .cert-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(148, 163, 184, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cert-indicator.active {
+            background: rgb(59, 130, 246);
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        /* CHANGE: Section label style for consistent visual hierarchy */
+        .section-eyebrow {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #38bdf8;
+            margin-bottom: 0.4rem;
+        }
+
+        /* CHANGE: Stat item in hero */
+        .hero-stat {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+        }
+        .hero-stat-num {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #38bdf8;
+            line-height: 1;
+        }
+        .hero-stat-label {
+            font-size: 0.68rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
         }
     </style>
 </head>
-<body>
 
-<!-- NAV -->
-<nav>
-    <div class="nav-inner">
-        <a href="#hero" class="nav-logo">VN.eng</a>
-        <ul class="nav-links">
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#certifications">Certifications</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <a href="mailto:vnagaraj2@wisc.edu" class="nav-cta">Hire Me →</a>
-        <button class="hamburger" id="hamburger" aria-label="Menu">
-            <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-            </svg>
-        </button>
-        <div class="mobile-menu" id="mobile-menu">
-            <a href="#experience">Experience</a>
-            <a href="#projects">Projects</a>
-            <a href="#skills">Skills</a>
-            <a href="#certifications">Certifications</a>
-            <a href="#contact">Contact</a>
-        </div>
-    </div>
-</nav>
+<!-- CHANGE: Removed diagonal body gradient — solid dark bg is more professional -->
+<body class="bg-slate-950 text-white min-h-screen">
 
-<!-- HERO -->
-<section id="hero">
-    <p class="hero-eyebrow">Manufacturing &amp; Quality Engineer</p>
-    <h1 class="hero-name">Vigneshwar<br><span>Nagaraj</span></h1>
-    <p class="hero-title">
-        M.S. Mechanical Engineering · UW–Madison<br>
-        Process validation, quality systems, and manufacturing execution — from design to production.
-    </p>
-    <div class="hero-value">
-        <strong>What I bring:</strong> I close the gap between engineering design and manufacturing reality — reducing defects, validating processes, and building quality systems that hold up under audit.
-    </div>
-    <div class="hero-contacts">
-        <a href="tel:+16087077253">📞 608-707-7253</a>
-        <a href="mailto:vnagaraj2@wisc.edu">✉ vnagaraj2@wisc.edu</a>
-        <a href="https://linkedin.com/in/vigneshwar-nagaraj" target="_blank">🔗 LinkedIn</a>
-        <a href="#">📍 Madison, WI · Open to Relocation</a>
-    </div>
-    <div class="hero-actions">
-        <a href="#projects" class="btn-primary">View Projects</a>
-        <a href="#contact" class="btn-secondary">Contact Me</a>
-        <a href="https://drive.google.com/file/d/YOUR_RESUME_FILE_ID/view" target="_blank" class="btn-secondary">↓ Resume</a>
-    </div>
-    <div class="hero-stats">
-        <div class="stat">
-            <span class="stat-num">20%</span>
-            <span class="stat-label">Downtime Reduction</span>
-        </div>
-        <div class="stat">
-            <span class="stat-num">0</span>
-            <span class="stat-label">Audit Non-Conformances</span>
-        </div>
-        <div class="stat">
-            <span class="stat-num">60%</span>
-            <span class="stat-label">Simulation Effort Cut</span>
-        </div>
-        <div class="stat">
-            <span class="stat-num">3</span>
-            <span class="stat-label">Industry Certifications</span>
-        </div>
-    </div>
-</section>
-
-<!-- CURRENTLY WORKING ON -->
-<section id="current">
-    <div class="section-header">
-        <p class="section-tag">In Progress</p>
-        <h2 class="section-title">Currently Working On</h2>
-    </div>
-    <div class="wip-grid">
-        <div class="wip-card">
-            <div class="wip-dot"></div>
-            <div>
-                <p class="wip-title">CFD Pipe Flow Analysis</p>
-                <p class="wip-desc">Simulating internal turbulent flow in a pipe network to characterize pressure drop, velocity profiles, and heat transfer coefficients under varying Reynolds numbers using ANSYS Fluent.</p>
-                <span class="wip-badge">Expected: May 2026</span>
-            </div>
-        </div>
-        <div class="wip-card">
-            <div class="wip-dot"></div>
-            <div>
-                <p class="wip-title">Thermal Heat Sink Optimization</p>
-                <p class="wip-desc">Geometry-driven optimization of a forced-convection heat sink using ANSYS Thermal and surrogate modeling to minimize junction temperature while meeting volumetric and mass constraints.</p>
-                <span class="wip-badge">Expected: May 2026</span>
-            </div>
-        </div>
-        <div class="wip-card">
-            <div class="wip-dot"></div>
-            <div>
-                <p class="wip-title">ANSYS FEA Project Portfolio</p>
-                <p class="wip-desc">Compiling structural and thermal FEA case studies including fatigue analysis, buckling, and nonlinear contact simulations completed across coursework and independent study.</p>
-                <span class="wip-badge">Compiling Documentation</span>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section id="experience">
-    <div class="section-header">
-        <p class="section-tag">Career</p>
-        <h2 class="section-title">Professional Experience</h2>
-    </div>
-    <div class="exp-list">
-
-        <div class="exp-card">
-            <div class="exp-top">
-                <div>
-                    <p class="exp-role">Manufacturing Lab Operations Engineer</p>
-                    <p class="exp-company">University of Wisconsin–Madison · Teaching Assistant</p>
+    <!-- Navigation -->
+    <!-- CHANGE: Removed shadow-xl, kept border only — cleaner separation -->
+    <nav class="fixed top-0 w-full bg-slate-950/98 backdrop-blur-md z-50 border-b border-slate-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- CHANGE: Removed quotes from logo — cleaner monogram -->
+                <div class="font-mono-custom text-sm font-medium text-cyan-400 tracking-widest" id="nav-logo">
+                    VN
                 </div>
-                <p class="exp-date">Aug 2025 – Present<br>Madison, WI</p>
-            </div>
-            <ul class="exp-bullets">
-                <li>Reduced unplanned equipment downtime by <strong>20%</strong> by implementing structured pre-production readiness checklists and preventive failure analysis across CNC, additive, casting, and welding stations serving 50+ students across 4 lab sections.</li>
-                <li>Improved dimensional tolerance adherence by <strong>15%</strong> through systematic GD&T-based document review of student inspection reports and enforcement of measurement procedures on CNC, casting, and welding outputs.</li>
-                <li>Managed additive manufacturing build scheduling and material procurement (PLA, PETG, ABS), achieving <strong>100% on-time build completion</strong> during peak demand periods through proactive machine readiness verification.</li>
-                <li>Administered PLC programming, metrology, and process verification procedures — translating academic lab workflows into repeatable, production-aligned practices.</li>
-            </ul>
-            <div class="exp-tags">
-                <span class="tag">Process Validation</span>
-                <span class="tag">GD&T</span>
-                <span class="tag">CNC</span>
-                <span class="tag">Additive Manufacturing</span>
-                <span class="tag">Equipment Readiness</span>
-                <span class="tag">Preventive Maintenance</span>
-            </div>
-        </div>
-
-        <div class="exp-card">
-            <div class="exp-top">
-                <div>
-                    <p class="exp-role">NPI &amp; Quality Engineering Intern</p>
-                    <p class="exp-company">Fabhead's Automation Pvt. Ltd.</p>
-                </div>
-                <p class="exp-date">Jan 2023 – Apr 2023<br>Chennai, India</p>
-            </div>
-            <ul class="exp-bullets">
-                <li>Supported end-to-end NPI coordination for industrial 3D printing programs across <strong>automotive, aerospace, and defense</strong> sectors — managing supplier documentation, material certifications, and customer requirement traceability through production launch.</li>
-                <li>Maintained ISO 9001 documentation control system including audit records, procedure updates, and compliance tracking — supporting successful <strong>TATA and DRDO customer audits with zero non-conformances</strong>.</li>
-                <li>Developed topology optimization study for an automotive hood component in SolidWorks, evaluating <strong>30–40% weight reduction</strong> opportunities with ANSYS structural validation and manufacturing feasibility review.</li>
-                <li>Collaborated with IIT Madras research team on V-Trough Solar Concentrator design, performing <strong>DFM analysis</strong> to identify cost-reduction opportunities and flag manufacturing constraint risks early in the design cycle.</li>
-            </ul>
-            <div class="exp-tags">
-                <span class="tag">ISO 9001</span>
-                <span class="tag">NPI</span>
-                <span class="tag">Supplier Documentation</span>
-                <span class="tag">CAPA</span>
-                <span class="tag">DFM</span>
-                <span class="tag">SolidWorks</span>
-                <span class="tag">ANSYS</span>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects">
-    <div class="section-header">
-        <p class="section-tag">Portfolio</p>
-        <h2 class="section-title">Engineering Projects</h2>
-    </div>
-    <div class="projects-grid" id="projects-grid">
-        <!-- Populated by JS -->
-    </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills">
-    <div class="section-header">
-        <p class="section-tag">Capabilities</p>
-        <h2 class="section-title">Core Competencies</h2>
-    </div>
-    <div class="skills-grid">
-        <div class="skill-card">
-            <p class="skill-cat">Manufacturing &amp; Operations</p>
-            <div class="skill-items">
-                <span class="skill-item">CNC Machining</span>
-                <span class="skill-item">Additive Manufacturing</span>
-                <span class="skill-item">Process Validation</span>
-                <span class="skill-item">Equipment Readiness</span>
-                <span class="skill-item">Casting &amp; Welding</span>
-                <span class="skill-item">PLC Programming</span>
-                <span class="skill-item">GD&T</span>
-                <span class="skill-item">DFM/DFX</span>
-            </div>
-        </div>
-        <div class="skill-card">
-            <p class="skill-cat">Quality &amp; Process Improvement</p>
-            <div class="skill-items">
-                <span class="skill-item">ISO 9001/14001/13485</span>
-                <span class="skill-item">PFMEA</span>
-                <span class="skill-item">CAPA</span>
-                <span class="skill-item">8D Problem Solving</span>
-                <span class="skill-item">SPC</span>
-                <span class="skill-item">Gage R&R</span>
-                <span class="skill-item">Cp/Cpk Analysis</span>
-                <span class="skill-item">Internal Audits</span>
-                <span class="skill-item">Lean Six Sigma</span>
-            </div>
-        </div>
-        <div class="skill-card">
-            <p class="skill-cat">Engineering Tools</p>
-            <div class="skill-items">
-                <span class="skill-item">SolidWorks</span>
-                <span class="skill-item">PTC Creo</span>
-                <span class="skill-item">ANSYS FEA</span>
-                <span class="skill-item">AutoCAD</span>
-                <span class="skill-item">PTC Windchill (PLM)</span>
-                <span class="skill-item">SAP ERP</span>
-                <span class="skill-item">ECN/ECO</span>
-            </div>
-        </div>
-        <div class="skill-card">
-            <p class="skill-cat">Data &amp; Analysis</p>
-            <div class="skill-items">
-                <span class="skill-item">Python</span>
-                <span class="skill-item">MATLAB</span>
-                <span class="skill-item">Minitab</span>
-                <span class="skill-item">JMP</span>
-                <span class="skill-item">MS Excel</span>
-                <span class="skill-item">Statistical Modeling</span>
-                <span class="skill-item">Surrogate Modeling</span>
-                <span class="skill-item">Data Visualization</span>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- CERTIFICATIONS -->
-<section id="certifications">
-    <div class="section-header">
-        <p class="section-tag">Credentials</p>
-        <h2 class="section-title">Certifications</h2>
-    </div>
-    <div class="certs-grid">
-        <div class="cert-card" onclick="openCertModal('https://drive.google.com/file/d/1uFE4HJmJaGQCK3gnGpoSiikJ4zNK9OYS/preview', 'Certified Six Sigma Green Belt')">
-            <div class="cert-icon">◈</div>
-            <div>
-                <p class="cert-name">Certified Six Sigma Green Belt</p>
-                <p class="cert-issuer">AIGPE · March 2026</p>
-            </div>
-        </div>
-        <div class="cert-card" onclick="openCertModal('https://drive.google.com/file/d/1JhRcQqGFCXXrgSiXTLIWGcFD0vATRXQ9/preview', 'Certified Minitab Expert')">
-            <div class="cert-icon">▦</div>
-            <div>
-                <p class="cert-name">Certified Minitab Expert</p>
-                <p class="cert-issuer">AIGPE · March 2026</p>
-            </div>
-        </div>
-        <div class="cert-card" onclick="openCertModal('https://drive.google.com/file/d/1rhTbbBvq5I67luqE9EC4gPTbexcMjw_y/preview', 'ISO 9001 & 14001 Education Award')">
-            <div class="cert-icon">◇</div>
-            <div>
-                <p class="cert-name">ISO 9001 &amp; 14001 Education Award</p>
-                <p class="cert-issuer">Exemplar Global · December 2025</p>
-            </div>
-        </div>
-        <div class="cert-card" onclick="openCertModal('https://drive.google.com/file/d/1i4WG3eR_4AMpdmqVob-kBHjDJtWhBvPE/preview', 'Certified Supply Chain Professional')">
-            <div class="cert-icon">⬡</div>
-            <div>
-                <p class="cert-name">Certified Supply Chain Professional (CSCP)</p>
-                <p class="cert-issuer">Udemy · 2025</p>
-            </div>
-        </div>
-        <div class="cert-card" style="cursor:default;">
-            <div class="cert-icon">▤</div>
-            <div>
-                <p class="cert-name">SAP ERP Fundamentals</p>
-                <p class="cert-issuer">Coursework · Fall 2024</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-    <div class="section-header">
-        <p class="section-tag">Get In Touch</p>
-        <h2 class="section-title">Let's Connect</h2>
-    </div>
-    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:2rem;max-width:500px;">
-        Open to full-time roles in manufacturing engineering, quality engineering, and operations — graduating May 2026.
-    </p>
-    <div class="contact-grid">
-        <div class="contact-form-box">
-            <h3>Send a Message</h3>
-            <form id="contact-form">
-                <div class="form-group">
-                    <label>Name</label>
-                    <input type="text" id="c-name" required placeholder="Your name">
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" id="c-email" required placeholder="your@email.com">
-                </div>
-                <div class="form-group">
-                    <label>Message</label>
-                    <textarea id="c-msg" rows="4" required placeholder="Tell me about the role or what you're looking for..."></textarea>
-                </div>
-                <button type="submit" class="btn-primary" style="width:100%;text-align:center;cursor:pointer;border:none;">Send Message →</button>
-            </form>
-            <p style="font-size:0.7rem;color:var(--muted);margin-top:0.75rem;">* Opens your email client</p>
-        </div>
-        <div class="contact-info-box">
-            <div class="contact-availability">
-                <p class="avail-text"><span class="avail-dot"></span>Available for Full-Time Roles</p>
-                <p class="avail-sub">Graduating May 2026 · Open to relocation · Authorized to work in the US</p>
-            </div>
-            <div class="contact-links">
-                <a href="mailto:vnagaraj2@wisc.edu" class="contact-link">
-                    <span class="contact-link-icon">✉</span>
-                    vnagaraj2@wisc.edu
-                </a>
-                <a href="tel:+16087077253" class="contact-link">
-                    <span class="contact-link-icon">📞</span>
-                    +1 608-707-7253
-                </a>
-                <a href="https://linkedin.com/in/vigneshwar-nagaraj" target="_blank" class="contact-link">
-                    <span class="contact-link-icon">in</span>
-                    linkedin.com/in/vigneshwar-nagaraj
-                </a>
-            </div>
-            <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.25rem;">
-                <p style="font-size:0.75rem;color:var(--muted);margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.1em;font-family:'Space Mono',monospace;">Target Roles</p>
-                <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
-                    <span class="tag">Manufacturing Engineer</span>
-                    <span class="tag">Quality Engineer</span>
-                    <span class="tag">NPI Engineer</span>
-                    <span class="tag">Process Engineer</span>
-                    <span class="tag">Operations Engineer</span>
+                
+                <div class="relative">
+                    <button class="text-slate-400 hover:text-slate-200 transition-colors flex items-center gap-2 text-sm" id="menu-btn">
+                        <span>Menu</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                    
+                    <div class="menu-dropdown" id="menu-dropdown">
+                        <a href="#about">About</a>
+                        <a href="#experience">Experience</a>
+                        <a href="#projects">Projects</a>
+                        <a href="#skills">Skills</a>
+                        <a href="#certifications">Certifications</a>
+                        <a href="#contact">Contact</a>
+                    </div>
                 </div>
             </div>
         </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- HERO / ABOUT                               -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="about" class="min-h-screen flex items-center justify-center px-4 pt-20 pb-12">
+        <div class="max-w-4xl mx-auto w-full">
+            <div class="text-center mb-10">
+
+                <!-- Profile Photo -->
+                <!-- CHANGE: Removed over-bright glow blur — subtle ring is cleaner -->
+                <div class="mb-8 flex justify-center">
+                    <div class="relative">
+                        <div class="absolute inset-0 rounded-full ring-2 ring-cyan-500/30"></div>
+                        <img 
+                            src="https://drive.google.com/thumbnail?id=1GRFSRfqOx-7vJ64d45dBjDOsShzbhDtQ&sz=w400" 
+                            alt="Vigneshwar Nagaraj" 
+                            class="relative w-32 h-32 md:w-36 md:h-36 rounded-full object-cover border-2 border-slate-700 shadow-xl"
+                            onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-32 h-32 md:w-36 md:h-36 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center text-3xl font-bold text-slate-400\'>VN</div>';"
+                        >
+                    </div>
+                </div>
+
+                <!-- CHANGE: Eyebrow label added for hierarchy -->
+                <p class="section-eyebrow mb-3">Manufacturing &amp; Quality Engineer</p>
+
+                <!-- CHANGE: Name kept large but gradient locked to cyan-blue (no scroll rainbow) -->
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-blue-500 gradient-text tracking-tight" id="main-heading">
+                    Vigneshwar Nagaraj
+                </h1>
+
+                <!-- CHANGE: Subtitle rewritten — one clear identity statement, not a keyword list -->
+                <p class="text-lg md:text-xl font-medium text-slate-300 mb-2">
+                    M.S. Mechanical Engineering · UW–Madison, May 2026
+                </p>
+                <p class="text-sm text-slate-500 mb-6 max-w-lg mx-auto leading-relaxed">
+                    Process validation, quality systems, and manufacturing execution — from design review through production readiness
+                </p>
+                
+                <!-- Contact links -->
+                <div class="flex flex-wrap gap-3 justify-center mb-6 text-slate-400 text-xs font-mono-custom">
+                    <a href="tel:+16087077253" class="flex items-center gap-1.5 hover:text-cyan-400 transition-colors">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                        </svg>
+                        608-707-7253
+                    </a>
+                    <span class="text-slate-700">·</span>
+                    <a href="mailto:vnagaraj2@wisc.edu" class="flex items-center gap-1.5 hover:text-cyan-400 transition-colors">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        vnagaraj2@wisc.edu
+                    </a>
+                    <span class="text-slate-700">·</span>
+                    <a href="https://linkedin.com/in/vigneshwar-nagaraj" target="_blank" class="flex items-center gap-1.5 hover:text-cyan-400 transition-colors">
+                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                        LinkedIn
+                    </a>
+                    <span class="text-slate-700">·</span>
+                    <span class="text-slate-500">Madison, WI · Open to Relocation</span>
+                </div>
+
+                <!-- CTA buttons -->
+                <!-- CHANGE: Removed blue-to-purple gradient on primary button — blue is enough -->
+                <div class="flex gap-3 justify-center flex-wrap mb-10">
+                    <a href="#projects" class="bg-blue-600 hover:bg-blue-700 px-5 py-2 rounded-md font-medium transition-colors text-sm">
+                        View Projects
+                    </a>
+                    <a href="#contact" class="border border-slate-600 hover:border-slate-400 text-slate-300 hover:text-white px-5 py-2 rounded-md font-medium transition-colors text-sm">
+                        Contact Me
+                    </a>
+                    <a href="https://drive.google.com/file/d/YOUR_RESUME_FILE_ID/view" target="_blank" class="border border-slate-700 hover:border-slate-500 text-slate-400 hover:text-slate-200 px-5 py-2 rounded-md font-medium transition-all flex items-center gap-2 text-sm">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Resume
+                    </a>
+                </div>
+            </div>
+
+            <!-- About + Stats block -->
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-slate-900/60 rounded-xl p-6 md:p-8 border border-slate-800/60 mb-8">
+                    <!-- CHANGE: Summary rewritten — shorter, clearer, no buzzwords -->
+                    <p class="text-sm text-slate-300 mb-5 leading-relaxed">
+                        Manufacturing and Quality Engineer with hands-on experience in process validation, ISO documentation, and NPI support. 
+                        Currently completing an accelerated M.S. in Mechanical Engineering at UW–Madison while operating the department's manufacturing lab. 
+                        Background spans industrial 3D printing, quality auditing, CAD/FEA, and statistical analysis. 
+                        Targeting full-time roles in manufacturing, quality, or operations engineering beginning May 2026.
+                    </p>
+                    <!-- CHANGE: Impact highlights rewritten — more specific, less inflated -->
+                    <div class="bg-slate-800/40 rounded-lg p-4 border-l-3 border-cyan-500" style="border-left: 3px solid #06b6d4;">
+                        <p class="text-xs text-cyan-400 font-medium tracking-wide uppercase mb-2 font-mono-custom">Selected Results</p>
+                        <div class="flex flex-wrap gap-x-6 gap-y-1 text-slate-400 text-xs">
+                            <span>20% unplanned downtime reduction via equipment readiness checklists</span>
+                            <span>Zero non-conformances across TATA &amp; DRDO audits</span>
+                            <span>15% improvement in tolerance adherence through GD&amp;T review</span>
+                            <span>60% simulation effort reduction with surrogate modeling</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <!-- CHANGE: Eyebrow label added for consistent section hierarchy -->
+                <p class="section-eyebrow mb-3">Education</p>
+                <div class="space-y-3 mb-2">
+                    <div class="bg-slate-900/60 rounded-lg p-4 border border-slate-800/60">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-1">
+                            <div>
+                                <h4 class="text-sm font-semibold text-white">M.S. Mechanical Engineering</h4>
+                                <p class="text-cyan-400 text-xs">University of Wisconsin–Madison</p>
+                            </div>
+                            <span class="text-slate-500 text-xs mt-1 md:mt-0 font-mono-custom">Sept 2024 – May 2026</span>
+                        </div>
+                        <p class="text-slate-500 text-xs">Accelerated Program · GPA: 3.0/4.0 · Madison, WI</p>
+                    </div>
+                    
+                    <div class="bg-slate-900/60 rounded-lg p-4 border border-slate-800/60">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-1">
+                            <div>
+                                <h4 class="text-sm font-semibold text-white">B.E. Automobile Engineering</h4>
+                                <p class="text-cyan-400 text-xs">Rajalakshmi Engineering College</p>
+                            </div>
+                            <span class="text-slate-500 text-xs mt-1 md:mt-0 font-mono-custom">Aug 2019 – May 2023</span>
+                        </div>
+                        <p class="text-slate-500 text-xs">CGPA: 8.56/10 · Chennai, India</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- EXPERIENCE                                 -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="experience" class="py-12 px-4">
+        <div class="max-w-4xl mx-auto">
+            <!-- CHANGE: Section eyebrow added; heading simplified -->
+            <p class="section-eyebrow text-center mb-1">Career</p>
+            <h2 class="text-2xl font-bold mb-8 text-center text-white" id="exp-heading">Professional Experience</h2>
+            
+            <div class="space-y-5">
+
+                <!-- TA Role -->
+                <!-- CHANGE: Role title simplified — removed "(Teaching Assistant)" parenthetical inflation -->
+                <div class="bg-slate-900/60 rounded-xl p-6 border border-slate-800/60 hover:border-slate-700 transition-all">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                        <div>
+                            <!-- CHANGE: Rewritten title — straightforward, not inflated -->
+                            <h3 class="text-base font-semibold text-white mb-0.5">Manufacturing Lab Teaching Assistant</h3>
+                            <p class="text-cyan-400 text-sm">University of Wisconsin–Madison</p>
+                        </div>
+                        <span class="text-slate-500 mt-1.5 md:mt-0 text-xs font-mono-custom">Aug 2025 – Present</span>
+                    </div>
+                    <ul class="space-y-2.5 text-slate-400 text-sm">
+                        <!-- CHANGE: Bullets rewritten — lead with action + outcome, cut filler phrases -->
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-cyan-500 mt-0.5 text-xs flex-shrink-0">→</span>
+                            <span>Reduced unplanned equipment downtime by <strong class="text-slate-200 font-medium">20%</strong> by implementing pre-production readiness checklists and preventive failure analysis across CNC, additive manufacturing, casting, and welding stations serving 50+ students per semester.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-cyan-500 mt-0.5 text-xs flex-shrink-0">→</span>
+                            <span>Improved dimensional tolerance adherence by <strong class="text-slate-200 font-medium">15%</strong> through GD&amp;T-based review of student inspection records and standardized measurement procedures across machining, casting, and welding stations.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-cyan-500 mt-0.5 text-xs flex-shrink-0">→</span>
+                            <span>Managed build scheduling and material procurement (PLA, PETG, ABS) for additive manufacturing stations; maintained <strong class="text-slate-200 font-medium">100% on-time build completion</strong> during peak semester periods through machine readiness verification.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-cyan-500 mt-0.5 text-xs flex-shrink-0">→</span>
+                            <span>Supported lab operations across CNC machining, PLC programming, metrology, and welding — translating production-aligned procedures into an academic environment for 4 concurrent lab sections.</span>
+                        </li>
+                    </ul>
+                    <!-- CHANGE: Skill tags added to experience cards for ATS-friendliness and quick scanning -->
+                    <div class="flex flex-wrap gap-1.5 mt-4">
+                        <span class="text-xs text-slate-500 bg-slate-800/60 border border-slate-700/40 px-2 py-0.5 rounded">Process Validation</span>
+                        <span class="text-xs text-slate-500 bg-slate-800/60 border border-slate-700/40 px-2 py-0.5 rounded">GD&T</span>
+                        <span class="text-xs text-slate-500 bg-slate-800/60 border border-slate-700/40 px-2 py-0.5 rounded">CNC</span>
+                        <span class="text-xs text-slate-500 bg-slate-800/60 border border-slate-700/40 px-2 py-0.5 rounded">Additive Manufacturing</span>
+                        <span class="text-xs text-slate-500 bg-slate-800/60 border border-slate-700/40 px-2 py-0.5 rounded">Preventive Maintenance</span>
+                        <span class="text-xs text-slate-500 bg-slate-800/60 border border-slate-700/40 px-2 py-0.5 rounded">Metrology</span>
+                    </div>
+                </div>
+
+                <!-- Internship -->
+                <div class="bg-slate-900/60 rounded-xl p-6 border border-slate-800/60 hover:border-slate-700 transition-all">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                        <div>
+                            <h3 class="text-base font-semibold text-white mb-0.5">NPI &amp; Quality Engineering Intern</h3>
+                            <p class="text-cyan-400 text-sm">Fabhead's Automation Pvt. Ltd.</p>
+                        </div>
+                        <span class="text-slate-500 mt-1.5 md:mt-0 text-xs font-mono-custom">Jan 2023 – Apr 2023</span>
+                    </div>
+                    <ul class="space-y-2.5 text-slate-400 text-sm">
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-cyan-500 mt-0.5 text-xs flex-shrink-0">→</span>
+                            <span>Coordinated NPI documentation for industrial 3D printing programs across automotive, aerospace, and defense customers — managing supplier drawings, material certifications, and customer requirement traceability from design review through production.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-cyan-500 mt-0.5 text-xs flex-shrink-0">→</span>
+                            <span>Maintained ISO 9001 document control — audit records, procedure revisions, compliance tracking — and supported <strong class="text-slate-200 font-medium">TATA and DRDO customer audits with zero non-conformances</strong>.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-cyan-500 mt-0.5 text-xs flex-shrink-0">→</span>
+                            <span>Developed topology optimization study in SolidWorks for an automotive hood component, evaluating 30–40% weight reduction opportunities and validating structural feasibility in ANSYS before manufacturing review.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-cyan-500 mt-0.5 text-xs flex-shrink-0">→</span>
+                            <span>Conducted DFM analysis for a V-Trough Solar Concentrator in collaboration with IIT Madras, identifying manufacturing constraints and cost-reduction opportunities at the design stage.</span>
+                        </li>
+                    </ul>
+                    <div class="flex flex-wrap gap-1.5 mt-4">
+                        <span class="text-xs text-slate-500 bg-slate-800/60 border border-slate-700/40 px-2 py-0.5 rounded">ISO 9001</span>
+                        <span class="text-xs text-slate-500 bg-slate-800/60 border border-slate-700/40 px-2 py-0.5 rounded">NPI Coordination</span>
+                        <span class="text-xs text-slate-500 bg-slate-800/60 border border-slate-700/40 px-2 py-0.5 rounded">Document Control</span>
+                        <span class="text-xs text-slate-500 bg-slate-800/60 border border-slate-700/40 px-2 py-0.5 rounded">CAPA</span>
+                        <span class="text-xs text-slate-500 bg-slate-800/60 border border-slate-700/40 px-2 py-0.5 rounded">SolidWorks</span>
+                        <span class="text-xs text-slate-500 bg-slate-800/60 border border-slate-700/40 px-2 py-0.5 rounded">ANSYS</span>
+                        <span class="text-xs text-slate-500 bg-slate-800/60 border border-slate-700/40 px-2 py-0.5 rounded">DFM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- PROJECTS                                   -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="projects" class="py-12 px-4">
+        <div class="max-w-7xl mx-auto">
+            <p class="section-eyebrow text-center mb-1">Portfolio</p>
+            <h2 class="text-2xl font-bold mb-8 text-center text-white" id="proj-heading">Engineering Projects</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5" id="projects-container">
+                <!-- Projects loaded by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SKILLS                                     -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="skills" class="py-12 px-4">
+        <div class="max-w-5xl mx-auto">
+            <p class="section-eyebrow text-center mb-1">Capabilities</p>
+            <h2 class="text-2xl font-bold mb-8 text-center text-white" id="skills-heading">Core Competencies</h2>
+            
+            <!-- CHANGE: Reduced from 9 cards to 8 in a clean 2×4 / 4×2 grid. Merged "Documentation" into PLM.
+                         Removed duplicate "Failure Mode Analysis" (already in Quality Systems as PFMEA).
+                         Removed "Root Cause Analysis" as standalone skill (it's implicit in 8D/CAPA). -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+
+                <div class="skill-card bg-slate-900/60 rounded-lg p-4 border border-slate-800/60">
+                    <h4 class="text-cyan-400 font-medium mb-3 text-xs tracking-wide uppercase font-mono-custom">Quality Systems</h4>
+                    <ul class="text-slate-400 text-xs space-y-1.5 leading-relaxed">
+                        <li>ISO 9001 / 14001 / 13485</li>
+                        <li>PFMEA &amp; Risk Analysis</li>
+                        <li>Internal Audits &amp; CAPA</li>
+                        <li>8D Problem Solving</li>
+                        <li>Lean Six Sigma (SSGB)</li>
+                    </ul>
+                </div>
+
+                <div class="skill-card bg-slate-900/60 rounded-lg p-4 border border-slate-800/60">
+                    <h4 class="text-cyan-400 font-medium mb-3 text-xs tracking-wide uppercase font-mono-custom">Manufacturing</h4>
+                    <ul class="text-slate-400 text-xs space-y-1.5 leading-relaxed">
+                        <li>CNC Machining &amp; CAM</li>
+                        <li>Additive Manufacturing</li>
+                        <li>Process Validation</li>
+                        <li>GD&amp;T Application</li>
+                        <li>Casting &amp; Welding</li>
+                    </ul>
+                </div>
+
+                <div class="skill-card bg-slate-900/60 rounded-lg p-4 border border-slate-800/60">
+                    <h4 class="text-cyan-400 font-medium mb-3 text-xs tracking-wide uppercase font-mono-custom">CAD &amp; Analysis</h4>
+                    <ul class="text-slate-400 text-xs space-y-1.5 leading-relaxed">
+                        <li>SolidWorks &amp; PTC Creo</li>
+                        <li>ANSYS (FEA / Thermal)</li>
+                        <li>Design-for-Manufacturing</li>
+                        <li>Modal &amp; Vibration Analysis</li>
+                        <li>AutoCAD</li>
+                    </ul>
+                </div>
+
+                <div class="skill-card bg-slate-900/60 rounded-lg p-4 border border-slate-800/60">
+                    <h4 class="text-cyan-400 font-medium mb-3 text-xs tracking-wide uppercase font-mono-custom">Statistical Methods</h4>
+                    <ul class="text-slate-400 text-xs space-y-1.5 leading-relaxed">
+                        <li>Statistical Process Control</li>
+                        <li>Minitab &amp; JMP</li>
+                        <li>Gage R&amp;R</li>
+                        <li>Process Capability (Cp/Cpk)</li>
+                        <li>DOE Fundamentals</li>
+                    </ul>
+                </div>
+
+                <div class="skill-card bg-slate-900/60 rounded-lg p-4 border border-slate-800/60">
+                    <h4 class="text-cyan-400 font-medium mb-3 text-xs tracking-wide uppercase font-mono-custom">Data &amp; Programming</h4>
+                    <ul class="text-slate-400 text-xs space-y-1.5 leading-relaxed">
+                        <li>Python &amp; MATLAB</li>
+                        <li>MS Excel (Advanced)</li>
+                        <li>Data Visualization</li>
+                        <li>Surrogate Modeling</li>
+                    </ul>
+                </div>
+
+                <div class="skill-card bg-slate-900/60 rounded-lg p-4 border border-slate-800/60">
+                    <h4 class="text-cyan-400 font-medium mb-3 text-xs tracking-wide uppercase font-mono-custom">PLM &amp; ERP</h4>
+                    <ul class="text-slate-400 text-xs space-y-1.5 leading-relaxed">
+                        <li>PTC Windchill (PLM)</li>
+                        <li>SAP ERP Fundamentals</li>
+                        <li>Change Mgmt (ECN/ECO)</li>
+                        <li>Technical Documentation</li>
+                        <li>Engineering Drawings</li>
+                    </ul>
+                </div>
+
+                <div class="skill-card bg-slate-900/60 rounded-lg p-4 border border-slate-800/60">
+                    <h4 class="text-cyan-400 font-medium mb-3 text-xs tracking-wide uppercase font-mono-custom">Supply Chain &amp; Ops</h4>
+                    <ul class="text-slate-400 text-xs space-y-1.5 leading-relaxed">
+                        <li>Supplier Documentation</li>
+                        <li>NPI Coordination</li>
+                        <li>Procurement Basics</li>
+                        <li>Demand Planning</li>
+                        <li>Logistics Fundamentals</li>
+                    </ul>
+                </div>
+
+                <div class="skill-card bg-slate-900/60 rounded-lg p-4 border border-slate-800/60">
+                    <h4 class="text-cyan-400 font-medium mb-3 text-xs tracking-wide uppercase font-mono-custom">Cross-functional</h4>
+                    <ul class="text-slate-400 text-xs space-y-1.5 leading-relaxed">
+                        <li>Audit Preparation</li>
+                        <li>Work Instruction Writing</li>
+                        <li>Cross-functional Teams</li>
+                        <li>Customer Communication</li>
+                        <li>Supplier Coordination</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- CERTIFICATIONS                             -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="certifications" class="py-12 px-4">
+        <div class="max-w-4xl mx-auto">
+            <!-- CHANGE: Shortened heading — "& Professional Development" was unnecessary -->
+            <p class="section-eyebrow text-center mb-1">Credentials</p>
+            <h2 class="text-2xl font-bold mb-8 text-center text-white" id="cert-heading">Certifications</h2>
+            
+            <div class="grid md:grid-cols-2 gap-4">
+
+                <div class="bg-slate-900/60 rounded-xl p-4 border border-slate-800/60 hover:border-blue-500/40 transition-all cursor-pointer" onclick="openBadgeModal('six-sigma')">
+                    <div class="flex items-start gap-3">
+                        <div class="w-9 h-9 bg-blue-600/15 border border-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-sm font-semibold text-white mb-0.5">Certified Six Sigma Green Belt</h3>
+                            <!-- CHANGE: Issuer and date on one line, smaller — less visual noise -->
+                            <p class="text-slate-500 text-xs font-mono-custom">AIGPE · March 2026</p>
+                            <p class="text-slate-500 text-xs mt-1">DMAIC methodology, statistical process control, Minitab-based analysis</p>
+                        </div>
+                        <span class="text-blue-400 text-xs flex-shrink-0">View →</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/60 rounded-xl p-4 border border-slate-800/60 hover:border-blue-500/40 transition-all cursor-pointer" onclick="openBadgeModal('minitab')">
+                    <div class="flex items-start gap-3">
+                        <div class="w-9 h-9 bg-blue-600/15 border border-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-sm font-semibold text-white mb-0.5">Certified Minitab Expert</h3>
+                            <p class="text-slate-500 text-xs font-mono-custom">AIGPE · March 2026</p>
+                            <p class="text-slate-500 text-xs mt-1">Hypothesis testing, regression, control charts, capability analysis</p>
+                        </div>
+                        <span class="text-blue-400 text-xs flex-shrink-0">View →</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/60 rounded-xl p-4 border border-slate-800/60 hover:border-blue-500/40 transition-all cursor-pointer" onclick="openCertificateModal('iso')">
+                    <div class="flex items-start gap-3">
+                        <div class="w-9 h-9 bg-blue-600/15 border border-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-sm font-semibold text-white mb-0.5">ISO 9001 &amp; 14001 Education Award</h3>
+                            <!-- CHANGE: Removed "Terry M. Mann" from the visible line — name before issuer confuses scanning -->
+                            <p class="text-slate-500 text-xs font-mono-custom">Exemplar Global · December 2025</p>
+                            <p class="text-slate-500 text-xs mt-1">QMS &amp; EMS internal auditing, clause-level interpretation</p>
+                        </div>
+                        <span class="text-blue-400 text-xs flex-shrink-0">View →</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/60 rounded-xl p-4 border border-slate-800/60 hover:border-blue-500/40 transition-all cursor-pointer" onclick="openCertificateModal('cscp')">
+                    <div class="flex items-start gap-3">
+                        <div class="w-9 h-9 bg-blue-600/15 border border-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-sm font-semibold text-white mb-0.5">Supply Chain Professional (CSCP)</h3>
+                            <p class="text-slate-500 text-xs font-mono-custom">Udemy · 2025</p>
+                            <p class="text-slate-500 text-xs mt-1">Supply chain strategy, procurement, demand planning, logistics</p>
+                        </div>
+                        <span class="text-blue-400 text-xs flex-shrink-0">View →</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/60 rounded-xl p-4 border border-slate-800/60 md:col-span-2">
+                    <div class="flex items-start gap-3">
+                        <div class="w-9 h-9 bg-slate-700/40 border border-slate-700/40 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-semibold text-white mb-0.5">SAP ERP Fundamentals</h3>
+                            <p class="text-slate-500 text-xs font-mono-custom">Coursework · Fall 2024</p>
+                            <p class="text-slate-500 text-xs mt-1">Enterprise resource planning, inventory management, production order workflows</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- CONTACT                                    -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="contact" class="py-12 px-4 mb-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- CHANGE: "Let's Connect" replaced — too casual, overused -->
+            <p class="section-eyebrow text-center mb-1">Get In Touch</p>
+            <h2 class="text-2xl font-bold mb-2 text-center text-white" id="contact-heading">Available for Full-Time Roles</h2>
+            <!-- CHANGE: Subheading is specific about timing and role types -->
+            <p class="text-sm text-slate-400 mb-8 text-center max-w-md mx-auto">
+                Graduating May 2026 · Open to manufacturing, quality, and operations engineering roles · Authorized to work in the US
+            </p>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-slate-900/60 rounded-2xl p-6 border border-slate-800/60">
+                    <h3 class="text-sm font-semibold mb-4 text-white">Send a Message</h3>
+                    <form class="space-y-4" id="contact-form">
+                        <div>
+                            <label class="block text-slate-400 mb-1 text-xs uppercase tracking-wide font-mono-custom">Name</label>
+                            <input type="text" id="contact-name" name="name" required placeholder="Your name" class="w-full px-3 py-2 text-sm bg-slate-800/40 border border-slate-700/60 rounded-lg text-white placeholder-slate-600 focus:outline-none focus:border-blue-500/60 transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-slate-400 mb-1 text-xs uppercase tracking-wide font-mono-custom">Email</label>
+                            <input type="email" id="contact-email" name="email" required placeholder="your@email.com" class="w-full px-3 py-2 text-sm bg-slate-800/40 border border-slate-700/60 rounded-lg text-white placeholder-slate-600 focus:outline-none focus:border-blue-500/60 transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-slate-400 mb-1 text-xs uppercase tracking-wide font-mono-custom">Message</label>
+                            <textarea id="contact-message" name="message" rows="3" required placeholder="Tell me about the role or what you're looking for..." class="w-full px-3 py-2 text-sm bg-slate-800/40 border border-slate-700/60 rounded-lg text-white placeholder-slate-600 focus:outline-none focus:border-blue-500/60 transition-colors resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-medium transition-colors text-sm">
+                            Send Message
+                        </button>
+                    </form>
+                    <p class="text-xs text-slate-600 mt-3">* Opens your default email client</p>
+                </div>
+
+                <div class="bg-slate-900/60 rounded-2xl p-6 border border-slate-800/60">
+                    <h3 class="text-sm font-semibold mb-4 text-white">Direct Contact</h3>
+                    <div class="space-y-3">
+                        <a href="mailto:vnagaraj2@wisc.edu" class="flex items-center gap-3 text-slate-300 hover:text-blue-400 transition-colors group">
+                            <div class="p-2 bg-slate-800/60 rounded-lg group-hover:bg-blue-600/20 transition-colors border border-slate-700/40">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-500 font-mono-custom">Email</p>
+                                <p class="font-medium text-sm">vnagaraj2@wisc.edu</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://linkedin.com/in/vigneshwar-nagaraj" target="_blank" class="flex items-center gap-3 text-slate-300 hover:text-blue-400 transition-colors group">
+                            <div class="p-2 bg-slate-800/60 rounded-lg group-hover:bg-blue-600/20 transition-colors border border-slate-700/40">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-500 font-mono-custom">LinkedIn</p>
+                                <p class="font-medium text-sm">vigneshwar-nagaraj</p>
+                            </div>
+                        </a>
+                        
+                        <a href="tel:+16087077253" class="flex items-center gap-3 text-slate-300 hover:text-blue-400 transition-colors group">
+                            <div class="p-2 bg-slate-800/60 rounded-lg group-hover:bg-blue-600/20 transition-colors border border-slate-700/40">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-500 font-mono-custom">Phone</p>
+                                <p class="font-medium text-sm">+1 608-707-7253</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- CHANGE: Added target roles block so recruiter knows immediately what positions to reach out about -->
+                    <div class="mt-5 pt-4 border-t border-slate-800/60">
+                        <p class="text-xs text-slate-500 uppercase tracking-wide font-mono-custom mb-2">Open Roles</p>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-xs text-slate-400 bg-slate-800/60 border border-slate-700/40 px-2 py-0.5 rounded">Manufacturing Engineer</span>
+                            <span class="text-xs text-slate-400 bg-slate-800/60 border border-slate-700/40 px-2 py-0.5 rounded">Quality Engineer</span>
+                            <span class="text-xs text-slate-400 bg-slate-800/60 border border-slate-700/40 px-2 py-0.5 rounded">NPI Engineer</span>
+                            <span class="text-xs text-slate-400 bg-slate-800/60 border border-slate-700/40 px-2 py-0.5 rounded">Process Engineer</span>
+                            <span class="text-xs text-slate-400 bg-slate-800/60 border border-slate-700/40 px-2 py-0.5 rounded">Operations Engineer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/50 py-5 px-4 text-center text-slate-600 text-xs font-mono-custom">
+        <p>© 2025 Vigneshwar Nagaraj · Manufacturing &amp; Quality Engineer · Madison, WI</p>
+    </footer>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- MODALS — ALL ORIGINAL LOGIC PRESERVED      -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div id="project-modal" class="modal">
+        <div class="bg-slate-900 rounded-2xl max-w-4xl w-full my-8 border border-slate-800/60 shadow-2xl shadow-black/50 max-h-[90vh] overflow-y-auto relative">
+            <button onclick="closeProjectModal()" class="absolute top-4 right-4 p-2 bg-slate-800 rounded-full hover:bg-slate-700 transition-colors z-10">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <div id="modal-content"></div>
+        </div>
     </div>
-</section>
 
-<footer>
-    <p>© 2025 Vigneshwar Nagaraj · Manufacturing &amp; Quality Engineer · Madison, WI</p>
-</footer>
-
-<!-- PROJECT MODAL -->
-<div class="modal-overlay" id="proj-modal">
-    <div class="modal-box">
-        <button class="modal-close" onclick="closeModal('proj-modal')">✕</button>
-        <img id="modal-img" src="" alt="" class="modal-img">
-        <div class="modal-content" id="modal-content"></div>
-    </div>
-</div>
-
-<!-- CERT MODAL -->
-<div class="cert-modal-overlay" id="cert-modal">
-    <div class="cert-modal-box">
-        <div class="cert-modal-header">
-            <h3 id="cert-modal-title">Certificate</h3>
-            <button onclick="closeModal('cert-modal')" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.2rem;">✕</button>
-        </div>
-        <div class="cert-modal-body">
-            <iframe id="cert-iframe" allow="autoplay"></iframe>
+    <div id="certificate-modal" class="modal">
+        <div class="certificate-container bg-slate-900 rounded-2xl border border-slate-800/60 shadow-2xl shadow-black/50 relative">
+            <div class="certificate-header flex justify-between items-center">
+                <h3 class="text-base font-semibold text-white" id="cert-title">Certificate</h3>
+                <button onclick="closeCertificateModal()" class="p-2 bg-slate-800 rounded-full hover:bg-slate-700 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="certificate-body">
+                <iframe id="cert-iframe" allow="autoplay"></iframe>
+            </div>
         </div>
     </div>
-</div>
 
-<script>
-/* ─── PROJECT DATA ──────────────────────────── */
-const projects = [
-    {
-        id: 'qms',
-        label: 'Quality Systems',
-        title: 'ISO 9001/14001/13485 Quality Management System',
-        image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=400&fit=crop',
-        role: 'Quality Engineering Intern · Fabhead\'s Automation',
-        problem: 'A growing industrial 3D printing company needed a compliant, auditable QMS to meet customer requirements from TATA and DRDO — without a dedicated quality team in place.',
-        approach: [
-            'Built and maintained ISO 9001 documentation architecture: SOPs, audit records, corrective action logs, and revision-controlled procedures',
-            'Served as primary point of contact for TATA and DRDO customer audits — coordinating documentation review and preparing evidence packages',
-            'Implemented document control workflow tracking using spreadsheet-based tooling to flag expiring records and pending approvals',
-            'Drafted CAPA reports in response to customer observations and closed findings within agreed timelines'
-        ],
-        tools: ['ISO 9001', 'ISO 14001', 'ISO 13485', 'Document Control', 'CAPA', 'Internal Auditing', 'Risk Analysis'],
-        results: [
-            'Achieved zero non-conformances across TATA and DRDO customer audits',
-            'Established compliant document control system from scratch within a 4-month internship',
-            'Created reusable audit evidence templates that reduced preparation time for subsequent reviews',
-            'Maintained 100% on-time closure of corrective action items during engagement'
-        ],
-        insight: 'QMS effectiveness depends less on document volume and more on traceability — every record must answer "what changed, why, and what was verified." Building the system with audit evidence in mind from day one, rather than retrofitting it before each audit, eliminated reactive scrambling and made compliance a normal operating state.',
-        metrics: ['0 Non-Conformances', 'ISO 9001/14001 Compliant', 'TATA & DRDO Approved']
-    },
-    {
-        id: 'tent',
-        label: 'Product Development · 2nd Place Award',
-        title: 'Hitch-Mounted Elevated Tent Platform',
-        image: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800&h=400&fit=crop',
-        role: 'Product Development Engineer · YAKIMA-Sponsored Design Competition',
-        problem: 'Rooftop tents reduce fuel economy, require ladder access, and lock users to a single campsite. A hitch-mounted alternative needed to match RTT sleeping ergonomics while eliminating these trade-offs — and hit a competitive price point.',
-        approach: [
-            'Conducted user research (interviews + surveys) to identify core pain points: setup time and campsite mobility ranked above weather protection',
-            'Evaluated three structural architectures using weighted decision matrices against deployment time, structural safety, aesthetics, and cost',
-            'Designed hinged aluminum folding frame with telescoping rear leveling legs and wheel-assisted front mobility for tool-free deployment',
-            'Developed full cost model: COGS $499.65, target weight 95.9 lbs — validated against competitive RTT market pricing ($2,000–$4,000)',
-            'Identified hardware fatigue as primary failure risk and specified reinforced hinge construction as mitigation'
-        ],
-        tools: ['SolidWorks', 'Weighted Decision Matrix', 'Cost Analysis', 'DFM', 'Risk Analysis', 'User Research'],
-        results: [
-            'Awarded 2nd place in YAKIMA-sponsored design competition',
-            'Achieved 400 lb load capacity with structural validation',
-            'Demonstrated tool-free deployment capability meeting 15-minute setup target',
-            'COGS of $499.65 enabled competitive positioning at <$1,500 retail against $2,000–$4,000 RTT market'
-        ],
-        insight: 'User research fundamentally changed the design direction. The initial focus on weather-resistant materials shifted entirely to deployment mechanism design after interviews revealed setup time and campsite mobility were the dominant buying criteria — not protection ratings. Interviewing users before committing to a concept saved two full design iterations.',
-        metrics: ['2nd Place Award', '400 lb Capacity', 'Tool-Free Deploy', '$499 COGS']
-    },
-    {
-        id: 'modal',
-        label: 'Structural Dynamics',
-        title: 'Experimental Modal Analysis of Bicycle Frame',
-        image: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=800&h=400&fit=crop',
-        role: 'Test Engineer & Data Analyst · UW–Madison',
-        problem: 'A new bicycle frame design claimed improved stiffness, but lacked experimental data to quantify the improvement or guide further geometry-based optimization. A validated test methodology was needed.',
-        approach: [
-            'Configured SIMO impact hammer test: roving excitation across 13 nodes, fixed triaxial accelerometer (PCB 086D05), controlled boundary conditions via bungee and tire block constraints',
-            'Processed time-domain signals with windowing and FFT transformation to build FRF matrix for both frame designs',
-            'Extracted modal parameters in MATLAB using AMI curve-fitting: 8 modes (Y-axis) and 4 modes (Z-axis)',
-            'Compared natural frequencies, damping ratios, and mode shapes between old and new frame geometries',
-            'Identified boundary condition effects on rigid-body mode contamination to maintain result validity'
-        ],
-        tools: ['Experimental Modal Analysis', 'MATLAB', 'FRF Estimation', 'LabShop', 'Signal Processing', 'Structural Dynamics'],
-        results: [
-            '10–18% stiffness improvement quantified across multiple mode shapes in new frame design',
-            'Lateral first bending mode: new frame 29.25 Hz vs. old frame 62.25 Hz — revealing distributed compliance, not rigidity increase',
-            'Damping ratios: new frame 5–19% vs. old frame 1–7%, indicating improved energy dissipation',
-            'Validated repeatable test methodology suitable for future frame benchmarking'
-        ],
-        insight: 'Lower natural frequency in the new frame revealed distributed compliance — not increased stiffness, contradicting the marketing claim. Higher damping improved ride comfort despite appearing "softer" in modal data. This distinction matters for design decisions: engineers and marketing teams interpret the same data differently, and test reports must make the engineering interpretation explicit.',
-        metrics: ['10–18% Stiffness Gain', '13-Node SIMO Setup', '8 Modes Extracted']
-    },
-    {
-        id: 'surrogate',
-        label: 'Computational Engineering',
-        title: 'Surrogate-Based Aerodynamic Optimization',
-        image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&h=400&fit=crop',
-        role: 'Computational Engineer · UW–Madison',
-        problem: 'Aerodynamic optimization across large design spaces requires hundreds of CFD runs — computationally prohibitive for iterative design. A surrogate model framework was needed to predict lift and drag without running full simulations for every design point.',
-        approach: [
-            'Generated aerodynamic dataset using XFLR5 across 20 NACA profiles and angle-of-attack range (−4° to 12°)',
-            'Parameterized airfoil geometry using 8 polynomial coefficients for upper and lower surfaces',
-            'Trained Gaussian Process Regression models (MATLAB fitrgp, squared exponential kernel) on Cl and Cd response surfaces',
-            'Implemented Bayesian Optimization (bayesopt, expected-improvement-plus acquisition) to maximize Cl/Cd ratio within 30 evaluations',
-            'Validated predictions against holdout dataset and verified surface continuity constraints'
-        ],
-        tools: ['MATLAB', 'XFLR5', 'Gaussian Process Regression', 'Bayesian Optimization', 'Surrogate Modeling'],
-        results: [
-            'Achieved R² > 0.9 prediction accuracy on validation dataset for Cl',
-            'Reduced computational simulation effort by 60% vs. traditional grid-based design sweeps',
-            'Identified optimized airfoil configurations with improved Cl/Cd performance within 30 function evaluations',
-            'Maintained geometric smoothness constraints throughout optimization trajectory'
-        ],
-        insight: 'Bayesian Optimization\'s acquisition function balances exploration and exploitation well, but initial training point selection critically determines whether the surrogate captures the full response surface or converges prematurely on a local optimum. A Latin hypercube sampling strategy for initial points outperformed random sampling in this application.',
-        metrics: ['R² > 0.9', '60% Simulation Reduction', '30 Evaluations to Optimum']
-    },
-    {
-        id: 'splash',
-        label: 'Additive Manufacturing',
-        title: 'Multi-Material Additive Splash Guard',
-        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&h=400&fit=crop',
-        role: 'Product Development Engineer · UW–Madison',
-        problem: 'Breathable mesh uppers in sports footwear allow water ingress during wet conditions. Fully waterproof shoes sacrifice comfort. A modular, detachable cover was needed that could retrofit onto existing footwear without compromising breathability during dry conditions.',
-        approach: [
-            'Captured shoe geometry via structured-light 3D scanning and generated parametric surfaces conforming to toe curvature and ankle profile',
-            'Designed hybrid material architecture: PLA for rigid splash deflection zones, TPU for flexible interface and comfort regions',
-            'Managed single-extruder constraint by developing a sequential print workflow with custom supports to simulate dual-material output',
-            'Iterated through two design cycles — slot-based interlocking system improved structural retention; geometry revision improved ergonomic fit'
-        ],
-        tools: ['3D Scanning', 'SolidWorks', 'FDM Printing', 'PLA/TPU', 'DfAM', 'Iterative Prototyping'],
-        results: [
-            'Demonstrated effective water deflection under simulated wet conditions',
-            'Improved attachment stability and ergonomic comfort through two design iterations',
-            'Validated feasibility of sequential-print multi-material workflow on single-extruder hardware',
-            'Established clear requirements for future dual-extrusion integration'
-        ],
-        insight: 'Material interfaces in multi-material AM require explicit design attention — not just material selection. The transition geometry between PLA and TPU zones affected both structural retention and print quality more than anticipated. Iterative physical prototyping was essential for ergonomic validation; computational models alone were insufficient for contact-fit assessment.',
-        metrics: ['2-Material Architecture', '2 Design Iterations', 'Waterproof Validated']
-    },
-    {
-        id: 'robot',
-        label: 'Robotics & Automation',
-        title: 'Autonomous Line-Following Robot with Vision Memory',
-        image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=400&fit=crop',
-        role: 'Robotics Engineer · UW–Madison',
-        problem: 'Traditional line-following robots require physical path markers laid on the floor. An autonomous system that could learn and replay a path from vision data — without permanent physical guides — would enable flexible deployment in changing environments.',
-        approach: [
-            'Calibrated dual LDR reflectivity sensors with onboard potentiometers and implemented proportional motor control to reduce oscillation during path following',
-            'Developed fault recovery logic: forward correction on dual-light reads; halt on correction failure — preventing uncontrolled deviation',
-            'Captured 10 Hz video using OpenCV; converted BGR→HSV for robust contour extraction under ambient lighting variation',
-            'Built path memory system: extracted centroids from contour detection, stored last 100 trajectory points in rolling buffer for marker-free replay',
-            'Integrated ROS architecture for future modular expansion of autonomous behaviors'
-        ],
-        tools: ['Arduino', 'Raspberry Pi', 'OpenCV', 'ROS', 'Python', 'Proportional Control', 'Computer Vision'],
-        results: [
-            'Achieved stable path tracking on both curved and straight trajectories',
-            'Functional path logging and marker-free replay demonstrated in controlled environment',
-            'ROS integration validated for future autonomous expansion',
-            'Identified computational bottleneck: simultaneous vision pipeline loading caused system freeze — informing dual-camera architecture proposal'
-        ],
-        insight: 'Resource-constrained real-time vision processing requires explicit task partitioning. Combining path memory capture and live video streaming on a single Raspberry Pi exceeded available compute, causing system instability. The engineering lesson: parallel pipeline performance must be validated on target hardware before architecture commitment, not after integration.',
-        metrics: ['10 Hz Vision Pipeline', 'Marker-Free Replay', 'Proportional Control']
-    }
-];
-
-/* ─── RENDER PROJECT CARDS ──────────────────── */
-const grid = document.getElementById('projects-grid');
-
-projects.forEach(p => {
-    const card = document.createElement('div');
-    card.className = 'project-card';
-    card.innerHTML = `
-        <img src="${p.image}" alt="${p.title}" class="project-img">
-        <div class="project-body">
-            <p class="project-label">${p.label}</p>
-            <h3 class="project-title">${p.title}</h3>
-            <p class="project-problem">${p.problem}</p>
-            <div class="project-metrics">
-                ${p.metrics.map(m => `<span class="metric-chip">${m}</span>`).join('')}
+    <div id="badge-modal" class="modal">
+        <div class="certificate-container bg-slate-900 rounded-2xl border border-slate-800/60 shadow-2xl shadow-black/50 relative">
+            <div class="certificate-header flex justify-between items-center">
+                <h3 class="text-base font-semibold text-white" id="badge-title">Certificate</h3>
+                <button onclick="closeBadgeModal()" class="p-2 bg-slate-800 rounded-full hover:bg-slate-700 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
             </div>
-            <div class="project-footer">
-                <span class="project-tools">${p.tools.slice(0,3).join(' · ')}</span>
-                <span class="project-link">Details →</span>
+            <div class="certificate-body p-8">
+                <div class="cert-carousel relative mb-6">
+                    <button class="cert-carousel-btn prev" onclick="prevCertSlide()">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    <button class="cert-carousel-btn next" onclick="nextCertSlide()">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                    <div class="cert-carousel-inner" id="cert-carousel-inner"></div>
+                    <div class="cert-carousel-indicators" id="cert-indicators"></div>
+                </div>
+                <div id="badge-info" class="bg-slate-800/50 rounded-lg p-5"></div>
             </div>
         </div>
-    `;
-    card.onclick = () => openProjectModal(p);
-    grid.appendChild(card);
-});
+    </div>
 
-/* WIP cards */
-const wipProjects = [
-    { title: 'CFD Pipe Flow Analysis', label: 'In Progress', desc: 'Internal turbulent flow simulation — ANSYS Fluent. Pressure drop, velocity profiles, heat transfer coefficients.' },
-    { title: 'Thermal Heat Sink Optimization', label: 'In Progress', desc: 'Forced-convection heat sink optimization — ANSYS Thermal + surrogate modeling for junction temperature minimization.' }
-];
+    <script>
+        // ═══════════════════════════════════════════
+        // PROJECTS DATA
+        // CHANGE: card `description` fields rewritten — problem-first framing instead of solution-first
+        // ═══════════════════════════════════════════
+        const projects = [
+            {
+                title: "Multi-Material Additive Manufacturing — Detachable Splash Guard",
+                description: "Breathable mesh shoes allow water ingress in wet conditions. Designed a modular, retrofit cover using PLA/TPU multi-material AM with iterative fit validation.",
+                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&h=500&fit=crop",
+                overview: "Developed a detachable, modular splash guard to improve water resistance in breathable sports footwear without compromising comfort or adaptability.",
+                problemStatement: "Breathable mesh uppers allow water ingress during wet conditions. Fully waterproof shoes sacrifice ventilation comfort. A removable retrofit cover was needed that preserves breathability during dry use.",
+                objectives: [
+                    "Design a removable splash guard integrating with existing footwear geometry",
+                    "Achieve effective water deflection while maintaining ergonomic fit",
+                    "Validate multi-material architecture for structural retention and comfort",
+                    "Iterate design through physical prototyping on single-extrusion hardware"
+                ],
+                methodology: [
+                    "Captured shoe profile via structured-light 3D scanning; generated parametric surfaces conforming to toe curvature and ankle profile",
+                    "Designed hybrid material architecture: PLA (rigid deflection zones) and TPU (flexible interface regions)",
+                    "Developed sequential print workflow to simulate dual-material output on single-extrusion printer",
+                    "Iterated through two design cycles: improved slot interlocking for retention; revised geometry for ergonomic fit"
+                ],
+                technologies: ["3D Scanning", "SolidWorks", "FDM / PLA / TPU", "DfAM", "Iterative Prototyping", "Reverse Engineering"],
+                results: [
+                    "Demonstrated effective water deflection under simulated wet conditions",
+                    "Improved attachment stability and ergonomic comfort across two design iterations",
+                    "Validated feasibility of sequential-print multi-material workflow on single-extrusion hardware",
+                    "Defined dual-extrusion integration requirements for future development"
+                ],
+                insights: "Material interface geometry required explicit design attention — transition zones between PLA and TPU affected structural retention and print quality more than material selection alone. Physical prototyping was essential for ergonomic validation; computational models were insufficient for contact-fit assessment.",
+                role: "Product Development Engineer · UW–Madison",
+                isComplete: true
+            },
+            {
+                title: "Surrogate-Based Aerodynamic Optimization",
+                description: "Aerodynamic optimization requires hundreds of CFD runs. Built Gaussian Process surrogate models achieving R² > 0.9, cutting simulation effort by 60%.",
+                image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&h=500&fit=crop",
+                overview: "Developed a surrogate modeling framework to predict aerodynamic performance (Cl, Cd) of parameterized airfoil geometries, replacing simulation-intensive sweeps with Bayesian Optimization.",
+                problemStatement: "Traditional aerodynamic optimization requires hundreds of expensive CFD simulations, limiting design space exploration. A surrogate approach was needed to maintain accuracy while reducing computational cost.",
+                objectives: [
+                    "Train surrogate models with R² > 0.85 for Cl and Cd prediction",
+                    "Reduce simulation effort compared to grid-based design sweeps",
+                    "Implement Bayesian optimization to identify high-performing configurations",
+                    "Validate predictions against holdout dataset"
+                ],
+                methodology: [
+                    "Generated dataset using XFLR5 across 20 NACA profiles, angle-of-attack range −4° to 12°",
+                    "Parameterized airfoil geometry with 8 polynomial coefficients for upper and lower surfaces",
+                    "Trained Gaussian Process Regression models (MATLAB fitrgp, squared exponential kernel)",
+                    "Implemented Bayesian Optimization (bayesopt, expected-improvement-plus) within 30 evaluations",
+                    "Validated against holdout dataset; verified geometric smoothness constraints"
+                ],
+                technologies: ["MATLAB", "XFLR5", "Gaussian Process Regression", "Bayesian Optimization", "Surrogate Modeling"],
+                results: [
+                    "R² > 0.9 on validation dataset for Cl prediction",
+                    "60% reduction in simulation effort vs. grid-based design sweeps",
+                    "Optimized airfoil configuration identified within 30 function evaluations",
+                    "Geometric smoothness constraints maintained throughout optimization"
+                ],
+                insights: "Initial training point selection is critical for Gaussian Process surrogate accuracy — Latin hypercube sampling outperformed random sampling for capturing non-linear regions. Bayesian optimization's exploration-exploitation balance works well, but requires a well-distributed initial dataset to avoid premature convergence.",
+                role: "Computational Engineer · UW–Madison",
+                isComplete: true
+            },
+            {
+                title: "Hitch-Mounted Elevated Tent Platform",
+                description: "Rooftop tents compromise fuel economy and campsite mobility. Designed a 400 lb capacity hitch-mounted alternative that won 2nd place in a YAKIMA-sponsored competition.",
+                image: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800&h=500&fit=crop",
+                overview: "Developed a hitch-mounted elevated camping tent system as an alternative to rooftop tents, using a phase-gate product development process from user research through cost-validated concept.",
+                problemStatement: "Rooftop tents reduce fuel economy, require ladder access, and prevent campsite mobility. A hitch-mounted alternative needed to match RTT sleeping ergonomics at a competitive price point.",
+                objectives: [
+                    "Achieve ≥400 lb load capacity with structural validation",
+                    "Enable tool-free deployment within 15-minute target",
+                    "Maintain stability on uneven terrain with adjustable leveling",
+                    "Target COGS enabling competitive retail pricing vs. $2,000–$4,000 RTT market"
+                ],
+                methodology: [
+                    "Conducted user research through interviews and surveys — identified setup time and campsite mobility as top buying criteria, above weather protection",
+                    "Evaluated three structural architectures using weighted decision matrices (deployment time, safety, aesthetics, cost)",
+                    "Designed hinged aluminum folding frame with telescoping leveling legs and wheel-assisted front mobility",
+                    "Developed full cost model: COGS $499.65, target weight 95.9 lbs; validated against competitive market",
+                    "Identified hardware fatigue as primary failure risk; specified reinforced hinge construction as mitigation"
+                ],
+                technologies: ["SolidWorks", "Weighted Decision Matrix", "Cost Analysis", "DFM", "Structural Design", "User Research"],
+                results: [
+                    "2nd place in YAKIMA-sponsored design competition",
+                    "400 lb load capacity validated structurally",
+                    "Tool-free deployment demonstrated, meeting 15-minute setup target",
+                    "COGS of $499.65 enables competitive retail positioning below primary RTT segment"
+                ],
+                insights: "User research shifted the design focus from material weatherproofing to deployment mechanism design — a direct result of interview data contradicting initial engineering assumptions. Phase-gate process prevented two unnecessary design iterations by surfacing this insight before CAD work began.",
+                role: "Product Development Engineer · UW–Madison",
+                isComplete: true
+            },
+            {
+                title: "Autonomous Line-Following Robot with Vision Memory",
+                description: "Standard line-following robots require permanent floor markers. Built a vision-based system that logs and replays paths without physical guides, with proportional control and fault recovery.",
+                image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=500&fit=crop",
+                overview: "Developed an autonomous mobile robot that follows paths using reflectivity sensors, logs trajectory from vision data, and replays routes without physical markers.",
+                problemStatement: "Traditional line-following systems require permanent physical path markers. An adaptive system that learns and replays paths from vision data would enable flexible deployment in changing environments.",
+                objectives: [
+                    "Implement proportional motor control for stable path following",
+                    "Build vision-based path logging and marker-free replay capability",
+                    "Develop fault recovery logic for robust autonomous operation",
+                    "Validate ROS integration for future modular expansion"
+                ],
+                methodology: [
+                    "Calibrated dual LDR reflectivity sensors; implemented proportional control to reduce path oscillation",
+                    "Developed fault recovery: forward correction on dual-light detection; halt on failed correction",
+                    "Captured 10 Hz video using OpenCV; BGR→HSV conversion for lighting-robust contour extraction",
+                    "Built path memory system: centroid extraction from contours, 100-point rolling buffer for replay",
+                    "Integrated ROS architecture for future expansion"
+                ],
+                technologies: ["Arduino", "Raspberry Pi", "OpenCV", "ROS", "Python", "Proportional Control"],
+                results: [
+                    "Stable path tracking on curved and straight trajectories demonstrated",
+                    "Marker-free path logging and replay validated in controlled environment",
+                    "ROS integration architecture confirmed for future autonomous features",
+                    "Identified Raspberry Pi compute bottleneck under simultaneous vision pipeline load — informed dual-camera architecture proposal"
+                ],
+                insights: "Real-time vision on resource-constrained hardware requires explicit task partitioning validated on target hardware, not estimated. Combining path logging and live streaming exceeded available compute and caused system instability — an integration failure that would not have been caught by component-level testing alone.",
+                role: "Robotics Engineer · UW–Madison",
+                isComplete: true
+            },
+            {
+                title: "Experimental Modal Analysis — Bicycle Frame",
+                description: "A new frame design claimed improved stiffness with no test data. Ran SIMO impact testing across 13 nodes to quantify a 10–18% stiffness improvement and higher damping.",
+                image: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=800&h=500&fit=crop",
+                overview: "Experimentally characterized and compared two bicycle frame designs by extracting natural frequencies, damping ratios, and mode shapes under controlled impact excitation.",
+                problemStatement: "A new frame design claimed improved stiffness but lacked experimental data. Quantitative modal testing was needed to verify the claim and provide data for design iteration.",
+                objectives: [
+                    "Extract natural frequencies and mode shapes for both frame designs",
+                    "Quantify stiffness differences through modal parameter comparison",
+                    "Validate test methodology for repeatable structural design benchmarking",
+                    "Provide engineering interpretation of results for the design team"
+                ],
+                methodology: [
+                    "Configured SIMO test: roving impact hammer, fixed triaxial accelerometer (PCB 086D05), 13 excitation nodes",
+                    "Controlled boundary conditions: bungee stabilization and tire block constraint to isolate structural modes",
+                    "Applied time-domain windowing, FFT transformation for FRF estimation and matrix assembly",
+                    "Extracted modal parameters via AMI curve-fitting in MATLAB: 8 Y-axis modes, 4 Z-axis modes",
+                    "Compared natural frequencies, damping ratios, and mode shapes between designs"
+                ],
+                technologies: ["MATLAB", "Experimental Modal Analysis", "FRF Estimation", "Signal Processing", "LabShop", "Structural Dynamics"],
+                results: [
+                    "10–18% higher stiffness quantified in new frame across multiple mode shapes",
+                    "Lateral first bending mode: new frame 29.25 Hz vs. old frame 62.25 Hz — indicating distributed compliance",
+                    "Damping ratios: new frame 5–19% vs. old frame 1–7% — improved energy dissipation",
+                    "Test methodology validated with repeatable measurements across sessions"
+                ],
+                insights: "Lower natural frequency in the new frame indicated distributed compliance, not increased rigidity — contradicting the marketing claim. Engineering reports must explicitly distinguish these interpretations; without that context, the same data can support opposite design conclusions.",
+                role: "Test Engineer · UW–Madison",
+                isComplete: true
+            },
+            {
+                title: "IMU-Driven Adaptive Load Balancing System",
+                description: "Heavy loads cause spinal misalignment with no real-time adaptation. Designed a research protocol for a wearable IMU-based load redistribution system with full experimental methodology.",
+                image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=500&fit=crop",
+                overview: "Designed a research protocol for an adaptive backpack system using IMU-based postural feedback to quantify and reduce spinal strain during load carrying.",
+                problemStatement: "Heavy or uneven loads cause spinal misalignment in military, industrial, and athletic use cases. Conventional backpacks provide no adaptive response to posture or terrain changes.",
+                objectives: [
+                    "Propose IMU system architecture for real-time posture estimation",
+                    "Design a controlled experiment to quantify spinal strain under varying load/terrain conditions",
+                    "Define statistical analysis methodology for validating adaptive load redistribution",
+                    "Outline mechanical design requirements for weight redistribution mechanism"
+                ],
+                methodology: [
+                    "Proposed multi-segment IMU placement (C7, thoracic, lumbar, hip, shank, foot) paired with force plates",
+                    "Designed factorial experiment: 10 participants, 3 load levels (10/20/30% BW), 3 terrains (flat, ±10° slopes)",
+                    "Defined kinematic and kinetic data collection: spinal curvature, GRF, CoP displacement, gait asymmetry",
+                    "Specified repeated-measures ANOVA (Load × Terrain × System) with appropriate post-hoc testing",
+                    "Outlined future directions: prototype development, exoskeleton integration, ML-based predictive correction"
+                ],
+                technologies: ["IMU Sensors", "Force Plates", "Biomechanics", "Experimental Design", "Repeated-Measures ANOVA", "Wearable Systems"],
+                results: [
+                    "Comprehensive experimental protocol established for biomechanical validation",
+                    "Novel closed-loop wearable load-balancing system architecture proposed",
+                    "Clear hypotheses defined for Load × Terrain interaction effects on spinal alignment",
+                    "Applications identified across military, industrial, and rehabilitation contexts"
+                ],
+                insights: "IMU drift over long-duration trials requires sensor fusion compensation — a constraint that affects both hardware selection and signal processing pipeline design. Factorial experiment design revealed a likely non-linear Load × Terrain interaction, which requires polynomial contrast testing beyond standard ANOVA to characterize properly.",
+                role: "Biomechanics Research Engineer · UW–Madison",
+                isComplete: true
+            },
+            {
+                title: "ANSYS Structural &amp; Thermal Analysis",
+                description: "FEA simulation case studies including structural, thermal, and fatigue analysis",
+                image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=500&fit=crop",
+                isComplete: false,
+                category: "ANSYS"
+            },
+            {
+                title: "Product Design &amp; Development Portfolio",
+                description: "CAD-driven product development projects from concept through manufacturing review",
+                image: "https://images.unsplash.com/photo-1586864387634-8582c40dd6bb?w=800&h=500&fit=crop",
+                isComplete: false,
+                category: "Product Design"
+            }
+        ];
 
-wipProjects.forEach(w => {
-    const card = document.createElement('div');
-    card.className = 'project-card wip-card-proj';
-    card.style.cursor = 'default';
-    card.innerHTML = `
-        <div style="height:160px;background:var(--surface2);display:flex;align-items:center;justify-content:center;">
-            <span style="font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--warn);border:1px solid rgba(251,191,36,0.3);padding:0.3rem 0.8rem;border-radius:4px;">● IN PROGRESS</span>
-        </div>
-        <div class="project-body">
-            <p class="project-label wip-label">${w.label}</p>
-            <h3 class="project-title">${w.title}</h3>
-            <p class="project-problem">${w.desc}</p>
-            <div class="project-footer">
-                <span class="project-tools">ANSYS · Python</span>
-                <span style="font-size:0.65rem;color:var(--warn);font-family:'Space Mono',monospace;">Expected May 2026</span>
-            </div>
-        </div>
-    `;
-    grid.appendChild(card);
-});
+        // Load Projects — original logic preserved, only card text updated via data above
+        const projectsContainer = document.getElementById('projects-container');
+        projects.forEach(project => {
+            const card = document.createElement('div');
+            
+            if (!project.isComplete) {
+                card.className = 'bg-slate-900/90 rounded-xl overflow-hidden border border-amber-500/30 hover:border-amber-400/60 transition-all hover:transform hover:scale-[1.02] cursor-pointer relative';
+            } else {
+                card.className = 'bg-slate-900/90 rounded-xl overflow-hidden border border-slate-800/60 hover:border-blue-500/40 transition-all hover:transform hover:scale-[1.02] cursor-pointer';
+            }
+            
+            card.onclick = () => openProjectModal(project);
+            
+            card.innerHTML = `
+                ${!project.isComplete ? '<div class="absolute top-2 right-2 z-10 bg-amber-500/90 text-slate-900 px-2 py-0.5 rounded text-xs font-medium">In Progress</div>' : ''}
+                <img src="${project.image}" alt="${project.title}" class="w-full h-40 object-cover ${!project.isComplete ? 'opacity-50' : 'opacity-80'}">
+                <div class="p-4">
+                    <h3 class="text-sm font-semibold ${!project.isComplete ? 'text-amber-400' : 'text-white'} mb-1.5 leading-snug">${project.title}</h3>
+                    <p class="text-slate-500 text-xs mb-3 leading-relaxed">${project.description}</p>
+                    <button class="inline-flex items-center gap-1.5 ${!project.isComplete ? 'text-amber-400' : 'text-blue-400'} hover:opacity-80 transition-opacity text-xs font-medium">
+                        ${!project.isComplete ? 'View Status' : 'View Details →'}
+                    </button>
+                </div>
+            `;
+            projectsContainer.appendChild(card);
+        });
 
-/* ─── PROJECT MODAL ─────────────────────────── */
-function openProjectModal(p) {
-    document.getElementById('modal-img').src = p.image;
-    document.getElementById('modal-content').innerHTML = `
-        <span class="modal-badge">${p.label}</span>
-        <h2 class="modal-title">${p.title}</h2>
-        <p class="modal-role">${p.role}</p>
+        // Menu — original logic preserved
+        document.getElementById('menu-btn').addEventListener('click', function(e) {
+            e.stopPropagation();
+            document.getElementById('menu-dropdown').classList.toggle('active');
+        });
 
-        <div class="modal-section">
-            <p class="modal-section-label">Problem Statement</p>
-            <p>${p.problem}</p>
-        </div>
+        document.querySelectorAll('#menu-dropdown a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('menu-dropdown').classList.remove('active');
+            });
+        });
 
-        <div class="modal-section">
-            <p class="modal-section-label">Approach</p>
-            <ul>${p.approach.map(a => `<li>${a}</li>`).join('')}</ul>
-        </div>
+        document.addEventListener('click', function(e) {
+            const menu = document.getElementById('menu-dropdown');
+            const btn = document.getElementById('menu-btn');
+            if (!btn.contains(e.target) && !menu.contains(e.target)) {
+                menu.classList.remove('active');
+            }
+        });
 
-        <div class="modal-section">
-            <p class="modal-section-label">Tools & Methods</p>
-            <div class="modal-tools">${p.tools.map(t => `<span class="modal-tool">${t}</span>`).join('')}</div>
-        </div>
+        // Project Modal — original logic preserved, modal content text tightened
+        function openProjectModal(project) {
+            const modal = document.getElementById('project-modal');
+            const content = document.getElementById('modal-content');
+            
+            if (!project.isComplete) {
+                content.innerHTML = `
+                    <div class="relative h-40">
+                        <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover rounded-t-2xl opacity-40">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                        <div class="absolute top-3 right-3 bg-amber-500 text-slate-900 px-3 py-1 rounded text-xs font-medium">In Progress</div>
+                    </div>
+                    <div class="p-6 md:p-8">
+                        <h2 class="text-xl font-bold mb-1 text-white">${project.title}</h2>
+                        <p class="text-slate-500 mb-5 text-sm">${project.category}</p>
+                        <div class="bg-amber-950/30 border border-amber-500/20 rounded-xl p-5 mb-5">
+                            <h3 class="text-sm font-semibold text-amber-400 mb-2">Documentation In Progress</h3>
+                            <p class="text-slate-400 text-sm mb-3">This project is currently being compiled. It will include technical specifications, methodology, and results documentation.</p>
+                            <ul class="text-slate-400 text-xs space-y-1">
+                                ${project.category === 'ANSYS' 
+                                    ? '<li>· Structural analysis case studies</li><li>· Thermal simulation projects</li><li>· Modal and fatigue analysis</li>'
+                                    : '<li>· CAD-driven product development</li><li>· Design-for-manufacturing studies</li><li>· Prototyping and validation work</li>'
+                                }
+                            </ul>
+                        </div>
+                        <div class="flex gap-3">
+                            <button onclick="closeProjectModal()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded-lg text-sm transition-colors">Close</button>
+                            <a href="mailto:vnagaraj2@wisc.edu?subject=Question about ${project.category} Projects" class="flex-1 border border-amber-500/40 hover:bg-amber-950/20 text-amber-400 px-4 py-2 rounded-lg text-sm transition-colors text-center">Contact for Details</a>
+                        </div>
+                    </div>
+                `;
+            } else {
+                content.innerHTML = `
+                    <div class="relative h-44 md:h-56">
+                        <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover rounded-t-2xl opacity-60">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                    </div>
+                    <div class="p-6 md:p-8">
+                        <h2 class="text-xl font-bold mb-1 text-white">${project.title}</h2>
+                        <p class="text-slate-500 mb-5 text-xs font-mono-custom">${project.role}</p>
+                        
+                        <div class="mb-4">
+                            <h3 class="text-xs font-medium mb-1.5 text-cyan-400 uppercase tracking-wide font-mono-custom">Problem</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed">${project.problemStatement}</p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h3 class="text-xs font-medium mb-1.5 text-cyan-400 uppercase tracking-wide font-mono-custom">Approach</h3>
+                            <ul class="space-y-1.5">
+                                ${project.methodology.map(m => `<li class="flex items-start gap-2"><span class="text-slate-600 mt-0.5 text-xs flex-shrink-0">›</span><span class="text-slate-400 text-sm">${m}</span></li>`).join('')}
+                            </ul>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h3 class="text-xs font-medium mb-2 text-cyan-400 uppercase tracking-wide font-mono-custom">Tools</h3>
+                            <div class="flex flex-wrap gap-1.5">
+                                ${project.technologies.map(t => `<span class="px-2 py-0.5 bg-slate-800 border border-slate-700/40 rounded text-xs text-slate-400">${t}</span>`).join('')}
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h3 class="text-xs font-medium mb-1.5 text-cyan-400 uppercase tracking-wide font-mono-custom">Results</h3>
+                            <ul class="space-y-1.5">
+                                ${project.results.map(r => `<li class="flex items-start gap-2"><span class="text-cyan-500 mt-0.5 text-xs flex-shrink-0">✓</span><span class="text-slate-300 text-sm">${r}</span></li>`).join('')}
+                            </ul>
+                        </div>
+                        
+                        <div class="mb-5 bg-slate-800/40 border border-slate-700/40 rounded-lg p-4">
+                            <h3 class="text-xs font-medium mb-1.5 text-slate-400 uppercase tracking-wide font-mono-custom">Engineering Insight</h3>
+                            <p class="text-slate-400 text-sm italic leading-relaxed">${project.insights}</p>
+                        </div>
+                        
+                        <button onclick="closeProjectModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 px-6 py-2 rounded-lg font-medium transition-colors text-sm">Close</button>
+                    </div>
+                `;
+            }
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
 
-        <div class="modal-section">
-            <p class="modal-section-label">Key Results</p>
-            <div class="modal-results">
-                <ul>${p.results.map(r => `<li><strong>${r}</strong></li>`).join('')}</ul>
-            </div>
-        </div>
+        function closeProjectModal() {
+            document.getElementById('project-modal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
 
-        <div class="modal-section">
-            <p class="modal-section-label">Engineering Insight</p>
-            <div class="modal-insight">${p.insight}</div>
-        </div>
-    `;
-    document.getElementById('proj-modal').classList.add('open');
-    document.body.style.overflow = 'hidden';
-}
+        document.getElementById('project-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeProjectModal();
+        });
 
-/* ─── CERT MODAL ────────────────────────────── */
-function openCertModal(url, title) {
-    document.getElementById('cert-modal-title').textContent = title;
-    document.getElementById('cert-iframe').src = url;
-    document.getElementById('cert-modal').classList.add('open');
-    document.body.style.overflow = 'hidden';
-}
+        // Certificate Modal — original logic preserved
+        function openCertificateModal(certType) {
+            const modal = document.getElementById('certificate-modal');
+            const iframe = document.getElementById('cert-iframe');
+            const title = document.getElementById('cert-title');
+            
+            if (certType === 'iso') {
+                title.textContent = 'ISO 9001 & 14001 Education Award';
+                iframe.src = 'https://drive.google.com/file/d/1rhTbbBvq5I67luqE9EC4gPTbexcMjw_y/preview';
+            } else if (certType === 'cscp') {
+                title.textContent = 'Supply Chain Professional (CSCP)';
+                iframe.src = 'https://drive.google.com/file/d/1i4WG3eR_4AMpdmqVob-kBHjDJtWhBvPE/preview';
+            }
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
 
-function closeModal(id) {
-    document.getElementById(id).classList.remove('open');
-    document.body.style.overflow = 'auto';
-    if (id === 'cert-modal') {
-        document.getElementById('cert-iframe').src = '';
-    }
-}
+        function closeCertificateModal() {
+            const modal = document.getElementById('certificate-modal');
+            document.getElementById('cert-iframe').src = '';
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
 
-/* Click outside to close */
-document.querySelectorAll('.modal-overlay, .cert-modal-overlay').forEach(el => {
-    el.addEventListener('click', function(e) {
-        if (e.target === this) closeModal(this.id);
-    });
-});
+        document.getElementById('certificate-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeCertificateModal();
+        });
 
-/* ─── CONTACT FORM ──────────────────────────── */
-document.getElementById('contact-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const name = document.getElementById('c-name').value;
-    const email = document.getElementById('c-email').value;
-    const msg = document.getElementById('c-msg').value;
-    const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${msg}`);
-    window.location.href = `mailto:vnagaraj2@wisc.edu?subject=${subject}&body=${body}`;
-});
+        // Badge Modal — original logic preserved
+        let currentCertSlide = 0;
+        let certSlides = [];
+        
+        function openBadgeModal(badgeType) {
+            const modal = document.getElementById('badge-modal');
+            const title = document.getElementById('badge-title');
+            const info = document.getElementById('badge-info');
+            const carouselInner = document.getElementById('cert-carousel-inner');
+            const indicators = document.getElementById('cert-indicators');
+            
+            currentCertSlide = 0;
+            certSlides = [];
+            
+            if (badgeType === 'six-sigma') {
+                title.textContent = 'Certified Six Sigma Green Belt';
+                certSlides = [
+                    { type: 'pdf', url: 'https://drive.google.com/file/d/1uFE4HJmJaGQCK3gnGpoSiikJ4zNK9OYS/preview', label: 'Certificate' },
+                    { type: 'image', url: 'https://drive.google.com/thumbnail?id=1Afif70fCB64T7hGbsqrvmrKn09fJ8hR7&sz=w800', label: 'Badge' }
+                ];
+                info.innerHTML = `
+                    <h4 class="text-sm font-semibold text-white mb-3">Certificate Details</h4>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between"><span class="text-slate-500">Issued by</span><span class="text-slate-300">AIGPE</span></div>
+                        <div class="flex justify-between"><span class="text-slate-500">Date</span><span class="text-slate-300">March 1, 2026</span></div>
+                        <div class="flex justify-between"><span class="text-slate-500">Credential ID</span><span class="text-slate-300 font-mono-custom text-xs">57853640713404</span></div>
+                        <div class="flex justify-between"><span class="text-slate-500">Standard</span><span class="text-slate-300">Open Badges v2</span></div>
+                    </div>
+                `;
+            } else if (badgeType === 'minitab') {
+                title.textContent = 'Certified Minitab Expert';
+                certSlides = [
+                    { type: 'pdf', url: 'https://drive.google.com/file/d/1JhRcQqGFCXXrgSiXTLIWGcFD0vATRXQ9/preview', label: 'Certificate' },
+                    { type: 'image', url: 'https://drive.google.com/thumbnail?id=1aPSU3iD7IotTsDB2qXWNIFs8JFLzqxiC&sz=w800', label: 'Badge' }
+                ];
+                info.innerHTML = `
+                    <h4 class="text-sm font-semibold text-white mb-3">Certificate Details</h4>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between"><span class="text-slate-500">Issued by</span><span class="text-slate-300">AIGPE</span></div>
+                        <div class="flex justify-between"><span class="text-slate-500">Date</span><span class="text-slate-300">March 2, 2026</span></div>
+                        <div class="flex justify-between"><span class="text-slate-500">Credential ID</span><span class="text-slate-300 font-mono-custom text-xs">97455268182132</span></div>
+                        <div class="flex justify-between"><span class="text-slate-500">Standard</span><span class="text-slate-300">Open Badges v2</span></div>
+                    </div>
+                `;
+            }
+            
+            carouselInner.innerHTML = certSlides.map(slide => {
+                if (slide.type === 'pdf') {
+                    return `<div class="cert-slide"><iframe src="${slide.url}" style="width:100%;height:600px;border:none;border-radius:0.5rem;background:white;"></iframe></div>`;
+                } else {
+                    return `<div class="cert-slide"><img src="${slide.url}" alt="${slide.label}" style="max-width:600px;width:100%;border-radius:0.5rem;"></div>`;
+                }
+            }).join('');
+            
+            indicators.innerHTML = certSlides.map((_, i) => 
+                `<div class="cert-indicator ${i === 0 ? 'active' : ''}" onclick="gotoCertSlide(${i})"></div>`
+            ).join('');
+            
+            updateCarousel();
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
 
-/* ─── MOBILE MENU ───────────────────────────── */
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobile-menu');
+        function prevCertSlide() {
+            currentCertSlide = (currentCertSlide - 1 + certSlides.length) % certSlides.length;
+            updateCarousel();
+        }
 
-hamburger.addEventListener('click', (e) => {
-    e.stopPropagation();
-    mobileMenu.classList.toggle('open');
-});
+        function nextCertSlide() {
+            currentCertSlide = (currentCertSlide + 1) % certSlides.length;
+            updateCarousel();
+        }
 
-mobileMenu.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => mobileMenu.classList.remove('open'));
-});
+        function gotoCertSlide(index) {
+            currentCertSlide = index;
+            updateCarousel();
+        }
 
-document.addEventListener('click', (e) => {
-    if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
-        mobileMenu.classList.remove('open');
-    }
-});
+        function updateCarousel() {
+            document.getElementById('cert-carousel-inner').style.transform = `translateX(-${currentCertSlide * 100}%)`;
+            document.querySelectorAll('.cert-indicator').forEach((el, i) => {
+                el.classList.toggle('active', i === currentCertSlide);
+            });
+        }
 
-/* ─── ESC KEY ───────────────────────────────── */
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        closeModal('proj-modal');
-        closeModal('cert-modal');
-    }
-});
-</script>
+        function closeBadgeModal() {
+            document.getElementById('cert-carousel-inner').innerHTML = '';
+            document.getElementById('badge-modal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
 
+        document.getElementById('badge-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeBadgeModal();
+        });
+
+        // CHANGE: Removed scroll-based rainbow gradient — headings are now static blue
+        // This was the single biggest visual professionalism issue in the original
+
+        // Contact Form — original logic preserved
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            const message = document.getElementById('contact-message').value;
+            const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
+            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+            window.location.href = `mailto:vnagaraj2@wisc.edu?subject=${subject}&body=${body}`;
+            alert('Opening your email client. If it doesn\'t open, email vnagaraj2@wisc.edu directly.');
+        });
+
+        // ESC to close modals
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeProjectModal();
+                closeCertificateModal();
+                closeBadgeModal();
+            }
+        });
+    </script>
 </body>
 </html>
