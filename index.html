@@ -1175,6 +1175,35 @@ const PROJECTS = [
     },
 
     {
+    id: 'heat-exchanger-cfd',
+    title: ' CFD Case Study: Counterflow Heat Exchanger',
+    category: 'cfd',
+    catLabel: 'Simulation & Optimisation',
+    image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=500&fit=crop',
+    tagline: 'Completed a structured CFD workflow study for a counterflow heat exchanger — covering geometry setup, domain identification, meshing, boundary conditions, and thermal result interpretation.',
+    wip: false,
+    problem: 'Goal was to develop a working understanding of internal flow CFD methodology by completing a guided counterflow heat exchanger simulation — covering the full workflow from geometry preparation through result interpretation, with independent analysis of the physics behind the observed outputs.',
+    approach: [
+        'Identified and separated the three physical domains within the assembly: hot fluid region, cold fluid region, and the copper wall/solid separating them — a necessary pre-processing step for any internal flow CFD setup.',
+        'Created inlet and outlet cap surfaces to close the fluid volumes and define a solvable internal flow domain, then generated volume meshes for each region with appropriate element sizing at fluid-wall interfaces.',
+        'Assigned material properties to each domain: liquid water for both fluid regions and copper for the solid wall, enabling conduction-convection coupled heat transfer across the wall.',
+        'Configured boundary conditions: velocity inlet at ~100°C for the hot stream and ~30°C for the cold stream flowing in the opposite direction; pressure outlet conditions at both exits; convective wall treatment at fluid-solid interfaces.',
+        'Ran the solver and post-processed results — extracted temperature contour plots across the full domain, pressure distribution along each flow path, and velocity field visualisation for both streams.',
+        'Interpreted outlet temperature results: hot stream exit temperature was lower than inlet; cold stream exit temperature was higher than inlet — confirming heat transfer from hot to cold across the copper wall, consistent with counterflow exchanger physics.',
+        'Analyzed how increasing inlet velocity in either stream would affect residence time and therefore heat transfer effectiveness — higher velocity reduces contact time and lowers the temperature differential at the outlets.'
+    ],
+    tools: ['ANSYS Fluent', 'SpaceClaim / DesignModeler', 'CFD Post', 'Volume Meshing', 'Conjugate Heat Transfer', 'Internal Flow Setup'],
+    results: [
+        'Completed a full CFD workflow from geometry import to post-processed results for a conjugate heat transfer problem.',
+        'Observed expected counterflow behaviour: hot outlet temperature lower than inlet; cold outlet temperature higher than inlet.',
+        'Temperature contours confirmed gradual thermal exchange along the exchanger length, consistent with counterflow configuration physics.',
+        'Pressure drop distributions visualised for both streams independently, showing expected behaviour through the flow path.',
+        'Developed working understanding of how meshing resolution at the fluid-wall interface influences solution accuracy in thermal simulations.'
+    ],
+    learning: 'This was a guided learning study completed as part of a structured CFD tutorial, not an independent research project. The geometry, setup sequence, and boundary condition values were instructor-defined. My contribution was in understanding the physical reasoning behind each setup decision, independently interpreting the results, and working through the implications of parameter changes on heat transfer performance. This case study was completed to build a concrete foundation in CFD workflow methodology before applying it to original simulation work.'
+    },
+
+    {
         id: 'imu-load',
         title: 'IMU-Driven Adaptive Load Balancing — Research Protocol',
         category: 'exp',
