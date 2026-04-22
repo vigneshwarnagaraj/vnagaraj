@@ -16,7 +16,7 @@
         /* ── Base — light warm background ── */
         body {
             font-family: 'IBM Plex Sans', system-ui, sans-serif;
-            background-color: #f4f3f0;   /* warm off-white, not harsh, not cream */
+            background-color: #f4f3f0;
             color: #1e1e22;
             min-height: 100vh;
             line-height: 1.6;
@@ -84,6 +84,9 @@
         .cat-exp    { color: #0e7c5b; border-color: rgba(14,124,91,0.28);   background: rgba(14,124,91,0.07); }
         .cat-robot  { color: #b8500e; border-color: rgba(184,80,14,0.28);   background: rgba(184,80,14,0.07); }
         .cat-wip    { color: #9a6c00; border-color: rgba(154,108,0,0.28);   background: rgba(154,108,0,0.07); }
+        /* ── ADDED: Operations & Supply Chain category ── */
+        .cat-ops    { color: #0f766e; border-color: rgba(15,118,110,0.28);  background: rgba(15,118,110,0.07); }
+        .cat-quality{ color: #7c3aed; border-color: rgba(124,58,237,0.28); background: rgba(124,58,237,0.07); }
 
         /* ── Navigation ── */
         nav {
@@ -234,7 +237,7 @@
             letter-spacing: 0.06em;
         }
 
-        /* ── Hero left — name: refined, light-weight, not bulky ── */
+        /* ── Hero left — name ── */
         .hero-name-main {
             font-family: 'IBM Plex Sans', sans-serif;
             font-size: clamp(2rem, 4.5vw, 3rem);
@@ -507,9 +510,9 @@
                 <!-- About -->
                 <div class="fu3" style="margin-bottom:1.75rem; padding: 1.25rem; background:#ffffff; border:1px solid rgba(0,0,0,0.08); border-radius:10px;">
                     <p style="font-size:0.82rem; color:#2e3340; line-height:1.8;">
-                        Mechanical engineering graduate student with practical experience across manufacturing lab operations, 
-                        product design, simulation, and startup quality &amp; documentation work. 
-                        Background spans additive manufacturing, CAD/FEA, experimental testing, quality systems, and data-driven analysis. 
+                        Mechanical engineering graduate student with practical experience across manufacturing lab operations,
+                        product design, simulation, and startup quality &amp; documentation work.
+                        Background spans additive manufacturing, CAD/FEA, experimental testing, quality systems, and data-driven analysis.
                         Looking for full-time roles in engineering — open across manufacturing, product development, quality, R&amp;D, and operations — starting May 2026.
                     </p>
                 </div>
@@ -748,9 +751,112 @@
             <button class="filter-tab" data-filter="exp">Experimental &amp; Validation</button>
             <button class="filter-tab" data-filter="design">Design &amp; Product Dev</button>
             <button class="filter-tab" data-filter="robot">Robotics &amp; Systems</button>
+            <button class="filter-tab" data-filter="ops">Operations &amp; Supply Chain</button>
+            <button class="filter-tab" data-filter="quality">Quality &amp; Systems</button>
         </div>
 
-        <div id="projects-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(290px,1fr)); gap:1.1rem;"></div>
+        <div id="projects-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(290px,1fr)); gap:1.1rem;">
+
+        <!-- ─ surrogate ─ -->
+        <div class="proj-card" data-category="cfd" onclick="openModalById('surrogate')">
+            <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&h=500&fit=crop" alt="Surrogate-Based Aerodynamic Optimisation" class="proj-img">
+            <div style="padding:1rem;">
+                <div style="margin-bottom:0.5rem;"><span class="cat-pill cat-cfd">Simulation &amp; Optimisation</span></div>
+                <h3 style="font-size:0.83rem;font-weight:600;color:#111118;line-height:1.4;margin-bottom:0.45rem;">Surrogate-Based Aerodynamic Optimisation</h3>
+                <p style="font-size:0.75rem;color:#6a7280;line-height:1.65;margin-bottom:0.7rem;">Gaussian Process surrogate models (R&sup2; &gt; 0.9) cut CFD simulation effort by 60% for airfoil optimisation.</p>
+                <span style="font-size:0.72rem;color:#0284c7;font-weight:500;">View Details &rarr;</span>
+            </div>
+        </div>
+
+        <!-- ─ heat-exchanger-cfd ─ -->
+        <div class="proj-card" data-category="cfd" onclick="openModalById('heat-exchanger-cfd')">
+            <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=500&fit=crop" alt="CFD Case Study: Counterflow Heat Exchanger" class="proj-img">
+            <div style="padding:1rem;">
+                <div style="margin-bottom:0.5rem;"><span class="cat-pill cat-cfd">Simulation &amp; Optimisation</span></div>
+                <h3 style="font-size:0.83rem;font-weight:600;color:#111118;line-height:1.4;margin-bottom:0.45rem;">CFD Case Study: Counterflow Heat Exchanger</h3>
+                <p style="font-size:0.75rem;color:#6a7280;line-height:1.65;margin-bottom:0.7rem;">Completed a structured CFD workflow study for a counterflow heat exchanger &mdash; covering geometry setup, domain identification, meshing, boundary conditions, and thermal result interpretation.</p>
+                <span style="font-size:0.72rem;color:#0284c7;font-weight:500;">View Details &rarr;</span>
+            </div>
+        </div>
+
+        <!-- ─ modal-analysis ─ -->
+        <div class="proj-card" data-category="exp" onclick="openModalById('modal-analysis')">
+            <img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=800&h=500&fit=crop" alt="Experimental Modal Analysis" class="proj-img">
+            <div style="padding:1rem;">
+                <div style="margin-bottom:0.5rem;"><span class="cat-pill cat-exp">Experimental &amp; Validation</span></div>
+                <h3 style="font-size:0.83rem;font-weight:600;color:#111118;line-height:1.4;margin-bottom:0.45rem;">Experimental Modal Analysis &mdash; Bicycle Frame</h3>
+                <p style="font-size:0.75rem;color:#6a7280;line-height:1.65;margin-bottom:0.7rem;">SIMO impact testing across 13 nodes quantified a 10&ndash;18% stiffness difference and contradicted the manufacturer&rsquo;s claim.</p>
+                <span style="font-size:0.72rem;color:#0284c7;font-weight:500;">View Details &rarr;</span>
+            </div>
+        </div>
+
+        <!-- ─ imu-load ─ -->
+        <div class="proj-card" data-category="exp" onclick="openModalById('imu-load')">
+            <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=500&fit=crop" alt="IMU-Driven Adaptive Load Balancing" class="proj-img">
+            <div style="padding:1rem;">
+                <div style="margin-bottom:0.5rem;"><span class="cat-pill cat-exp">Experimental &amp; Validation</span></div>
+                <h3 style="font-size:0.83rem;font-weight:600;color:#111118;line-height:1.4;margin-bottom:0.45rem;">IMU-Driven Adaptive Load Balancing &mdash; Research Protocol</h3>
+                <p style="font-size:0.75rem;color:#6a7280;line-height:1.65;margin-bottom:0.7rem;">Designed a full factorial experimental protocol for an IMU-based wearable load redistribution system targeting spinal strain reduction.</p>
+                <span style="font-size:0.72rem;color:#0284c7;font-weight:500;">View Details &rarr;</span>
+            </div>
+        </div>
+
+        <!-- ─ splash-guard ─ -->
+        <div class="proj-card" data-category="design" onclick="openModalById('splash-guard')">
+            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&h=500&fit=crop" alt="Multi-Material AM Splash Guard" class="proj-img">
+            <div style="padding:1rem;">
+                <div style="margin-bottom:0.5rem;"><span class="cat-pill cat-design">Design &amp; Product Dev</span></div>
+                <h3 style="font-size:0.83rem;font-weight:600;color:#111118;line-height:1.4;margin-bottom:0.45rem;">Multi-Material Additive Manufacturing &mdash; Detachable Splash Guard</h3>
+                <p style="font-size:0.75rem;color:#6a7280;line-height:1.65;margin-bottom:0.7rem;">Modular PLA/TPU retrofit cover for breathable footwear &mdash; designed and validated through two prototype cycles using multi-material AM.</p>
+                <span style="font-size:0.72rem;color:#0284c7;font-weight:500;">View Details &rarr;</span>
+            </div>
+        </div>
+
+        <!-- ─ hitch-tent ─ -->
+        <div class="proj-card" data-category="design" onclick="openModalById('hitch-tent')">
+            <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800&h=500&fit=crop" alt="Hitch-Mounted Tent Platform" class="proj-img">
+            <div style="padding:1rem;">
+                <div style="margin-bottom:0.5rem;"><span class="cat-pill cat-design">Design &amp; Product Dev</span></div>
+                <h3 style="font-size:0.83rem;font-weight:600;color:#111118;line-height:1.4;margin-bottom:0.45rem;">Hitch-Mounted Elevated Tent Platform</h3>
+                <p style="font-size:0.75rem;color:#6a7280;line-height:1.65;margin-bottom:0.7rem;">2nd place &mdash; YAKIMA-sponsored competition. 400 lb capacity hitch-mounted alternative to rooftop tents, COGS $499.65.</p>
+                <span style="font-size:0.72rem;color:#0284c7;font-weight:500;">View Details &rarr;</span>
+            </div>
+        </div>
+
+        <!-- ─ line-robot ─ -->
+        <div class="proj-card" data-category="robot" onclick="openModalById('line-robot')">
+            <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=500&fit=crop" alt="Autonomous Line-Following Robot" class="proj-img">
+            <div style="padding:1rem;">
+                <div style="margin-bottom:0.5rem;"><span class="cat-pill cat-robot">Robotics &amp; Systems</span></div>
+                <h3 style="font-size:0.83rem;font-weight:600;color:#111118;line-height:1.4;margin-bottom:0.45rem;">Autonomous Line-Following Robot with Vision Memory</h3>
+                <p style="font-size:0.75rem;color:#6a7280;line-height:1.65;margin-bottom:0.7rem;">Vision-based path logging and marker-free replay with proportional control and autonomous fault recovery logic.</p>
+                <span style="font-size:0.72rem;color:#0284c7;font-weight:500;">View Details &rarr;</span>
+            </div>
+        </div>
+
+        <!-- ─ qms-medical-device ─ -->
+        <div class="proj-card" data-category="quality" onclick="openModalById('qms-medical-device')">
+            <img src="https://images.unsplash.com/photo-1581092335397-9fa3411086a1?w=800&h=500&fit=crop" alt="QMS Development Medical Device" class="proj-img">
+            <div style="padding:1rem;">
+                <div style="margin-bottom:0.5rem;"><span class="cat-pill cat-quality">Quality &amp; Systems Engineering</span></div>
+                <h3 style="font-size:0.83rem;font-weight:600;color:#111118;line-height:1.4;margin-bottom:0.45rem;">Quality Management System (QMS) Development &amp; Internal Audit &mdash; Medical Device</h3>
+                <p style="font-size:0.75rem;color:#6a7280;line-height:1.65;margin-bottom:0.7rem;">Designed a complete ISO-aligned quality system and successfully passed internal audit under simulated regulatory conditions.</p>
+                <span style="font-size:0.72rem;color:#0284c7;font-weight:500;">View Details &rarr;</span>
+            </div>
+        </div>
+
+        <!-- ─ sap-supply-chain ─ -->
+        <div class="proj-card" data-category="ops" onclick="openModalById('sap-supply-chain')">
+            <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=500&fit=crop" alt="SAP ERPsim Supply Chain" class="proj-img">
+            <div style="padding:1rem;">
+                <div style="margin-bottom:0.5rem;"><span class="cat-pill cat-ops">Operations &amp; Supply Chain</span></div>
+                <h3 style="font-size:0.83rem;font-weight:600;color:#111118;line-height:1.4;margin-bottom:0.45rem;">ERP-Based Supply Chain Strategy &amp; Operations Optimization (SAP ERPsim)</h3>
+                <p style="font-size:0.75rem;color:#6a7280;line-height:1.65;margin-bottom:0.7rem;">Real-time SAP-based decision-making across forecasting, procurement, production, and pricing achieved top-1 rankings while maintaining low debt-to-equity ratio.</p>
+                <span style="font-size:0.72rem;color:#0284c7;font-weight:500;">View Details &rarr;</span>
+            </div>
+        </div>
+
+    </div>
     </div>
 </section>
 
@@ -800,7 +906,6 @@
                     <li>ROS 2</li>
                     <li>Catia</li>
                     <li>AutoCAD</li>
-                    
                 </ul>
             </div>
 
@@ -1008,7 +1113,7 @@
 <!-- Cert PDF modal -->
 <div class="modal-overlay" id="cert-modal">
     <div class="cert-modal-box">
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:1rem 1.25rem;border-bottom:1px solid rgba(255,255,255,0.06);flex-shrink:0;">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:1rem 1.25rem;border-bottom:1px solid rgba(0,0,0,0.07);flex-shrink:0;">
             <h3 style="font-size:0.88rem;font-weight:600;color:#111118;" id="cert-modal-title">Certificate</h3>
             <button onclick="closeCertModal()" style="width:28px;height:28px;border-radius:50%;background:#eef0f3;border:1px solid rgba(0,0,0,0.1);color:#4a5260;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.85rem;transition:all 0.2s;" onmouseover="this.style.background='rgba(2,132,199,0.1)'" onmouseout="this.style.background='#eef0f3'">✕</button>
         </div>
@@ -1021,15 +1126,15 @@
 <!-- Badge carousel modal -->
 <div class="modal-overlay" id="badge-modal">
     <div class="cert-modal-box" style="max-width:780px;height:auto;max-height:90vh;overflow-y:auto;">
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:1rem 1.25rem;border-bottom:1px solid rgba(255,255,255,0.06);flex-shrink:0;">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:1rem 1.25rem;border-bottom:1px solid rgba(0,0,0,0.07);flex-shrink:0;">
             <h3 style="font-size:0.88rem;font-weight:600;color:#111118;" id="badge-modal-title">Certificate</h3>
             <button onclick="closeBadgeModal()" style="width:28px;height:28px;border-radius:50%;background:#eef0f3;border:1px solid rgba(0,0,0,0.1);color:#4a5260;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.85rem;transition:all 0.2s;" onmouseover="this.style.background='rgba(2,132,199,0.1)'" onmouseout="this.style.background='#eef0f3'">✕</button>
         </div>
         <div style="padding:1.5rem;">
             <div style="position:relative;overflow:hidden;border-radius:7px;margin-bottom:0.75rem;">
                 <div id="badge-slides" style="display:flex;transition:transform 0.4s ease;"></div>
-                <button onclick="prevSlide()" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;background:rgba(17,17,19,0.9);border:1px solid rgba(0,0,0,0.1);color:#4a5260;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5;font-size:1rem;">‹</button>
-                <button onclick="nextSlide()" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;background:rgba(17,17,19,0.9);border:1px solid rgba(0,0,0,0.1);color:#4a5260;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5;font-size:1rem;">›</button>
+                <button onclick="prevSlide()" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;background:rgba(17,17,19,0.9);border:1px solid rgba(0,0,0,0.1);color:#4a5260;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5;font-size:1rem;">&#8249;</button>
+                <button onclick="nextSlide()" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;background:rgba(17,17,19,0.9);border:1px solid rgba(0,0,0,0.1);color:#4a5260;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5;font-size:1rem;">&#8250;</button>
             </div>
             <div class="cert-dots" id="badge-dots"></div>
             <div id="badge-info" style="margin-top:1.25rem;padding:1rem;border-radius:8px;background:#eef0f3;border:1px solid rgba(0,0,0,0.08);"></div>
@@ -1104,7 +1209,7 @@
 
 <!-- Footer -->
 <footer style="border-top:1px solid rgba(0,0,0,0.07);padding:1.25rem 2rem;text-align:center;">
-    <p class="font-mono" style="font-size:0.62rem;color:#9aa0ae;">© 2025 Vigneshwar Nagaraj · Mechanical Engineer · Madison, WI</p>
+    <p class="font-mono" style="font-size:0.62rem;color:#9aa0ae;">&#169; 2025 Vigneshwar Nagaraj · Mechanical Engineer · Madison, WI</p>
 </footer>
 
 <!-- ════════════════════════════════
@@ -1116,7 +1221,7 @@
    PROJECT DATA
    To add a new project: copy any object below,
    fill all fields, set wip:false when complete.
-   category: 'cfd' | 'exp' | 'design' | 'robot'
+   category: 'cfd' | 'exp' | 'design' | 'robot' | 'ops'
 ──────────────────────────────────────────── */
 const PROJECTS = [
 
@@ -1127,11 +1232,11 @@ const PROJECTS = [
         category: 'cfd',
         catLabel: 'Simulation & Optimisation',
         image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&h=500&fit=crop',
-        tagline: 'Gaussian Process surrogate models (R² > 0.9) cut CFD simulation effort by 60% for airfoil optimisation.',
+        tagline: 'Gaussian Process surrogate models (R\u00b2 > 0.9) cut CFD simulation effort by 60% for airfoil optimisation.',
         wip: false,
         problem: 'Traditional aerodynamic optimisation requires hundreds of expensive CFD runs per design sweep, making iterative improvement slow. A surrogate approach was needed that maintained acceptable accuracy while drastically reducing compute cost.',
         approach: [
-            'Generated training dataset using XFLR5 across 20 NACA profiles, angle-of-attack range −4° to 12°.',
+            'Generated training dataset using XFLR5 across 20 NACA profiles, angle-of-attack range \u22124\u00b0 to 12\u00b0.',
             'Parameterised airfoil geometry with 8 polynomial coefficients per surface (upper and lower).',
             'Trained Gaussian Process Regression models in MATLAB (fitrgp, squared exponential kernel).',
             'Implemented Bayesian Optimisation (bayesopt, expected-improvement-plus) within 30 function evaluations.',
@@ -1139,7 +1244,7 @@ const PROJECTS = [
         ],
         tools: ['MATLAB', 'XFLR5', 'Gaussian Process Regression', 'Bayesian Optimisation', 'Latin Hypercube Sampling'],
         results: [
-            'R² > 0.9 on validation set for Cl prediction.',
+            'R\u00b2 > 0.9 on validation set for Cl prediction.',
             '60% reduction in simulation effort vs. grid-based design sweeps.',
             'Optimised airfoil configuration identified within 30 function evaluations.',
             'Geometric smoothness constraints maintained throughout the optimisation loop.'
@@ -1147,14 +1252,43 @@ const PROJECTS = [
         learning: 'Initial training point selection is critical for Gaussian Process accuracy. Latin hypercube sampling consistently outperformed random sampling for capturing non-linear aerodynamic regions. Bayesian optimisation works well, but needs a well-distributed initial dataset to avoid premature convergence.'
     },
 
+    {
+        id: 'heat-exchanger-cfd',
+        title: 'CFD Case Study: Counterflow Heat Exchanger',
+        category: 'cfd',
+        catLabel: 'Simulation & Optimisation',
+        image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=500&fit=crop',
+        tagline: 'Completed a structured CFD workflow study for a counterflow heat exchanger — covering geometry setup, domain identification, meshing, boundary conditions, and thermal result interpretation.',
+        wip: false,
+        problem: 'Goal was to develop a working understanding of internal flow CFD methodology by completing a guided counterflow heat exchanger simulation — covering the full workflow from geometry preparation through result interpretation, with independent analysis of the physics behind the observed outputs.',
+        approach: [
+            'Identified and separated the three physical domains within the assembly: hot fluid region, cold fluid region, and the copper wall/solid separating them.',
+            'Created inlet and outlet cap surfaces to close the fluid volumes and define a solvable internal flow domain, then generated volume meshes for each region with appropriate element sizing at fluid-wall interfaces.',
+            'Assigned material properties to each domain: liquid water for both fluid regions and copper for the solid wall, enabling conduction-convection coupled heat transfer across the wall.',
+            'Configured boundary conditions: velocity inlet at ~100\u00b0C for the hot stream and ~30\u00b0C for the cold stream flowing in the opposite direction; pressure outlet conditions at both exits.',
+            'Ran the solver and post-processed results — extracted temperature contour plots, pressure distribution, and velocity field visualisation for both streams.',
+            'Interpreted outlet temperature results: hot stream exit temperature was lower than inlet; cold stream exit temperature was higher than inlet — confirming heat transfer from hot to cold across the copper wall.',
+            'Analyzed how increasing inlet velocity in either stream would affect residence time and therefore heat transfer effectiveness.'
+        ],
+        tools: ['ANSYS Fluent', 'SpaceClaim / DesignModeler', 'CFD Post', 'Volume Meshing', 'Conjugate Heat Transfer', 'Internal Flow Setup'],
+        results: [
+            'Completed a full CFD workflow from geometry import to post-processed results for a conjugate heat transfer problem.',
+            'Observed expected counterflow behaviour: hot outlet temperature lower than inlet; cold outlet temperature higher than inlet.',
+            'Temperature contours confirmed gradual thermal exchange along the exchanger length.',
+            'Pressure drop distributions visualised for both streams independently.',
+            'Developed working understanding of how meshing resolution at the fluid-wall interface influences solution accuracy in thermal simulations.'
+        ],
+        learning: 'This was a guided learning study completed as part of a structured CFD tutorial, not an independent research project. The geometry, setup sequence, and boundary condition values were instructor-defined. My contribution was in understanding the physical reasoning behind each setup decision, independently interpreting the results, and working through the implications of parameter changes on heat transfer performance.'
+    },
+
     /* ── Experimental & Validation ── */
     {
         id: 'modal-analysis',
-        title: 'Experimental Modal Analysis — Bicycle Frame',
+        title: 'Experimental Modal Analysis \u2014 Bicycle Frame',
         category: 'exp',
         catLabel: 'Experimental & Validation',
         image: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=800&h=500&fit=crop',
-        tagline: 'SIMO impact testing across 13 nodes quantified a 10–18% stiffness difference and contradicted the manufacturer\'s claim.',
+        tagline: 'SIMO impact testing across 13 nodes quantified a 10\u201318% stiffness difference and contradicted the manufacturer\'s claim.',
         wip: false,
         problem: 'A new bicycle frame design claimed improved stiffness over the previous model but lacked any experimental validation data. Quantitative modal testing was needed to verify or refute the claim.',
         approach: [
@@ -1166,46 +1300,17 @@ const PROJECTS = [
         ],
         tools: ['MATLAB', 'Experimental Modal Analysis', 'FRF Estimation', 'Signal Processing', 'LabShop', 'Structural Dynamics'],
         results: [
-            '10–18% higher natural frequencies measured in the new frame across multiple mode shapes.',
-            'Lateral first bending mode: new frame 29.25 Hz vs. old frame 62.25 Hz — indicating distributed compliance, not higher stiffness.',
-            'Damping ratios: new frame 5–19% vs. old frame 1–7%.',
+            '10\u201318% higher natural frequencies measured in the new frame across multiple mode shapes.',
+            'Lateral first bending mode: new frame 29.25 Hz vs. old frame 62.25 Hz \u2014 indicating distributed compliance, not higher stiffness.',
+            'Damping ratios: new frame 5\u201319% vs. old frame 1\u20137%.',
             'Test methodology validated; repeatable measurements across sessions.'
         ],
-        learning: 'Lower natural frequency in the new frame indicated distributed compliance — not the increased stiffness claimed by the manufacturer. Engineering test reports must explicitly distinguish these interpretations, because the same data can support opposite design conclusions depending on framing.'
-    },
-
-    {
-    id: 'heat-exchanger-cfd',
-    title: ' CFD Case Study: Counterflow Heat Exchanger',
-    category: 'cfd',
-    catLabel: 'Simulation & Optimisation',
-    image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=500&fit=crop',
-    tagline: 'Completed a structured CFD workflow study for a counterflow heat exchanger — covering geometry setup, domain identification, meshing, boundary conditions, and thermal result interpretation.',
-    wip: false,
-    problem: 'Goal was to develop a working understanding of internal flow CFD methodology by completing a guided counterflow heat exchanger simulation — covering the full workflow from geometry preparation through result interpretation, with independent analysis of the physics behind the observed outputs.',
-    approach: [
-        'Identified and separated the three physical domains within the assembly: hot fluid region, cold fluid region, and the copper wall/solid separating them — a necessary pre-processing step for any internal flow CFD setup.',
-        'Created inlet and outlet cap surfaces to close the fluid volumes and define a solvable internal flow domain, then generated volume meshes for each region with appropriate element sizing at fluid-wall interfaces.',
-        'Assigned material properties to each domain: liquid water for both fluid regions and copper for the solid wall, enabling conduction-convection coupled heat transfer across the wall.',
-        'Configured boundary conditions: velocity inlet at ~100°C for the hot stream and ~30°C for the cold stream flowing in the opposite direction; pressure outlet conditions at both exits; convective wall treatment at fluid-solid interfaces.',
-        'Ran the solver and post-processed results — extracted temperature contour plots across the full domain, pressure distribution along each flow path, and velocity field visualisation for both streams.',
-        'Interpreted outlet temperature results: hot stream exit temperature was lower than inlet; cold stream exit temperature was higher than inlet — confirming heat transfer from hot to cold across the copper wall, consistent with counterflow exchanger physics.',
-        'Analyzed how increasing inlet velocity in either stream would affect residence time and therefore heat transfer effectiveness — higher velocity reduces contact time and lowers the temperature differential at the outlets.'
-    ],
-    tools: ['ANSYS Fluent', 'SpaceClaim / DesignModeler', 'CFD Post', 'Volume Meshing', 'Conjugate Heat Transfer', 'Internal Flow Setup'],
-    results: [
-        'Completed a full CFD workflow from geometry import to post-processed results for a conjugate heat transfer problem.',
-        'Observed expected counterflow behaviour: hot outlet temperature lower than inlet; cold outlet temperature higher than inlet.',
-        'Temperature contours confirmed gradual thermal exchange along the exchanger length, consistent with counterflow configuration physics.',
-        'Pressure drop distributions visualised for both streams independently, showing expected behaviour through the flow path.',
-        'Developed working understanding of how meshing resolution at the fluid-wall interface influences solution accuracy in thermal simulations.'
-    ],
-    learning: 'This was a guided learning study completed as part of a structured CFD tutorial, not an independent research project. The geometry, setup sequence, and boundary condition values were instructor-defined. My contribution was in understanding the physical reasoning behind each setup decision, independently interpreting the results, and working through the implications of parameter changes on heat transfer performance. This case study was completed to build a concrete foundation in CFD workflow methodology before applying it to original simulation work.'
+        learning: 'Lower natural frequency in the new frame indicated distributed compliance \u2014 not the increased stiffness claimed by the manufacturer. Engineering test reports must explicitly distinguish these interpretations, because the same data can support opposite design conclusions depending on framing.'
     },
 
     {
         id: 'imu-load',
-        title: 'IMU-Driven Adaptive Load Balancing — Research Protocol',
+        title: 'IMU-Driven Adaptive Load Balancing \u2014 Research Protocol',
         category: 'exp',
         catLabel: 'Experimental & Validation',
         image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=500&fit=crop',
@@ -1214,36 +1319,36 @@ const PROJECTS = [
         problem: 'Heavy or uneven loads cause spinal misalignment in military, industrial, and athletic use. Conventional backpacks have no adaptive response to posture or terrain changes.',
         approach: [
             'Proposed multi-segment IMU placement (C7, thoracic, lumbar, hip, shank, foot) paired with force plates.',
-            'Designed factorial experiment: 10 participants, 3 load levels (10/20/30% BW), 3 terrains (flat, ±10° slopes).',
+            'Designed factorial experiment: 10 participants, 3 load levels (10/20/30% BW), 3 terrains (flat, \u00b110\u00b0 slopes).',
             'Defined kinematic and kinetic data collection: spinal curvature, GRF, CoP displacement, gait asymmetry.',
-            'Specified repeated-measures ANOVA (Load × Terrain × System) with post-hoc testing strategy.',
+            'Specified repeated-measures ANOVA (Load \u00d7 Terrain \u00d7 System) with post-hoc testing strategy.',
             'Outlined future directions: prototype build, exoskeleton integration, ML-based predictive correction.'
         ],
         tools: ['IMU Sensors', 'Force Plates', 'Biomechanics', 'Experimental Design', 'Repeated-Measures ANOVA', 'Wearable Systems'],
         results: [
             'Complete biomechanical experimental protocol established for future validation.',
             'Novel closed-loop wearable load-balancing system architecture proposed.',
-            'Clear hypotheses defined for Load × Terrain interaction effects on spinal alignment.',
+            'Clear hypotheses defined for Load \u00d7 Terrain interaction effects on spinal alignment.',
             'Applications identified across military load-carrying, industrial ergonomics, and rehabilitation.'
         ],
-        learning: 'IMU drift over long trials requires explicit sensor fusion compensation — a constraint that must be addressed at hardware selection, not post-processing. The factorial design revealed a likely non-linear Load × Terrain interaction, which requires polynomial contrast testing beyond a standard ANOVA to characterise.'
+        learning: 'IMU drift over long trials requires explicit sensor fusion compensation \u2014 a constraint that must be addressed at hardware selection, not post-processing. The factorial design revealed a likely non-linear Load \u00d7 Terrain interaction, which requires polynomial contrast testing beyond a standard ANOVA to characterise.'
     },
 
     /* ── Design & Product Dev ── */
     {
         id: 'splash-guard',
-        title: 'Multi-Material Additive Manufacturing — Detachable Splash Guard',
+        title: 'Multi-Material Additive Manufacturing \u2014 Detachable Splash Guard',
         category: 'design',
         catLabel: 'Design & Product Dev',
         image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&h=500&fit=crop',
-        tagline: 'Modular PLA/TPU retrofit cover for breathable footwear — designed and validated through two prototype cycles using multi-material AM.',
+        tagline: 'Modular PLA/TPU retrofit cover for breathable footwear \u2014 designed and validated through two prototype cycles using multi-material AM.',
         wip: false,
         problem: 'Breathable mesh uppers allow water ingress during wet conditions. Fully waterproof shoes sacrifice ventilation comfort. A removable retrofit cover was needed that preserves breathability during dry use.',
         approach: [
             'Captured shoe profile via structured-light 3D scanning; generated parametric surfaces conforming to toe curvature and ankle profile.',
             'Designed hybrid material architecture: PLA for rigid deflection zones, TPU for flexible interface regions.',
             'Developed a sequential print workflow to simulate dual-material output on a single-extrusion printer.',
-            'Iterated through two design cycles — improved slot interlocking for retention; revised geometry for ergonomic fit.'
+            'Iterated through two design cycles \u2014 improved slot interlocking for retention; revised geometry for ergonomic fit.'
         ],
         tools: ['3D Scanning', 'SolidWorks', 'FDM / PLA / TPU', 'DfAM', 'Iterative Prototyping', 'Reverse Engineering'],
         results: [
@@ -1261,14 +1366,14 @@ const PROJECTS = [
         category: 'design',
         catLabel: 'Design & Product Dev',
         image: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800&h=500&fit=crop',
-        tagline: '2nd place — YAKIMA-sponsored competition. 400 lb capacity hitch-mounted alternative to rooftop tents, COGS $499.65.',
+        tagline: '2nd place \u2014 YAKIMA-sponsored competition. 400 lb capacity hitch-mounted alternative to rooftop tents, COGS $499.65.',
         wip: false,
         problem: 'Rooftop tents reduce fuel economy, require ladder access, and prevent vehicle mobility at a campsite. A hitch-mounted alternative was needed that matched RTT sleeping ergonomics at a lower price point.',
         approach: [
-            'Conducted user research via interviews and surveys — setup time and campsite mobility ranked higher than weather protection as buying criteria.',
+            'Conducted user research via interviews and surveys \u2014 setup time and campsite mobility ranked higher than weather protection as buying criteria.',
             'Evaluated three structural architectures using weighted decision matrices (deployment time, safety, aesthetics, cost).',
             'Designed a hinged aluminium folding frame with telescoping levelling legs and wheel-assisted front mobility.',
-            'Developed full COGS model: $499.65, target weight 95.9 lbs; validated against the $2,000–$4,000 RTT market.',
+            'Developed full COGS model: $499.65, target weight 95.9 lbs; validated against the $2,000\u2013$4,000 RTT market.',
             'Identified hardware fatigue as primary failure risk; specified reinforced hinge construction as mitigation.'
         ],
         tools: ['SolidWorks', 'Weighted Decision Matrix', 'Cost Analysis', 'DFM', 'Structural Design', 'User Research'],
@@ -1278,10 +1383,64 @@ const PROJECTS = [
             'Tool-free deployment demonstrated within the 15-minute target.',
             'COGS of $499.65 enables competitive retail positioning below the primary RTT segment.'
         ],
-        learning: 'User research shifted the design focus from material weatherproofing to deployment mechanism design — interview data directly contradicted initial engineering assumptions. The phase-gate process prevented two unnecessary design iterations by surfacing this insight before CAD work began.'
+        learning: 'User research shifted the design focus from material weatherproofing to deployment mechanism design \u2014 interview data directly contradicted initial engineering assumptions. The phase-gate process prevented two unnecessary design iterations by surfacing this insight before CAD work began.'
     },
 
-   /* ── Operations & Supply Chain ── */
+    /* ── Robotics & Systems ── */
+    {
+        id: 'line-robot',
+        title: 'Autonomous Line-Following Robot with Vision Memory',
+        category: 'robot',
+        catLabel: 'Robotics & Systems',
+        image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=500&fit=crop',
+        tagline: 'Vision-based path logging and marker-free replay with proportional control and autonomous fault recovery logic.',
+        wip: false,
+        problem: 'Traditional line-following robots require permanent physical floor markers. An adaptive system that learns and replays paths from vision data would allow flexible deployment in changing environments.',
+        approach: [
+            'Calibrated dual LDR reflectivity sensors; implemented proportional control to reduce path oscillation.',
+            'Developed fault recovery: forward correction on dual-sensor detection; halt on failed correction.',
+            'Captured 10 Hz video using OpenCV; BGR\u2192HSV conversion for lighting-robust contour extraction.',
+            'Built path memory system: centroid extraction from contours, 100-point rolling buffer for replay.',
+            'Integrated ROS architecture for future modular expansion.'
+        ],
+        tools: ['Arduino', 'Raspberry Pi', 'OpenCV', 'ROS', 'Python', 'Proportional Control'],
+        results: [
+            'Stable path tracking on curved and straight trajectories demonstrated.',
+            'Marker-free path logging and replay validated in a controlled environment.',
+            'ROS integration architecture confirmed for future autonomous features.',
+            'Identified Raspberry Pi compute bottleneck under simultaneous vision pipeline load; informed dual-camera architecture proposal.'
+        ],
+        learning: 'Real-time vision on resource-constrained hardware requires explicit task partitioning validated on target hardware \u2014 not estimated. Running path logging and live streaming simultaneously exceeded available compute and caused system instability, an integration failure component-level testing alone would not have caught.'
+    },
+
+    /* ── Quality & Systems Engineering ── */
+    {
+        id: 'qms-medical-device',
+        title: 'Quality Management System (QMS) Development & Internal Audit — Medical Device',
+        category: 'quality',
+        catLabel: 'Quality & Systems Engineering',
+        image: 'https://images.unsplash.com/photo-1581092335397-9fa3411086a1?w=800&h=500&fit=crop',
+        tagline: 'Designed a complete ISO-aligned quality system and successfully passed internal audit under simulated regulatory conditions.',
+        wip: false,
+        problem: 'A fictional medical device company required a complete Quality Management System (QMS) to meet regulatory expectations, including risk management, supplier qualification, and audit readiness. The system needed to be built from scratch and validated through an internal audit.',
+        approach: [
+            'Developed full QMS documentation aligned with ISO-style frameworks, covering risk management, supplier qualification, and organizational context.',
+            'Created PFMEA to identify failure modes, assess severity and occurrence, and prioritize risk mitigation strategies.',
+            'Designed supplier selection, evaluation, and acceptance procedures including supporting forms and review workflows.',
+            'Built core system documents including Management System Manual, policy deployment structure, and risk register.',
+            'Prepared documentation for audit readiness and participated in internal audit conducted under real-world evaluation conditions.'
+        ],
+        tools: ['PFMEA', 'ISO 9001/13485 Concepts', 'Risk Analysis', 'Audit Preparation', 'Supplier Qualification', 'Quality Documentation'],
+        results: [
+            'Developed a complete, structured QMS framework covering risk, suppliers, and organizational processes.',
+            'Successfully passed internal audit evaluation conducted by certified auditor (Terry Mann).',
+            'Established traceable documentation linking risk identification, supplier controls, and quality procedures.',
+            'Demonstrated ability to translate regulatory requirements into structured, implementable engineering processes.'
+        ],
+        learning: 'Quality systems are not just documentation — they are decision-making frameworks that connect risk, suppliers, and operations. A strong QMS ensures that engineering decisions are traceable, auditable, and aligned with both performance and compliance requirements.'
+    },
+
+    /* ── Operations & Supply Chain ── */
     {
         id: 'sap-supply-chain',
         title: 'ERP-Based Supply Chain Strategy & Operations Optimization (SAP ERPsim)',
@@ -1308,131 +1467,83 @@ const PROJECTS = [
         learning: 'End-to-end system performance is driven by how well individual functions \u2014 procurement, production, logistics, and pricing \u2014 are coordinated. Maximizing valuation is not about optimizing a single variable, but about managing trade-offs between inventory, demand variability, and financial risk in real time.'
     }
 
-    /* ── Robotics & Systems ── */
-    {
-        id: 'line-robot',
-        title: 'Autonomous Line-Following Robot with Vision Memory',
-        category: 'robot',
-        catLabel: 'Robotics & Systems',
-        image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=500&fit=crop',
-        tagline: 'Vision-based path logging and marker-free replay with proportional control and autonomous fault recovery logic.',
-        wip: false,
-        problem: 'Traditional line-following robots require permanent physical floor markers. An adaptive system that learns and replays paths from vision data would allow flexible deployment in changing environments.',
-        approach: [
-            'Calibrated dual LDR reflectivity sensors; implemented proportional control to reduce path oscillation.',
-            'Developed fault recovery: forward correction on dual-sensor detection; halt on failed correction.',
-            'Captured 10 Hz video using OpenCV; BGR→HSV conversion for lighting-robust contour extraction.',
-            'Built path memory system: centroid extraction from contours, 100-point rolling buffer for replay.',
-            'Integrated ROS architecture for future modular expansion.'
-        ],
-        tools: ['Arduino', 'Raspberry Pi', 'OpenCV', 'ROS', 'Python', 'Proportional Control'],
-        results: [
-            'Stable path tracking on curved and straight trajectories demonstrated.',
-            'Marker-free path logging and replay validated in a controlled environment.',
-            'ROS integration architecture confirmed for future autonomous features.',
-            'Identified Raspberry Pi compute bottleneck under simultaneous vision pipeline load; informed dual-camera architecture proposal.'
-        ],
-        learning: 'Real-time vision on resource-constrained hardware requires explicit task partitioning validated on target hardware — not estimated. Running path logging and live streaming simultaneously exceeded available compute and caused system instability, an integration failure component-level testing alone would not have caught.'
-    }
-
 ];
 
 /* ── Category config ── */
 const CAT = {
-    cfd:    { label: 'Simulation & Optimisation', cls: 'cat-cfd' },
-    exp:    { label: 'Experimental & Validation', cls: 'cat-exp' },
+    cfd:    { label: 'Simulation & Optimisation', cls: 'cat-cfd'    },
+    exp:    { label: 'Experimental & Validation', cls: 'cat-exp'    },
     design: { label: 'Design & Product Dev',      cls: 'cat-design' },
-    robot:  { label: 'Robotics & Systems',        cls: 'cat-robot' },
+    robot:  { label: 'Robotics & Systems',        cls: 'cat-robot'  },
+    ops:    { label: 'Operations & Supply Chain', cls: 'cat-ops'    },
+    quality:{ label: 'Quality & Systems Engineering', cls: 'cat-quality'},
 };
 
-/* ── Render projects ── */
-function renderProjects(filter) {
-    const grid = document.getElementById('projects-grid');
-    if (!grid) return;
-    grid.innerHTML = '';
-    const list = filter === 'all' ? PROJECTS : PROJECTS.filter(p => p.category === filter);
-
-    list.forEach(p => {
-        try {
-            const cat = CAT[p.category] || { label: p.category || '', cls: '' };
-            const card = document.createElement('div');
-            card.className = 'proj-card';
-            card.onclick = () => openModal(p);
-            const titleColor = p.wip ? '#6a7280' : '#111118';
-            const linkColor  = p.wip ? '#9a6c00' : '#0284c7';
-            const imgStyle   = p.wip ? 'opacity:0.3;filter:grayscale(40%);' : '';
-            const wipBadge   = p.wip ? '<div class="wip-badge">In Progress</div>' : '';
-            const taglineText = p.tagline || p.description || '';
-            card.innerHTML =
-                wipBadge +
-                '<img src="' + (p.image||'') + '" alt="' + (p.title||'') + '" class="proj-img" style="' + imgStyle + '">' +
-                '<div style="padding:1rem;">' +
-                  '<div style="margin-bottom:0.5rem;"><span class="cat-pill ' + cat.cls + '">' + cat.label + '</span></div>' +
-                  '<h3 style="font-size:0.83rem;font-weight:600;color:' + titleColor + ';line-height:1.4;margin-bottom:0.45rem;">' + (p.title||'') + '</h3>' +
-                  '<p style="font-size:0.75rem;color:#6a7280;line-height:1.65;margin-bottom:0.7rem;">' + taglineText + '</p>' +
-                  '<span style="font-size:0.72rem;color:' + linkColor + ';font-weight:500;">' + (p.wip ? 'In Progress →' : 'View Details →') + '</span>' +
-                '</div>';
-            grid.appendChild(card);
-        } catch(e) {
-            console.warn('Project card render failed for:', p && p.id, e);
+/* ── Filter tabs — show/hide static cards by data-category ── */
+document.getElementById('filter-tabs').addEventListener('click', function(e) {
+    var tab = e.target.closest('.filter-tab');
+    if (!tab) return;
+    document.querySelectorAll('.filter-tab').forEach(function(t) { t.classList.remove('active'); });
+    tab.classList.add('active');
+    var filter = tab.getAttribute('data-filter');
+    document.querySelectorAll('#projects-grid .proj-card').forEach(function(card) {
+        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+            card.style.display = '';
+        } else {
+            card.style.display = 'none';
         }
     });
-}
-
-/* ── Filter tabs ── */
-document.getElementById('filter-tabs').addEventListener('click', e => {
-    const tab = e.target.closest('.filter-tab');
-    if (!tab) return;
-    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    renderProjects(tab.dataset.filter);
 });
 
-renderProjects('all');
+/* ── Open modal by project id ── */
+function openModalById(id) {
+    var p = PROJECTS.find(function(x) { return x.id === id; });
+    if (p) openModal(p);
+}
 
 /* ── Project modal ── */
 function openModal(p) {
     const overlay = document.getElementById('project-modal');
-    const box = document.getElementById('modal-content');
-    const cat = CAT[p.category];
+    const box     = document.getElementById('modal-content');
+    const cat     = CAT[p.category] || { label: '', cls: '' };
 
     if (p.wip) {
         box.innerHTML = `
-            <button class="modal-close-btn" onclick="closeModal()">✕</button>
+            <button class="modal-close-btn" onclick="closeModal()">&times;</button>
             <div style="clear:both;padding:1.75rem 2rem;">
                 <span class="cat-pill ${cat.cls}" style="margin-bottom:0.9rem;display:inline-block;">${cat.label}</span>
                 <h2 style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;color:#111118;margin-bottom:1rem;line-height:1.3;">${p.title}</h2>
                 <div style="padding:1.1rem;border-radius:8px;background:rgba(154,108,0,0.05);border:1px solid rgba(251,191,36,0.18);margin-bottom:1.25rem;">
                     <p class="font-mono" style="font-size:0.65rem;color:#9a6c00;margin-bottom:0.4rem;">DOCUMENTATION IN PROGRESS</p>
-                    <p style="font-size:0.8rem;color:#6a7280;line-height:1.7;">${p.tagline}</p>
+                    <p style="font-size:0.8rem;color:#6a7280;line-height:1.7;">${p.tagline || ''}</p>
                 </div>
                 <a href="mailto:vnagaraj2@wisc.edu?subject=Question about ${p.title}" class="btn-ghost">Contact for Details</a>
             </div>
         `;
     } else {
-        const approachHTML = p.approach.map(a =>
+        const approachHTML = (p.approach || []).map(a =>
             `<li style="display:flex;gap:0.55rem;align-items:flex-start;">
-                <span style="color:#9aa0ae;flex-shrink:0;margin-top:2px;">›</span>
+                <span style="color:#9aa0ae;flex-shrink:0;margin-top:2px;">&rsaquo;</span>
                 <span style="font-size:0.8rem;color:#2e3340;line-height:1.7;">${a}</span>
             </li>`
         ).join('');
-        const toolsHTML = p.tools.map(t => `<span class="tag">${t}</span>`).join('');
-        const resultsHTML = p.results.map(r =>
+        const toolsHTML = (p.tools || []).map(t => `<span class="tag">${t}</span>`).join('');
+        const resultsHTML = (p.results || []).map(r =>
             `<li style="display:flex;gap:0.55rem;align-items:flex-start;">
-                <span style="color:#0284c7;flex-shrink:0;margin-top:3px;font-size:0.7rem;">✓</span>
+                <span style="color:#0284c7;flex-shrink:0;margin-top:3px;font-size:0.7rem;">&#10003;</span>
                 <span style="font-size:0.8rem;color:#2e3340;line-height:1.7;">${r}</span>
             </li>`
         ).join('');
 
         box.innerHTML = `
-            <button class="modal-close-btn" onclick="closeModal()">✕</button>
+            <button class="modal-close-btn" onclick="closeModal()">&times;</button>
             <div style="clear:both;padding:1.75rem 2rem;">
                 <span class="cat-pill ${cat.cls}" style="margin-bottom:0.9rem;display:inline-block;">${cat.label}</span>
                 <h2 style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;color:#111118;line-height:1.3;margin-bottom:1.6rem;">${p.title}</h2>
 
                 <div style="margin-bottom:1.4rem;">
                     <p class="modal-label">Problem</p>
-                    <p style="font-size:0.81rem;color:#2e3340;line-height:1.8;">${p.problem}</p>
+                    <p style="font-size:0.81rem;color:#2e3340;line-height:1.8;">${p.problem || ''}</p>
                 </div>
 
                 <div style="margin-bottom:1.4rem;">
@@ -1452,7 +1563,7 @@ function openModal(p) {
 
                 <div style="padding:1rem;border-radius:8px;background:#eef0f3;border:1px solid rgba(0,0,0,0.08);margin-bottom:1.25rem;">
                     <p class="modal-label">Key Learning</p>
-                    <p style="font-size:0.8rem;color:#4a5260;line-height:1.8;font-style:italic;">${p.learning}</p>
+                    <p style="font-size:0.8rem;color:#4a5260;line-height:1.8;font-style:italic;">${p.learning || ''}</p>
                 </div>
 
                 <button onclick="closeModal()" class="btn-ghost" style="width:100%;justify-content:center;">Close</button>
@@ -1476,7 +1587,7 @@ document.getElementById('project-modal').addEventListener('click', e => {
 function openCertModal(type) {
     const modal = document.getElementById('cert-modal');
     const iframe = document.getElementById('cert-iframe');
-    const title = document.getElementById('cert-modal-title');
+    const title  = document.getElementById('cert-modal-title');
     if (type === 'iso') {
         title.textContent = 'ISO 9001 & 14001 Education Award';
         iframe.src = 'https://drive.google.com/file/d/1rhTbbBvq5I67luqE9EC4gPTbexcMjw_y/preview';
@@ -1499,9 +1610,9 @@ document.getElementById('cert-modal').addEventListener('click', e => {
 /* ── Badge modal (carousel) ── */
 let bSlides = [], bIdx = 0;
 function openBadgeModal(type) {
-    const modal = document.getElementById('badge-modal');
-    const title = document.getElementById('badge-modal-title');
-    const info  = document.getElementById('badge-info');
+    const modal  = document.getElementById('badge-modal');
+    const title  = document.getElementById('badge-modal-title');
+    const info   = document.getElementById('badge-info');
     const slides = document.getElementById('badge-slides');
     const dots   = document.getElementById('badge-dots');
     bIdx = 0; bSlides = [];
@@ -1509,8 +1620,8 @@ function openBadgeModal(type) {
     if (type === 'six-sigma') {
         title.textContent = 'Certified Six Sigma Green Belt';
         bSlides = [
-            { type:'pdf', url:'https://drive.google.com/file/d/1uFE4HJmJaGQCK3gnGpoSiikJ4zNK9OYS/preview', label:'Certificate' },
-            { type:'img', url:'https://drive.google.com/thumbnail?id=1Afif70fCB64T7hGbsqrvmrKn09fJ8hR7&sz=w800',    label:'Badge' }
+            { type: 'pdf', url: 'https://drive.google.com/file/d/1uFE4HJmJaGQCK3gnGpoSiikJ4zNK9OYS/preview', label: 'Certificate' },
+            { type: 'img', url: 'https://drive.google.com/thumbnail?id=1Afif70fCB64T7hGbsqrvmrKn09fJ8hR7&sz=w800',    label: 'Badge' }
         ];
         info.innerHTML = `
             <p style="font-size:0.8rem;font-weight:600;color:#111118;margin-bottom:0.7rem;">Certificate Details</p>
@@ -1523,8 +1634,8 @@ function openBadgeModal(type) {
     } else if (type === 'minitab') {
         title.textContent = 'Certified Minitab Expert';
         bSlides = [
-            { type:'pdf', url:'https://drive.google.com/file/d/1JhRcQqGFCXXrgSiXTLIWGcFD0vATRXQ9/preview', label:'Certificate' },
-            { type:'img', url:'https://drive.google.com/thumbnail?id=1aPSU3iD7IotTsDB2qXWNIFs8JFLzqxiC&sz=w800',    label:'Badge' }
+            { type: 'pdf', url: 'https://drive.google.com/file/d/1JhRcQqGFCXXrgSiXTLIWGcFD0vATRXQ9/preview', label: 'Certificate' },
+            { type: 'img', url: 'https://drive.google.com/thumbnail?id=1aPSU3iD7IotTsDB2qXWNIFs8JFLzqxiC&sz=w800',    label: 'Badge' }
         ];
         info.innerHTML = `
             <p style="font-size:0.8rem;font-weight:600;color:#111118;margin-bottom:0.7rem;">Certificate Details</p>
@@ -1543,7 +1654,7 @@ function openBadgeModal(type) {
     ).join('');
 
     dots.innerHTML = bSlides.map((_, i) =>
-        `<div class="cert-dot ${i===0?'active':''}" onclick="gotoSlide(${i})"></div>`
+        `<div class="cert-dot ${i === 0 ? 'active' : ''}" onclick="gotoSlide(${i})"></div>`
     ).join('');
 
     updateCarousel();
@@ -1552,8 +1663,8 @@ function openBadgeModal(type) {
 }
 
 function updateCarousel() {
-    document.getElementById('badge-slides').style.transform = `translateX(-${bIdx*100}%)`;
-    document.querySelectorAll('#badge-dots .cert-dot').forEach((d,i) => d.classList.toggle('active', i===bIdx));
+    document.getElementById('badge-slides').style.transform = `translateX(-${bIdx * 100}%)`;
+    document.querySelectorAll('#badge-dots .cert-dot').forEach((d, i) => d.classList.toggle('active', i === bIdx));
 }
 function prevSlide() { bIdx = (bIdx - 1 + bSlides.length) % bSlides.length; updateCarousel(); }
 function nextSlide() { bIdx = (bIdx + 1) % bSlides.length; updateCarousel(); }
@@ -1568,7 +1679,7 @@ document.getElementById('badge-modal').addEventListener('click', e => {
 });
 
 /* ── Hamburger ── */
-const ham = document.getElementById('hamburger');
+const ham  = document.getElementById('hamburger');
 const mNav = document.getElementById('mobile-nav');
 ham.addEventListener('click', () => mNav.classList.toggle('open'));
 document.querySelectorAll('.mob-link').forEach(a => a.addEventListener('click', () => mNav.classList.remove('open')));
@@ -1576,7 +1687,7 @@ document.querySelectorAll('.mob-link').forEach(a => a.addEventListener('click', 
 /* ── Contact form ── */
 document.getElementById('contact-form').addEventListener('submit', e => {
     e.preventDefault();
-    const name = document.getElementById('c-name').value;
+    const name  = document.getElementById('c-name').value;
     const email = document.getElementById('c-email').value;
     const msg   = document.getElementById('c-msg').value;
     const sub   = encodeURIComponent(`Portfolio Inquiry from ${name}`);
@@ -1593,11 +1704,7 @@ document.addEventListener('keydown', e => {
 function handleMobileLayout() {
     const grid = document.querySelector('.hero-grid');
     if (!grid) return;
-    if (window.innerWidth <= 768) {
-        grid.style.gridTemplateColumns = '1fr';
-    } else {
-        grid.style.gridTemplateColumns = '1fr 260px';
-    }
+    grid.style.gridTemplateColumns = window.innerWidth <= 768 ? '1fr' : '1fr 260px';
 }
 window.addEventListener('resize', handleMobileLayout);
 handleMobileLayout();
