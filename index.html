@@ -240,8 +240,8 @@
         .hero-name-main {
             font-family: 'IBM Plex Sans', sans-serif;
             font-size: clamp(2rem, 4.5vw, 3rem);
-            font-weight: 300;
-            color: #111118;
+            font-weight: 500;
+            color: #0a0a10;
             line-height: 1.08;
             letter-spacing: -0.01em;
             margin-bottom: 0.5rem;
@@ -475,17 +475,33 @@
 
             body {
                 background: #ffffff !important;
-                color: #1e1e22 !important;
+                color: #111118 !important;
                 font-size: 10pt;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
             }
 
-            section { padding: 32px 0 !important; }
+            /* Ensure readable contrast for faded text */
+            .eyebrow,
+            .hero-photo-sub,
+            .font-mono,
+            p[style*="color:#7a8494"],
+            p[style*="color:#6a7280"],
+            span[style*="color:#7a8494"] {
+                color: #444 !important;
+            }
 
-            /* Avoid awkward page breaks */
+            .hero-name-main { color: #000 !important; }
+
+            section { padding: 28px 0 !important; }
+
+            /* Prevent awkward breaks */
             .card,
             .proj-card,
-            .skill-card,
-            section { page-break-inside: avoid; break-inside: avoid; }
+            .skill-card { page-break-inside: avoid; break-inside: avoid; }
+
+            /* Keep each experience card together */
+            #experience .card { page-break-inside: avoid; break-inside: avoid; }
 
             /* Links stay readable */
             a { color: #0284c7 !important; text-decoration: underline; }
@@ -557,14 +573,14 @@
 
             <!-- LEFT: identity + bio + CTAs -->
             <div>
-                <p class="eyebrow fu" style="margin-bottom:0.75rem;">Mechanical Engineering Portfolio</p>
+                <p class="eyebrow fu" style="margin-bottom:0.75rem; color:#0369a1; font-weight:600; letter-spacing:0.2em;">Mechanical Engineering Portfolio</p>
 
                 <h1 class="hero-name-main fu2">Vigneshwar<br>Nagaraj</h1>
 
-                <p class="fu2" style="font-size:0.9rem; color:#4a5260; margin-bottom:0.35rem;">
+                <p class="fu2" style="font-size:0.9rem; color:#2e3340; font-weight:500; margin-bottom:0.35rem;">
                     M.S. Mechanical Engineering · UW–Madison, May 2026
                 </p>
-                <p class="fu3" style="font-family:'IBM Plex Mono',monospace; font-size:0.68rem; color:#7a8494; margin-bottom:1.75rem; line-height:1.7;">
+                <p class="fu3" style="font-family:'IBM Plex Mono',monospace; font-size:0.68rem; color:#4a5260; margin-bottom:1.75rem; line-height:1.7;">
                     Design · Simulation · Manufacturing · Quality · R&amp;D
                 </p>
 
@@ -672,41 +688,46 @@
                     </span>
                 </div>
 
-                <ul style="display:flex; flex-direction:column; gap:0.6rem; margin-bottom:1.1rem;">
+                <ul style="display:flex; flex-direction:column; gap:0.75rem; margin-bottom:1.1rem;">
                     <li style="display:flex; gap:0.65rem; align-items:flex-start;">
                         <span class="bullet-arrow">→</span>
                         <span style="font-size:0.82rem; color:#2e3340; line-height:1.7;">
-                            Reviewed lab manuals and verified instructions before release to students each semester — corrected errors and updated steps across machining, casting, welding, forging, and additive manufacturing labs.
+                            <strong>Reviewed and verified lab manuals</strong> before each semester release —
+                            corrected errors and updated procedures across <strong>machining, casting, welding, forging,</strong> and <strong>additive manufacturing</strong> labs.
                         </span>
                     </li>
                     <li style="display:flex; gap:0.65rem; align-items:flex-start;">
                         <span class="bullet-arrow">→</span>
                         <span style="font-size:0.82rem; color:#2e3340; line-height:1.7;">
-                            Performed lab activities in advance to check machine readiness and material availability; flagged issues before student sessions to avoid workflow disruptions.
+                            <strong>Pre-checked machine readiness and material availability</strong> before student sessions —
+                            flagged issues in advance to prevent workflow disruptions.
                         </span>
                     </li>
                     <li style="display:flex; gap:0.65rem; align-items:flex-start;">
                         <span class="bullet-arrow">→</span>
                         <span style="font-size:0.82rem; color:#2e3340; line-height:1.7;">
-                            Supported additive manufacturing labs involving metal-filled resin printing, surface finish preparation (grinding/polishing), and pore analysis using ImageJ; also assisted with 3D printer build plate calibration and G-code/HMI-based CNC workflows.
+                            <strong>Supported additive manufacturing labs</strong> — metal-filled resin printing, surface finish preparation (grinding/polishing), and pore analysis using <strong>ImageJ</strong>;
+                            assisted with <strong>build plate calibration</strong> and <strong>G-code / HMI-based CNC workflows</strong>.
                         </span>
                     </li>
                     <li style="display:flex; gap:0.65rem; align-items:flex-start;">
                         <span class="bullet-arrow">→</span>
                         <span style="font-size:0.82rem; color:#2e3340; line-height:1.7;">
-                            Operated and demonstrated metrology equipment during lab sessions — height gauges, vernier calipers, Alicona surface profilometer, and Calypso 2021 for GD&amp;T-based inspection and reverse engineering tasks.
+                            <strong>Operated metrology equipment</strong> during lab sessions —
+                            height gauges, vernier calipers, <strong>Alicona surface profilometer,</strong> and <strong>Calypso 2021</strong> for GD&amp;T-based inspection and reverse engineering.
                         </span>
                     </li>
                     <li style="display:flex; gap:0.65rem; align-items:flex-start;">
                         <span class="bullet-arrow">→</span>
                         <span style="font-size:0.82rem; color:#2e3340; line-height:1.7;">
-                            Assisted with PLC automation labs using B&amp;R Automation Studio — ladder logic programming, virtual coffee machine logic, and factory simulation exercises.
+                            <strong>Assisted PLC automation labs</strong> using <strong>B&amp;R Automation Studio</strong> —
+                            ladder logic programming, virtual coffee machine logic, and factory simulation exercises.
                         </span>
                     </li>
                     <li style="display:flex; gap:0.65rem; align-items:flex-start;">
                         <span class="bullet-arrow">→</span>
                         <span style="font-size:0.82rem; color:#2e3340; line-height:1.7;">
-                            Graded lab assignments and assisted in grading midterm and final exams; held weekly office hours to help students with in-class and lab-related questions.
+                            <strong>Graded assignments and exams</strong>; held weekly office hours to support students with lab and coursework questions.
                         </span>
                     </li>
                 </ul>
@@ -745,39 +766,48 @@
                     </span>
                 </div>
 
-                <p style="font-size:0.75rem; color:#7a8494; font-family:'IBM Plex Mono',monospace; margin-bottom:0.9rem;">
+                <p style="font-size:0.75rem; color:#7a8494; font-family:'IBM Plex Mono',monospace; margin-bottom:0.6rem;">
                     SAP ERP &nbsp;·&nbsp; Production Planning &nbsp;·&nbsp; Procurement &nbsp;·&nbsp; Logistics &nbsp;·&nbsp; Sales &amp; Finance
                 </p>
 
-                <ul style="display:flex; flex-direction:column; gap:0.6rem; margin-bottom:1.1rem;">
+                <!-- Context line per request -->
+                <p style="font-size:0.8rem; color:#4a5260; line-height:1.7; margin-bottom:0.9rem; padding:0.65rem 0.9rem; background:rgba(2,132,199,0.04); border-left:3px solid rgba(2,132,199,0.3); border-radius:0 6px 6px 0;">
+                    Simulation-based business operations environment replicating real-world manufacturing supply chain decision-making.
+                </p>
+
+                <ul style="display:flex; flex-direction:column; gap:0.75rem; margin-bottom:1.1rem;">
                     <li style="display:flex; gap:0.65rem; align-items:flex-start;">
                         <span class="bullet-arrow">→</span>
                         <span style="font-size:0.82rem; color:#2e3340; line-height:1.7;">
-                            Executed end-to-end supply chain operations within SAP ERP — ran MRP cycles, raised purchase orders, managed stock transfers, released production orders, and processed sales transactions across multiple simulation rounds.
+                            <strong>Executed end-to-end supply chain operations within SAP ERP</strong> —
+                            ran <strong>MRP cycles</strong>, raised purchase orders, managed stock transfers, released production orders, and processed sales transactions.
                         </span>
                     </li>
                     <li style="display:flex; gap:0.65rem; align-items:flex-start;">
                         <span class="bullet-arrow">→</span>
                         <span style="font-size:0.82rem; color:#2e3340; line-height:1.7;">
-                            Analyzed SAP-generated inventory, production, sales, pricing, and financial statements between rapid decision cycles to adjust procurement quantities, reorder points, and regional distribution strategy.
+                            <strong>Analyzed SAP-generated reports</strong> (inventory, production, sales, pricing, financials) between decision cycles —
+                            adjusted procurement quantities, reorder points, and <strong>regional distribution strategy</strong>.
                         </span>
                     </li>
                     <li style="display:flex; gap:0.65rem; align-items:flex-start;">
                         <span class="bullet-arrow">→</span>
                         <span style="font-size:0.82rem; color:#2e3340; line-height:1.7;">
-                            Developed integrated cross-functional strategy spanning demand forecasting, push/pull logistics balancing, dynamic pricing, and advertising spend — consistently ranked in the top 1–4 out of 12 competing teams based on company valuation.
+                            <strong>Developed cross-functional strategy</strong> spanning demand forecasting, push/pull logistics, dynamic pricing, and advertising —
+                            consistently ranked <strong>top 1–4 of 12 teams</strong> by company valuation.
                         </span>
                     </li>
                     <li style="display:flex; gap:0.65rem; align-items:flex-start;">
                         <span class="bullet-arrow">→</span>
                         <span style="font-size:0.82rem; color:#2e3340; line-height:1.7;">
-                            Managed financial performance by controlling debt levels and optimizing working capital; maintained a low debt-to-equity ratio while growing company valuation — demonstrating the trade-off between operational agility and financial risk.
+                            <strong>Managed financial performance</strong> — controlled debt levels and optimized working capital;
+                            maintained a <strong>low debt-to-equity ratio</strong> while growing company valuation.
                         </span>
                     </li>
                     <li style="display:flex; gap:0.65rem; align-items:flex-start;">
                         <span class="bullet-arrow">→</span>
                         <span style="font-size:0.82rem; color:#2e3340; line-height:1.7;">
-                            Used Excel for post-round data analysis — tracked KPIs including inventory turnover, stockout frequency, margin by region, and revenue vs. target to refine strategy between simulation cycles.
+                            <strong>Used Excel for post-round KPI analysis</strong> — tracked inventory turnover, stockout frequency, margin by region, and revenue vs. target.
                         </span>
                     </li>
                 </ul>
@@ -813,41 +843,45 @@
                     Early-stage industrial 3D printing startup. Worked across business operations, design, and QA due to the small team structure.
                 </p>
 
-                <ul style="display:flex; flex-direction:column; gap:0.6rem; margin-bottom:1.1rem;">
+                <ul style="display:flex; flex-direction:column; gap:0.75rem; margin-bottom:1.1rem;">
                     <li style="display:flex; gap:0.65rem; align-items:flex-start;">
                         <span class="bullet-arrow">→</span>
                         <span style="font-size:0.82rem; color:#2e3340; line-height:1.7;">
-                            Supported day-to-day business operations — handled inbound and outbound customer calls, explained the company's manufacturing process to prospective clients, and helped qualify and follow up on leads; contributed to converting 3 prospects into active pipeline opportunities.
+                            <strong>Supported day-to-day business operations</strong> — handled customer calls, explained the manufacturing process to prospects, and followed up on leads;
+                            contributed to converting <strong>3 prospects into active pipeline opportunities</strong>.
                         </span>
                     </li>
                     <li style="display:flex; gap:0.65rem; align-items:flex-start;">
                         <span class="bullet-arrow">→</span>
                         <span style="font-size:0.82rem; color:#2e3340; line-height:1.7;">
-                            Assisted in preparing customer quotations and invoices; helped maintain internal documentation across design, QA, and business functions using Google Forms and shared document workflows.
+                            <strong>Prepared customer quotations and invoices</strong>;
+                            maintained internal documentation across design, QA, and business functions using <strong>Google Forms</strong> and shared document workflows.
                         </span>
                     </li>
                     <li style="display:flex; gap:0.65rem; align-items:flex-start;">
                         <span class="bullet-arrow">→</span>
                         <span style="font-size:0.82rem; color:#2e3340; line-height:1.7;">
-                            Worked with the design team to recreate a truck HUD component geometry for carbon and glass fiber manufacturing. Also contributed to early design stages of a V-trough solar concentrator project linked to the IIT Madras innovation team — internship ended before manufacturing/testing phases.
+                            <strong>Worked with the design team</strong> to recreate a <strong>truck HUD component geometry</strong> for carbon and glass fiber manufacturing —
+                            also contributed to early design stages of a <strong>V-trough solar concentrator</strong> project linked to IIT Madras.
                         </span>
                     </li>
                     <li style="display:flex; gap:0.65rem; align-items:flex-start;">
                         <span class="bullet-arrow">→</span>
                         <span style="font-size:0.82rem; color:#2e3340; line-height:1.7;">
-                            Designed small display/expo components that were manufactured in-house using the company's FDM 3D printers.
+                            <strong>Designed display/expo components</strong> manufactured in-house using the company's <strong>FDM 3D printers</strong>.
                         </span>
                     </li>
                     <li style="display:flex; gap:0.65rem; align-items:flex-start;">
                         <span class="bullet-arrow">→</span>
                         <span style="font-size:0.82rem; color:#2e3340; line-height:1.7;">
-                            Assisted the QA team with inspection of early manufactured parts — updated QA sheets, noted dimensional and surface defects, and reported findings for review. Parts were associated with clients in the automotive and defense sectors (details under NDA).
+                            <strong>Assisted QA team with part inspection</strong> — updated QA sheets, noted dimensional and surface defects, and reported findings for review.
+                            Parts were for <strong>automotive and defense sector clients</strong> (details under NDA).
                         </span>
                     </li>
                     <li style="display:flex; gap:0.65rem; align-items:flex-start;">
                         <span class="bullet-arrow">→</span>
                         <span style="font-size:0.82rem; color:#2e3340; line-height:1.7;">
-                            Supported ISO-related documentation tasks — maintaining records and assisting with document version control across teams.
+                            <strong>Supported ISO-related documentation</strong> — maintained records and assisted with <strong>document version control</strong> across teams.
                         </span>
                     </li>
                 </ul>
@@ -902,7 +936,7 @@
             <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=500&fit=crop" alt="CFD Case Study: Counterflow Heat Exchanger" class="proj-img">
             <div style="padding:1rem;">
                 <div style="margin-bottom:0.5rem;"><span class="cat-pill cat-cfd">Simulation &amp; Optimisation</span></div>
-                <h3 style="font-size:0.83rem;font-weight:600;color:#111118;line-height:1.4;margin-bottom:0.45rem;">CFD Case Study: Counterflow Heat Exchanger</h3>
+                <h3 style="font-size:0.83rem;font-weight:600;color:#111118;line-height:1.4;margin-bottom:0.45rem;">CFD Analysis of Counterflow Heat Exchanger</h3>
                 <p style="font-size:0.75rem;color:#6a7280;line-height:1.65;margin-bottom:0.7rem;">Completed a structured CFD workflow study for a counterflow heat exchanger &mdash; covering geometry setup, domain identification, meshing, boundary conditions, and thermal result interpretation.</p>
                 <span style="font-size:0.72rem;color:#0284c7;font-weight:500;">View Details &rarr;</span>
             </div>
@@ -913,7 +947,7 @@
             <img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=800&h=500&fit=crop" alt="Experimental Modal Analysis" class="proj-img">
             <div style="padding:1rem;">
                 <div style="margin-bottom:0.5rem;"><span class="cat-pill cat-exp">Experimental &amp; Validation</span></div>
-                <h3 style="font-size:0.83rem;font-weight:600;color:#111118;line-height:1.4;margin-bottom:0.45rem;">Experimental Modal Analysis &mdash; Bicycle Frame</h3>
+                <h3 style="font-size:0.83rem;font-weight:600;color:#111118;line-height:1.4;margin-bottom:0.45rem;">Experimental Modal Analysis of Bicycle Frame</h3>
                 <p style="font-size:0.75rem;color:#6a7280;line-height:1.65;margin-bottom:0.7rem;">SIMO impact testing across 13 nodes quantified a 10&ndash;18% stiffness difference and contradicted the manufacturer&rsquo;s claim.</p>
                 <span style="font-size:0.72rem;color:#0284c7;font-weight:500;">View Details &rarr;</span>
             </div>
@@ -990,7 +1024,7 @@
                     <circle cx="124" cy="62" r="2.5" fill="#0284c7" opacity="0.4"/>
                     <line x1="128" y1="71" x2="148" y2="71" stroke="rgba(2,132,199,0.2)" stroke-width="1.5" stroke-linecap="round"/>
                     <!-- Title label -->
-                    <text x="160" y="103" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="600" fill="#1d4ed8" letter-spacing="0.5">QMS / ISO 13485</text>
+                    <text x="160" y="103" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="700" fill="#0369a1" letter-spacing="0.5">QMS / ISO 13485</text>
                     <!-- Tag pills row -->
                     <rect x="24" y="114" width="56" height="16" rx="8" fill="rgba(2,132,199,0.1)" stroke="rgba(2,132,199,0.25)" stroke-width="1"/>
                     <text x="52" y="125.5" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7" fill="#1d6fa4">PFMEA</text>
@@ -1132,50 +1166,11 @@
         </p>
 
         <div style="background:#ffffff; border:1px solid rgba(0,0,0,0.08); border-radius:12px; padding:1.75rem 2rem;">
-            <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:2rem;">
-
-                <div>
-                    <p class="role-group-label">Manufacturing &amp; Process</p>
-                    <div>
-                        <span class="role-pill">Manufacturing Engineer</span>
-                        <span class="role-pill">Process Engineer</span>
-                        <span class="role-pill">Industrial Engineer</span>
-                        <span class="role-pill">Additive Manufacturing Engineer</span>
-                        <span class="role-pill">Operations Engineer</span>
-                    </div>
-                </div>
-
-                <div>
-                    <p class="role-group-label">Design &amp; Product Development</p>
-                    <div>
-                        <span class="role-pill">Mechanical Engineer</span>
-                        <span class="role-pill">Product Design Engineer</span>
-                        <span class="role-pill">Design Engineer</span>
-                        <span class="role-pill">NPI Engineer</span>
-                        <span class="role-pill">Prototype / Development Engineer</span>
-                    </div>
-                </div>
-
-                <div>
-                    <p class="role-group-label">Quality &amp; Validation</p>
-                    <div>
-                        <span class="role-pill">Quality Engineer</span>
-                        <span class="role-pill">Validation / Test Engineer</span>
-                        <span class="role-pill">Reliability Engineer</span>
-                        <span class="role-pill">Systems Engineer</span>
-                    </div>
-                </div>
-
-                <div>
-                    <p class="role-group-label">Simulation &amp; R&amp;D</p>
-                    <div>
-                        <span class="role-pill">R&amp;D Engineer</span>
-                        <span class="role-pill">CFD / Simulation Engineer</span>
-                        <span class="role-pill">Performance Engineer</span>
-                        <span class="role-pill">Automation / Mechatronics Engineer</span>
-                    </div>
-                </div>
-
+            <div style="display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center;">
+                <span class="role-pill">Manufacturing Engineer</span>
+                <span class="role-pill">Mechanical Engineer</span>
+                <span class="role-pill">CFD / Simulation Engineer</span>
+                <span class="role-pill">Quality Engineer</span>
             </div>
         </div>
     </div>
@@ -1353,6 +1348,15 @@
                                 <p style="font-size:0.8rem;color:#2e3340;">+1 608-707-7253</p>
                             </div>
                         </a>
+                        <a href="https://vigneshwarnagaraj.github.io/vnagaraj/" target="_blank" class="contact-link">
+                            <div class="contact-icon-wrap">
+                                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            </div>
+                            <div>
+                                <p class="font-mono" style="font-size:0.6rem;color:#9aa0ae;margin-bottom:1px;">Portfolio Website</p>
+                                <p style="font-size:0.8rem;color:#0284c7;">vigneshwarnagaraj.github.io/vnagaraj</p>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -1407,7 +1411,7 @@ const PROJECTS = [
 
     {
         id: 'heat-exchanger-cfd',
-        title: 'CFD Case Study: Counterflow Heat Exchanger',
+        title: 'CFD Analysis of Counterflow Heat Exchanger',
         category: 'cfd',
         catLabel: 'Simulation & Optimisation',
         image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=500&fit=crop',
