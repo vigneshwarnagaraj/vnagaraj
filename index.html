@@ -8,8 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 
-    <!-- ── PDF EXPORT LIBRARY ── -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- ── PDF EXPORT LIBRARY — loaded before any custom scripts ── -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
         /* ── Reset ── */
@@ -199,7 +199,8 @@
             text-decoration: none;
             display: inline-flex; align-items: center; gap: 6px;
         }
-        .btn-pdf:hover { border-color: rgba(2,132,199,0.4); color: #0284c7; background: rgba(2,132,199,0.04); }
+        .btn-pdf:hover:not(:disabled) { border-color: rgba(2,132,199,0.4); color: #0284c7; background: rgba(2,132,199,0.04); }
+        .btn-pdf:disabled { opacity: 0.45; cursor: not-allowed; }
         .btn-pdf svg { flex-shrink: 0; }
         /* Spinner shown during PDF generation */
         #pdf-spinner {
@@ -498,11 +499,10 @@
 
         /* ══════════════════════════════════════
            PDF EXPORT STYLES
-           .no-print applied via JS during html2pdf export.
-           Also respected by browser Print dialog.
+           .no-print: JS sets display:none during html2pdf export
+           and restores it in finally{}.
+           @media print handles browser Print dialog.
         ══════════════════════════════════════ */
-        .no-print { display: none !important; }
-
         @media print {
             /* Hide interactive / navigational elements */
             .no-print,
@@ -549,13 +549,13 @@
 
 <!-- ════════════════ PDF SPINNER ════════════════ -->
 <!-- PDF EXPORT SCRIPT: Loading overlay shown during PDF generation -->
-<div id="pdf-spinner">
+<div id="pdf-spinner" class="no-print">
     <div class="pdf-spin-ring"></div>
     <p style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:#5a6070;letter-spacing:0.08em;">Generating PDF…</p>
 </div>
 
 <!-- ════════════════ NAVIGATION ════════════════ -->
-<nav>
+<nav class="no-print">
     <div class="nav-inner">
         <a href="#hero" class="nav-logo">V.N</a>
         <ul class="nav-links">
@@ -571,7 +571,7 @@
         </button>
     </div>
 </nav>
-<div class="mobile-nav" id="mobile-nav">
+<div class="mobile-nav no-print" id="mobile-nav">
     <a href="#about"          class="mob-link">About</a>
     <a href="#experience"     class="mob-link">Experience</a>
     <a href="#projects"       class="mob-link">Projects</a>
@@ -629,12 +629,12 @@
                 <div class="fu4" style="display:flex; gap:0.65rem; flex-wrap:wrap; margin-bottom:2rem;">
                     <a href="#projects" class="btn-primary">View Projects</a>
                     <a href="#contact"  class="btn-ghost">Contact Me</a>
-                    <!-- PDF EXPORT SCRIPT: "Save as PDF" trigger button -->
-                    <button id="btn-save-pdf" class="btn-pdf" title="Download full portfolio as PDF">
+                    <!-- PDF EXPORT BUTTON — disabled until html2pdf library confirms loaded -->
+                    <button id="savePdfBtn" class="btn-pdf no-print" disabled title="Download full portfolio as PDF">
                         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path d="M12 16V4m0 12l-4-4m4 4l4-4M4 20h16"/>
                         </svg>
-                        Save as PDF
+                        Loading PDF Export…
                     </button>
                 </div>
 
@@ -911,7 +911,7 @@
         <p class="eyebrow" style="margin-bottom:0.4rem;">Portfolio</p>
         <h2 class="section-title" style="margin-bottom:1.5rem;">Engineering Projects</h2>
 
-        <div class="filter-tabs" id="filter-tabs">
+        <div class="filter-tabs no-print" id="filter-tabs">
             <button class="filter-tab active" data-filter="all">All</button>
             <button class="filter-tab" data-filter="cfd">Simulation &amp; Optimisation</button>
             <button class="filter-tab" data-filter="exp">Experimental &amp; Validation</button>
@@ -1872,85 +1872,81 @@ window.addEventListener('resize', handleMobileLayout);
 handleMobileLayout();
 
 /* ══════════════════════════════════════════════
-   PDF EXPORT SCRIPT — FIXED
-   Uses html2pdf.js (loaded via CDN at top of file).
-   Triggered by #btn-save-pdf in the hero CTA row.
-   Filename: Vigneshwar_Nagaraj_Portfolio.pdf
-   Fix: robust try/finally so button always reappears;
-        uses .no-print class to hide nav/UI elements;
-        console debug messages included.
+   PDF EXPORT SCRIPT
+   - Waits for html2pdf library via polling before enabling button
+   - Uses .no-print class to hide UI chrome during export
+   - try/catch/finally ensures button always restores
+   - Console messages: "Starting PDF export..." / "PDF export complete." / "PDF export failed: ..."
 ══════════════════════════════════════════════ */
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener("DOMContentLoaded", function () {
 
-    var pdfBtn = document.getElementById('btn-save-pdf');
-    if (!pdfBtn) return;
+    var pdfButton = document.getElementById("savePdfBtn");
+    if (!pdfButton) return;
 
-    pdfBtn.addEventListener('click', async function () {
+    /* Poll until html2pdf is available, then enable the button */
+    function enablePdfButtonWhenReady() {
+        if (typeof html2pdf !== "undefined") {
+            pdfButton.disabled = false;
+            /* Restore icon + label now that library is confirmed */
+            pdfButton.innerHTML =
+                '<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">' +
+                '<path d="M12 16V4m0 12l-4-4m4 4l4-4M4 20h16"/></svg>' +
+                ' Save Portfolio as PDF';
+            console.log("PDF library loaded.");
+        } else {
+            setTimeout(enablePdfButtonWhenReady, 300);
+        }
+    }
+    enablePdfButtonWhenReady();
 
-        // Close any open modals first
+    pdfButton.addEventListener("click", async function () {
+
+        /* Extra guard in case someone clicks before polling completes */
+        if (typeof html2pdf === "undefined") {
+            alert("PDF library is still loading. Please wait a moment and try again.");
+            return;
+        }
+
+        /* Close any open modals so they don't appear in the PDF */
         closeModal();
         closeCertModal();
         closeBadgeModal();
 
-        // Guard: make sure library loaded
-        if (typeof html2pdf === 'undefined') {
-            alert('PDF library not loaded yet. Please wait a moment and try again.');
-            console.error('PDF export failed: html2pdf is not defined');
-            return;
-        }
+        console.log("Starting PDF export...");
 
-        console.log('Starting PDF export...');
-
-        const spinner = document.getElementById('pdf-spinner');
-
-        // Add .no-print to elements that should be hidden in PDF
-        var noPrintTargets = [
-            document.querySelector('nav'),
-            document.querySelector('.mobile-nav'),
-            document.querySelector('.filter-tabs'),
-            document.getElementById('pdf-spinner'),
-            document.getElementById('btn-save-pdf'),
-            document.getElementById('project-modal'),
-            document.getElementById('cert-modal'),
-            document.getElementById('badge-modal')
-        ].filter(Boolean);
+        var elementsToHide = document.querySelectorAll(".no-print");
 
         try {
-            // Hide interactive chrome
-            noPrintTargets.forEach(function (el) { el.classList.add('no-print'); });
-            if (spinner) spinner.classList.add('active');
+            elementsToHide.forEach(function (el) { el.style.display = "none"; });
 
-            var opt = {
+            var options = {
                 margin:      0.25,
-                filename:    'Vigneshwar_Nagaraj_Portfolio.pdf',
-                image:       { type: 'jpeg', quality: 0.98 },
+                filename:    "Vigneshwar_Nagaraj_Portfolio.pdf",
+                image:       { type: "jpeg", quality: 0.98 },
                 html2canvas: {
                     scale:       2,
                     useCORS:     true,
-                    scrollY:     0,
-                    windowWidth: 1200,
-                    logging:     false
+                    scrollY:     0
                 },
                 jsPDF: {
-                    unit:        'in',
-                    format:      'letter',
-                    orientation: 'portrait'
+                    unit:        "in",
+                    format:      "letter",
+                    orientation: "portrait"
                 },
                 pagebreak: {
-                    mode: ['avoid-all', 'css', 'legacy']
+                    mode: ["avoid-all", "css", "legacy"]
                 }
             };
 
-            await html2pdf().set(opt).from(document.body).save();
-            console.log('PDF export complete.');
+            await html2pdf().set(options).from(document.body).save();
+            console.log("PDF export complete.");
 
-        } catch (err) {
-            console.error('PDF export failed: ' + err);
-            alert('PDF generation encountered an issue.\nError: ' + err + '\n\nAlternative: use your browser\'s Print → Save as PDF.');
+        } catch (error) {
+            console.error("PDF export failed:", error);
+            alert("PDF export failed. Please try using browser Print > Save as PDF.");
         } finally {
-            // Always restore — even if export failed
-            noPrintTargets.forEach(function (el) { el.classList.remove('no-print'); });
-            if (spinner) spinner.classList.remove('active');
+            /* Always restore hidden elements, even on failure */
+            elementsToHide.forEach(function (el) { el.style.display = ""; });
         }
     });
 
