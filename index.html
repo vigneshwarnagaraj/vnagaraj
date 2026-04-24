@@ -8,6 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 
+    <!-- ── PDF EXPORT LIBRARY ── -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <style>
         /* ── Reset ── */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -84,8 +87,6 @@
         .cat-exp    { color: #0e7c5b; border-color: rgba(14,124,91,0.28);   background: rgba(14,124,91,0.07); }
         .cat-robot  { color: #b8500e; border-color: rgba(184,80,14,0.28);   background: rgba(184,80,14,0.07); }
         .cat-wip    { color: #9a6c00; border-color: rgba(154,108,0,0.28);   background: rgba(154,108,0,0.07); }
-        /* ── ADDED: Operations & Supply Chain category ── */
-        .cat-ops    { color: #0f766e; border-color: rgba(15,118,110,0.28);  background: rgba(15,118,110,0.07); }
         .cat-quality{ color: #7c3aed; border-color: rgba(124,58,237,0.28); background: rgba(124,58,237,0.07); }
 
         /* ── Navigation ── */
@@ -183,6 +184,42 @@
             display: inline-flex; align-items: center; gap: 6px;
         }
         .btn-ghost:hover { border-color: rgba(0,0,0,0.28); color: #111118; }
+
+        /* ── PDF EXPORT STYLES — "Save as PDF" button ── */
+        .btn-pdf {
+            background: transparent;
+            color: #5a6070;
+            border: 1px solid rgba(0,0,0,0.14);
+            padding: 9px 20px;
+            border-radius: 7px;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex; align-items: center; gap: 6px;
+        }
+        .btn-pdf:hover { border-color: rgba(2,132,199,0.4); color: #0284c7; background: rgba(2,132,199,0.04); }
+        .btn-pdf svg { flex-shrink: 0; }
+        /* Spinner shown during PDF generation */
+        #pdf-spinner {
+            display: none;
+            position: fixed; inset: 0;
+            background: rgba(244,243,240,0.88);
+            backdrop-filter: blur(6px);
+            z-index: 9999;
+            align-items: center; justify-content: center;
+            flex-direction: column; gap: 1rem;
+        }
+        #pdf-spinner.active { display: flex; }
+        .pdf-spin-ring {
+            width: 38px; height: 38px;
+            border: 3px solid rgba(2,132,199,0.18);
+            border-top-color: #0284c7;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
         /* ── Hero layout ── */
         .hero-grid {
@@ -458,10 +495,68 @@
             border: 1px solid rgba(154,108,0,0.25);
             color: #9a6c00;
         }
+
+        /* ══════════════════════════════════════
+           PDF EXPORT STYLES
+           Applied when html2pdf renders the page
+        ══════════════════════════════════════ */
+        @media print {
+            /* Hide interactive / navigational elements */
+            nav,
+            .mobile-nav,
+            .hamburger,
+            .filter-tabs,
+            #project-modal,
+            #cert-modal,
+            #badge-modal,
+            #pdf-spinner,
+            .btn-pdf,
+            .modal-overlay,
+            .modal-close-btn,
+            .wip-badge { display: none !important; }
+
+            body {
+                background: #ffffff !important;
+                color: #1e1e22 !important;
+                font-size: 10pt;
+            }
+
+            section { padding: 32px 0 !important; }
+
+            /* Avoid page breaks inside key containers */
+            .card,
+            .proj-card,
+            .skill-card,
+            .hero-grid,
+            section { page-break-inside: avoid; break-inside: avoid; }
+
+            /* Force page break before major sections */
+            #experience,
+            #projects,
+            #skills,
+            #certifications,
+            #contact { page-break-before: auto; }
+
+            /* Keep links visible and styled */
+            a { color: #0284c7 !important; text-decoration: underline; }
+
+            .section-wrap { padding: 0 1rem !important; }
+
+            /* Flatten hero layout to single column */
+            .hero-grid { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+            .hero-right { order: 0 !important; }
+        }
     </style>
 </head>
 
 <body>
+
+<!-- ════════════════ PDF SPINNER ════════════════ -->
+<!-- PDF EXPORT SCRIPT: Loading overlay shown during PDF generation -->
+<div id="pdf-spinner">
+    <div class="pdf-spin-ring"></div>
+    <p style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:#5a6070;letter-spacing:0.08em;">Generating PDF…</p>
+</div>
 
 <!-- ════════════════ NAVIGATION ════════════════ -->
 <nav>
@@ -534,10 +629,17 @@
                     <span style="color:#9aa0ae;">Madison, WI · Open to Relocation</span>
                 </div>
 
-                <!-- CTA -->
+                <!-- CTA row — includes new Save as PDF button -->
                 <div class="fu4" style="display:flex; gap:0.65rem; flex-wrap:wrap; margin-bottom:2rem;">
                     <a href="#projects" class="btn-primary">View Projects</a>
                     <a href="#contact"  class="btn-ghost">Contact Me</a>
+                    <!-- PDF EXPORT SCRIPT: "Save as PDF" trigger button -->
+                    <button id="btn-save-pdf" class="btn-pdf" title="Download full portfolio as PDF">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M12 16V4m0 12l-4-4m4 4l4-4M4 20h16"/>
+                        </svg>
+                        Save as PDF
+                    </button>
                 </div>
 
                 <!-- Education -->
@@ -733,6 +835,75 @@
                 </div>
             </div>
 
+            <!-- ════════════════════════════════════
+                 SAP EXPERIENCE SECTION
+                 Moved from Projects → Experience.
+                 Presented as academic / simulation-based
+                 coursework, not a full-time role.
+            ════════════════════════════════════ -->
+            <div class="card" style="padding:1.6rem;">
+                <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-start; gap:0.5rem; margin-bottom:1rem;">
+                    <div>
+                        <h3 style="font-size:0.95rem; font-weight:600; color:#111118; margin-bottom:3px;">
+                            SAP ERPsim Business Operations Simulation
+                        </h3>
+                        <p style="font-size:0.8rem; color:#0284c7;">IT in Supply Chains Coursework · University of Wisconsin–Madison</p>
+                    </div>
+                    <span class="font-mono" style="font-size:0.63rem; color:#7a8494; padding:3px 9px; border:1px solid rgba(0,0,0,0.08); border-radius:4px; white-space:nowrap;">
+                        Fall 2024
+                    </span>
+                </div>
+
+                <p style="font-size:0.75rem; color:#7a8494; font-family:'IBM Plex Mono',monospace; margin-bottom:0.9rem;">
+                    SAP ERP &nbsp;·&nbsp; Production Planning &nbsp;·&nbsp; Procurement &nbsp;·&nbsp; Logistics &nbsp;·&nbsp; Sales &amp; Finance
+                </p>
+
+                <ul style="display:flex; flex-direction:column; gap:0.6rem; margin-bottom:1.1rem;">
+                    <li style="display:flex; gap:0.65rem; align-items:flex-start;">
+                        <span class="bullet-arrow">→</span>
+                        <span style="font-size:0.82rem; color:#2e3340; line-height:1.7;">
+                            Executed end-to-end supply chain operations within SAP ERP — ran MRP cycles, raised purchase orders, managed stock transfers, released production orders, and processed sales transactions across multiple simulation rounds.
+                        </span>
+                    </li>
+                    <li style="display:flex; gap:0.65rem; align-items:flex-start;">
+                        <span class="bullet-arrow">→</span>
+                        <span style="font-size:0.82rem; color:#2e3340; line-height:1.7;">
+                            Analyzed SAP-generated inventory, production, sales, pricing, and financial statements between rapid decision cycles to adjust procurement quantities, reorder points, and regional distribution strategy.
+                        </span>
+                    </li>
+                    <li style="display:flex; gap:0.65rem; align-items:flex-start;">
+                        <span class="bullet-arrow">→</span>
+                        <span style="font-size:0.82rem; color:#2e3340; line-height:1.7;">
+                            Developed integrated cross-functional strategy spanning demand forecasting, push/pull logistics balancing, dynamic pricing, and advertising spend — consistently ranked in the top 1–4 out of 12 competing teams based on company valuation.
+                        </span>
+                    </li>
+                    <li style="display:flex; gap:0.65rem; align-items:flex-start;">
+                        <span class="bullet-arrow">→</span>
+                        <span style="font-size:0.82rem; color:#2e3340; line-height:1.7;">
+                            Managed financial performance by controlling debt levels and optimizing working capital; maintained a low debt-to-equity ratio while growing company valuation — demonstrating the trade-off between operational agility and financial risk.
+                        </span>
+                    </li>
+                    <li style="display:flex; gap:0.65rem; align-items:flex-start;">
+                        <span class="bullet-arrow">→</span>
+                        <span style="font-size:0.82rem; color:#2e3340; line-height:1.7;">
+                            Used Excel for post-round data analysis — tracked KPIs including inventory turnover, stockout frequency, margin by region, and revenue vs. target to refine strategy between simulation cycles.
+                        </span>
+                    </li>
+                </ul>
+
+                <div style="display:flex; flex-wrap:wrap; gap:0.35rem;">
+                    <span class="tag">SAP ERP (ERPsim)</span>
+                    <span class="tag">MRP / Production Planning</span>
+                    <span class="tag">Procurement</span>
+                    <span class="tag">Demand Forecasting</span>
+                    <span class="tag">Logistics &amp; Distribution</span>
+                    <span class="tag">Pricing Strategy</span>
+                    <span class="tag">Financial Analysis</span>
+                    <span class="tag">Excel</span>
+                </div>
+            </div>
+            <!-- ════ END SAP EXPERIENCE SECTION ════ -->
+
         </div>
     </div>
 </section>
@@ -751,10 +922,10 @@
             <button class="filter-tab" data-filter="exp">Experimental &amp; Validation</button>
             <button class="filter-tab" data-filter="design">Design &amp; Product Dev</button>
             <button class="filter-tab" data-filter="robot">Robotics &amp; Systems</button>
-            <button class="filter-tab" data-filter="ops">Operations &amp; Supply Chain</button>
             <button class="filter-tab" data-filter="quality">Quality &amp; Systems</button>
         </div>
 
+        <!-- SAP / ops filter tab removed; sap-supply-chain card removed -->
         <div id="projects-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(290px,1fr)); gap:1.1rem;">
 
         <!-- ─ surrogate ─ -->
@@ -841,17 +1012,6 @@
                 <div style="margin-bottom:0.5rem;"><span class="cat-pill cat-quality">Quality &amp; Systems Engineering</span></div>
                 <h3 style="font-size:0.83rem;font-weight:600;color:#111118;line-height:1.4;margin-bottom:0.45rem;">Quality Management System (QMS) Development &amp; Internal Audit &mdash; Medical Device</h3>
                 <p style="font-size:0.75rem;color:#6a7280;line-height:1.65;margin-bottom:0.7rem;">Designed a complete ISO-aligned quality system and successfully passed internal audit under simulated regulatory conditions.</p>
-                <span style="font-size:0.72rem;color:#0284c7;font-weight:500;">View Details &rarr;</span>
-            </div>
-        </div>
-
-        <!-- ─ sap-supply-chain ─ -->
-        <div class="proj-card" data-category="ops" onclick="openModalById('sap-supply-chain')">
-            <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=500&fit=crop" alt="SAP ERPsim Supply Chain" class="proj-img">
-            <div style="padding:1rem;">
-                <div style="margin-bottom:0.5rem;"><span class="cat-pill cat-ops">Operations &amp; Supply Chain</span></div>
-                <h3 style="font-size:0.83rem;font-weight:600;color:#111118;line-height:1.4;margin-bottom:0.45rem;">ERP-Based Supply Chain Strategy &amp; Operations Optimization (SAP ERPsim)</h3>
-                <p style="font-size:0.75rem;color:#6a7280;line-height:1.65;margin-bottom:0.7rem;">Real-time SAP-based decision-making across forecasting, procurement, production, and pricing achieved top-1 rankings while maintaining low debt-to-equity ratio.</p>
                 <span style="font-size:0.72rem;color:#0284c7;font-weight:500;">View Details &rarr;</span>
             </div>
         </div>
@@ -1219,9 +1379,8 @@
 
 /* ─────────────────────────────────────────
    PROJECT DATA
-   To add a new project: copy any object below,
-   fill all fields, set wip:false when complete.
-   category: 'cfd' | 'exp' | 'design' | 'robot' | 'ops'
+   SAP / ERPsim removed from here — moved to Experience section.
+   category: 'cfd' | 'exp' | 'design' | 'robot' | 'quality'
 ──────────────────────────────────────────── */
 const PROJECTS = [
 
@@ -1438,33 +1597,6 @@ const PROJECTS = [
             'Demonstrated ability to translate regulatory requirements into structured, implementable engineering processes.'
         ],
         learning: 'Quality systems are not just documentation — they are decision-making frameworks that connect risk, suppliers, and operations. A strong QMS ensures that engineering decisions are traceable, auditable, and aligned with both performance and compliance requirements.'
-    },
-
-    /* ── Operations & Supply Chain ── */
-    {
-        id: 'sap-supply-chain',
-        title: 'ERP-Based Supply Chain Strategy & Operations Optimization (SAP ERPsim)',
-        category: 'ops',
-        catLabel: 'Operations & Supply Chain',
-        image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=500&fit=crop',
-        tagline: 'Real-time SAP-based decision-making across forecasting, procurement, production, and pricing achieved top-1 rankings while maintaining low debt-to-equity ratio.',
-        wip: false,
-        problem: 'A competitive, real-time SAP ERP simulation required teams to manage an entire supply chain \u2014 from forecasting and procurement to production, logistics, pricing, and financial strategy \u2014 with the objective of maximizing company valuation while maintaining a low debt-to-equity ratio under time-constrained decision cycles.',
-        approach: [
-            'Executed end-to-end operations including demand forecasting, raw material procurement, production planning, logistics distribution, and pricing strategy within SAP ERP.',
-            'Analyzed SAP-generated reports (inventory, production, sales, market pricing, and financial statements) between rapid simulation cycles to adjust strategy.',
-            'Balanced push vs. pull logistics strategies to optimize regional inventory availability and minimize stockouts.',
-            'Adjusted pricing and advertising strategies based on market demand and competitor behavior.',
-            'Managed financial performance by controlling debt levels, optimizing working capital, and maintaining healthy cash flow.'
-        ],
-        tools: ['SAP ERP (ERPsim)', 'Supply Chain Strategy', 'Demand Forecasting', 'Production Planning', 'Financial Analysis', 'Excel'],
-        results: [
-            'Consistently ranked in top 4 (often top 1) out of 12 teams based on company valuation and sales performance.',
-            'Achieved high company valuation while maintaining low debt-to-equity ratio through balanced operational and financial decisions.',
-            'Improved inventory positioning across regions, reducing stockouts and lost sales opportunities.',
-            'Demonstrated ability to make accurate, data-driven decisions under high-speed, time-constrained conditions.'
-        ],
-        learning: 'End-to-end system performance is driven by how well individual functions \u2014 procurement, production, logistics, and pricing \u2014 are coordinated. Maximizing valuation is not about optimizing a single variable, but about managing trade-offs between inventory, demand variability, and financial risk in real time.'
     }
 
 ];
@@ -1475,7 +1607,6 @@ const CAT = {
     exp:    { label: 'Experimental & Validation', cls: 'cat-exp'    },
     design: { label: 'Design & Product Dev',      cls: 'cat-design' },
     robot:  { label: 'Robotics & Systems',        cls: 'cat-robot'  },
-    ops:    { label: 'Operations & Supply Chain', cls: 'cat-ops'    },
     quality:{ label: 'Quality & Systems Engineering', cls: 'cat-quality'},
 };
 
@@ -1708,6 +1839,95 @@ function handleMobileLayout() {
 }
 window.addEventListener('resize', handleMobileLayout);
 handleMobileLayout();
+
+/* ══════════════════════════════════════════════
+   PDF EXPORT SCRIPT
+   Uses html2pdf.js (loaded via CDN at top of file).
+   Triggered by #btn-save-pdf in the hero CTA row.
+   Filename: Vigneshwar_Nagaraj_Portfolio.pdf
+══════════════════════════════════════════════ */
+document.getElementById('btn-save-pdf').addEventListener('click', function () {
+    // Close any open modals first so they don't appear in the PDF
+    closeModal();
+    closeCertModal();
+    closeBadgeModal();
+
+    // Show the loading spinner
+    const spinner = document.getElementById('pdf-spinner');
+    spinner.classList.add('active');
+
+    // html2pdf options
+    const opt = {
+        margin:      [12, 10, 12, 10],   // top, right, bottom, left (mm)
+        filename:    'Vigneshwar_Nagaraj_Portfolio.pdf',
+        image:       { type: 'jpeg', quality: 0.92 },
+        html2canvas: {
+            scale:         2,             // higher DPI for crisp text
+            useCORS:       true,          // allow cross-origin images
+            scrollY:       0,
+            windowWidth:   1200,          // render at desktop width
+            logging:       false
+        },
+        jsPDF: {
+            unit:        'mm',
+            format:      'letter',
+            orientation: 'portrait'
+        },
+        // Page-break rules: avoid splitting inside these selectors
+        pagebreak: {
+            mode:   ['avoid-all', 'css', 'legacy'],
+            before: ['#experience', '#projects', '#skills', '#certifications', '#contact'],
+            avoid:  ['.card', '.proj-card', '.skill-card', 'section']
+        }
+    };
+
+    // Elements to temporarily hide during PDF render
+    const hideSelectors = [
+        'nav',
+        '.mobile-nav',
+        '#pdf-spinner',
+        '.filter-tabs',
+        '#btn-save-pdf',
+        '#project-modal',
+        '#cert-modal',
+        '#badge-modal'
+    ];
+    const hidden = [];
+    hideSelectors.forEach(sel => {
+        document.querySelectorAll(sel).forEach(el => {
+            if (el.style.display !== 'none') {
+                el.dataset.pdfHidden = 'true';
+                el.style.display = 'none';
+                hidden.push(el);
+            }
+        });
+    });
+
+    // Generate PDF from the full document body
+    html2pdf()
+        .set(opt)
+        .from(document.body)
+        .save()
+        .then(function () {
+            // Restore hidden elements
+            hidden.forEach(el => {
+                el.style.display = '';
+                delete el.dataset.pdfHidden;
+            });
+            // Hide spinner
+            spinner.classList.remove('active');
+        })
+        .catch(function (err) {
+            console.error('PDF generation error:', err);
+            hidden.forEach(el => {
+                el.style.display = '';
+                delete el.dataset.pdfHidden;
+            });
+            spinner.classList.remove('active');
+            alert('PDF generation encountered an issue. Please try again or use your browser\'s Print → Save as PDF option.');
+        });
+});
+/* ══ END PDF EXPORT SCRIPT ══ */
 
 </script>
 </body>
