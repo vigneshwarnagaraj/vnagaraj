@@ -290,6 +290,10 @@
             transition: border-color 0.25s, transform 0.25s;
             position: relative;
         }
+        .cad-grid .proj-card { display: flex; flex-direction: column; }
+        .cad-grid .proj-img { height: 220px; aspect-ratio: auto; padding: 0.75rem; background: #f7f8fa; }
+        .cad-card-body { display: flex; flex: 1; flex-direction: column; padding: 1rem; }
+        .cad-card-body .skill-tags { margin-top: auto; }
         .proj-card:hover {
             border-color: rgba(2,132,199,0.3);
             transform: translateY(-2px);
@@ -372,7 +376,8 @@
             margin: 0; overflow: hidden; border: 1px solid rgba(0,0,0,0.08);
             border-radius: 9px; background: #f7f8fa; display: flex; flex-direction: column;
         }
-        .project-media-grid figure.featured { grid-column: 1 / -1; }
+        .project-media-grid figure.featured,
+        .project-media-grid figure.media-hero { grid-column: 1 / -1; }
         .project-media-grid figure > a {
             width: 100%; aspect-ratio: 16 / 10; max-height: 430px;
             display: flex; align-items: center; justify-content: center;
@@ -382,6 +387,10 @@
             width: 100%; height: 100%; display: block; object-fit: contain;
             object-position: center; background: #fff; cursor: zoom-in;
         }
+        .project-media-grid figure.media-hero > a { aspect-ratio: 16 / 9; max-height: 520px; }
+        .project-media-grid figure.media-landscape > a { aspect-ratio: 16 / 10; max-height: 390px; }
+        .project-media-grid figure.media-tall { max-width: 430px; justify-self: center; width: 100%; }
+        .project-media-grid figure.media-tall > a { aspect-ratio: 4 / 5; max-height: 520px; }
         .project-media-grid figcaption {
             padding: 0.65rem 0.75rem; font-size: 0.69rem; line-height: 1.55; color: #6a7280;
         }
@@ -400,6 +409,11 @@
         .project-video-grid figcaption {
             padding: 0.65rem 0.75rem; font-size: 0.69rem; line-height: 1.55; color: #6a7280;
         }
+        .cad-media-fallback {
+            min-height: 190px; padding: 1.25rem; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; gap: 0.75rem; text-align: center;
+            background: #f1f3f5; color: #4a5260; font-size: 0.75rem; line-height: 1.6;
+        }
         .project-visual-section {
             margin: 1rem 0 1.45rem; padding-top: 0.2rem;
         }
@@ -412,8 +426,9 @@
         @media (max-width: 640px) {
             .project-media-grid { grid-template-columns: 1fr; }
             .project-video-grid { grid-template-columns: 1fr; }
-            .project-media-grid figure.featured { grid-column: auto; }
+            .project-media-grid figure.featured, .project-media-grid figure.media-hero { grid-column: auto; }
             .project-media-grid figure > a { max-height: 360px; }
+            .cad-grid .proj-img { height: 210px; }
         }
 
         .cad-grid {
@@ -985,7 +1000,7 @@
             <div class="proj-media" style="background:linear-gradient(135deg,#fff7e8,#eef6fb);display:flex;align-items:center;justify-content:center;">
                 <div style="text-align:center;"><div class="font-display" style="font-size:1.2rem;color:#8a5a10;margin-bottom:0.25rem;">SAP ERPsim</div><div class="font-mono" style="font-size:0.62rem;color:#6a7280;letter-spacing:0.1em;">ACADEMIC SIMULATION</div></div>
             </div>
-            <div style="padding:1rem;">
+            <div class="cad-card-body">
                 <div style="margin-bottom:0.5rem;"><span class="cat-pill cat-ops">Academic Simulation</span></div>
                 <h3 style="font-size:0.83rem;font-weight:600;color:#111118;line-height:1.4;margin-bottom:0.45rem;">Business Operations Simulation using SAP ERPsim</h3>
                 <p style="font-size:0.75rem;color:#6a7280;line-height:1.65;margin-bottom:0.7rem;">Procurement Planning and Logistics lead across 53 university-course simulation rounds.</p>
@@ -1366,33 +1381,34 @@ const CAD_MODELS = [
         modelType: 'Assembly',
         application: 'Heat-transfer / flow-simulation geometry',
         tags: ['SolidWorks', 'Assembly Modeling', 'Mechanical Design', 'Heat Exchanger', 'CAD'],
-        thumbnail: 'Assets/CAD Models/Radiator/Radiator Isometric.PNG',
+        thumbnail: 'Assets/Cad Model/Radiator/Radiator Isometric.PNG',
         images: [
             {
                 title: 'Isometric View',
-                src: 'Assets/CAD Models/Radiator/Radiator Isometric.PNG',
+                src: 'Assets/Cad Model/Radiator/Radiator Isometric.PNG',
                 alt: 'Isometric CAD view of finned heat exchanger radiator assembly',
                 caption: 'Isometric view showing the finned core, interconnected tubing, end sections, and inlet/outlet geometry.',
-                primary: true
+                primary: true,
+                role: 'hero'
             },
             {
                 title: 'Side View',
-                src: 'Assets/CAD Models/Radiator/Radiator Side View.PNG',
+                src: 'Assets/Cad Model/Radiator/Radiator Side View.PNG',
                 alt: 'Side CAD view of finned heat exchanger radiator assembly showing fin spacing and tubing',
                 caption: 'Side profile showing fin spacing, tube routing, end sections, and inlet/outlet geometry.',
-                portrait: true
+                role: 'tall'
             }
         ],
         downloads: [
-            { label: 'Download STEP', format: 'STEP Model', path: 'Assets/CAD Models/Radiator/Radiator V3.STEP', primary: true },
-            { label: 'Download STL', format: 'STL Model · Mesh Format', path: 'Assets/CAD Models/Radiator/Radiator V3.STL' }
+            { label: 'Download STEP', format: 'STEP Model', path: 'Assets/Cad Model/Radiator/Radiator V3.STEP', primary: true },
+            { label: 'Download STL', format: 'STL Model · Mesh Format', path: 'Assets/Cad Model/Radiator/Radiator V3.STL' }
         ]
     },
     {
-        name: 'Quadcopter Design & Flow Simulation',
+        name: 'Quadcopter Assembly',
         cardDescription: 'Foldable quadcopter design developed in SolidWorks with an initial CFD study of rotor-driven airflow and surface pressure distribution.',
         software: 'SolidWorks',
-        modelType: 'Design & Flow Simulation',
+        modelType: 'Assembly',
         application: 'Mechanical design and exploratory CFD study',
         tags: ['SolidWorks', 'Flow Simulation', 'Assembly Modeling', 'CFD'],
         badge: 'Design & Flow Simulation',
@@ -1478,59 +1494,48 @@ const PROJECTS = [
 
     {
         id: 'quadcopter',
-        title: 'Quadcopter Design & Flow Simulation',
+        title: 'Quadcopter Assembly',
         category: 'cfd',
         catLabel: 'Design & Flow Simulation',
         image: 'Assets/Cad Model/Quadcopter/Quadcopter Isometric View.PNG',
         tagline: 'Foldable SolidWorks quadcopter design with an initial study of rotor-driven airflow and surface pressure.',
         wip: false,
-        problem: 'I designed a foldable quadcopter in SolidWorks and then used SolidWorks Flow Simulation to study airflow and surface pressure around the model. The project combines mechanical design, packaging considerations, rotating-flow visualization, and an initial CFD investigation.',
+        problem: 'I designed a foldable quadcopter assembly in SolidWorks and used the completed geometry for an exploratory flow-simulation study. The page separates the mechanical configuration from the analysis media so each visual supports the relevant engineering stage.',
         approach: [
             'Designed a central body, folding arms, motor housings, propellers, camera mount, and ventilation features in SolidWorks.',
             'Used folding arms to reduce the quadcopter\'s stored footprint when it is not in use.',
-            'Configured an initial SolidWorks Flow Simulation study with each rotor set to 150 RPM.',
             'Used flow trajectories to examine airflow direction around the propellers and interaction with the arms and body.',
-            'Reviewed surface pressure distribution before advancing to aerodynamic forces, rotor-speed comparisons, and additional simulation conditions.'
+            'Reviewed the available flow visualization and surface result before planning additional simulation conditions.'
         ],
         tools: ['SolidWorks', 'SolidWorks Flow Simulation', 'Assembly Modeling', 'Mechanical Design', 'CFD', 'Flow Visualization'],
         results: [
             'Completed the foldable quadcopter assembly and compact folded configuration.',
             'Visualized rotor-driven flow trajectories around the propellers, arms, and central body.',
-            'Examined surface pressure distribution over an approximate range of 101.323 kPa to 101.327 kPa.',
             'Identified airflow behavior that raised additional questions for future design and simulation iterations.'
         ],
         learning: 'This initial study reinforced the value of understanding flow and pressure patterns before drawing conclusions about aerodynamic performance. The current results are exploratory and do not establish aerodynamic optimization or flight validation.',
-        overviewSections: [
-            { title: 'Design Overview', description: 'The isometric assembly view highlights the central body, folding arms, motor housings, propellers, camera mount, and ventilation features.', images: [
-                { src: 'Assets/Cad Model/Quadcopter/Quadcopter Isometric View.PNG', alt: 'Isometric CAD view of foldable quadcopter assembly', caption: 'Isometric view of the complete quadcopter assembly.', featured: true },
-                { src: 'Assets/Cad Model/Quadcopter/Quadcopter Top Fold View.PNG', alt: 'Top CAD view of quadcopter with arms folded', caption: 'Folded configuration showing the reduced storage footprint.' }
+        detailSections: [
+            { title: 'CAD Design — Isometric Assembly View', description: 'Main CAD geometry and mechanical configuration.', images: [
+                { src: 'Assets/Cad Model/Quadcopter/Quadcopter Isometric View.PNG', alt: 'Isometric CAD view of foldable quadcopter assembly', caption: 'Isometric view of the complete quadcopter CAD assembly.', role: 'hero' }
+            ]},
+            { title: 'CAD Design — Folded Configuration', description: 'Packaging configuration of the folding-arm design.', images: [
+                { src: 'Assets/Cad Model/Quadcopter/Quadcopter Top Fold View.PNG', alt: 'Top CAD view of the quadcopter in its folded configuration', caption: 'Top view showing the quadcopter in its folded configuration.', role: 'landscape' }
+            ]},
+            { title: 'Flow Simulation — CFD / Flow Field', description: 'Analysis visualization produced using the quadcopter geometry.', images: [
+                { src: 'Assets/Cad Model/Quadcopter/Quadcopter Flow Sim_1.png', alt: 'Flow-simulation visualization around the quadcopter geometry', caption: 'Flow-simulation visualization around the quadcopter geometry.', role: 'landscape' }
+            ]},
+            { title: 'Flow Simulation — Surface Result', description: 'Static surface-result view from the exploratory simulation.', images: [
+                { src: 'Assets/Cad Model/Quadcopter/Surface Plot 1.png', alt: 'Surface result from the quadcopter flow simulation', caption: 'Surface result from the quadcopter flow simulation.', role: 'landscape' }
+            ]},
+            { title: 'Flow Trajectory Animations', description: 'The original AVI files are preserved as project media. Because browser-native AVI playback is not reliable, each animation is provided as an open/download link.', videos: [
+                { src: 'Assets/Cad Model/Quadcopter/Flow Trajectory Animation Iso View.avi', caption: 'Isometric Flow Trajectory', type: 'video/x-msvideo', fallback: true },
+                { src: 'Assets/Cad Model/Quadcopter/Flow Trajectory Animation - Top View.avi', caption: 'Top-View Flow Trajectory', type: 'video/x-msvideo', fallback: true }
             ]}
-        ],
-        approachSections: [
-            { title: 'Additional Design Views', description: 'Supporting orthographic views clarify the arm layout and folded packaging concept.', images: [
-                { src: 'Assets/Cad Model/Quadcopter/Quadcopter Top View.PNG', alt: 'Top CAD view of unfolded quadcopter', caption: 'Top view of the deployed arm layout.' },
-                { src: 'Assets/Cad Model/Quadcopter/Quadcopter Front View.PNG', alt: 'Front CAD view of quadcopter', caption: 'Front view of the body, arms, and propellers.' },
-                { src: 'Assets/Cad Model/Quadcopter/Quadcopter Fold Side View.PNG', alt: 'Side CAD view of folded quadcopter', caption: 'Side view of the folded packaging configuration.' }
-            ]},
-            { title: 'Rotor Motion & Flow Trajectory', description: 'Browser-compatible MP4 media used to present rotor motion and the initial airflow-trajectory study.', videos: [
-                { src: 'Assets/Cad Model/Quadcopter/Quadcopter v1.mp4', caption: 'Rotor Motion' },
-                { src: 'Assets/Cad Model/Quadcopter/Quadcopter v3.mp4', caption: 'Airflow Trajectory' }
-            ]},
-            { title: 'Why Flow Trajectories', description: 'Flow trajectories make airflow direction, interactions with the structure, and unexpected simulated behavior easier to inspect before more detailed aerodynamic quantities are introduced.' }
-        ],
-        resultSections: [
-            { title: 'Surface Pressure Distribution', description: 'Pressure distribution across the propellers, body, arms, and motor housings. The displayed range is approximately 101.323 kPa to 101.327 kPa.', images: [
-                { src: 'Assets/Cad Model/Quadcopter/Surface Plot 1.png', alt: 'SolidWorks Flow Simulation surface pressure plot on quadcopter geometry', caption: 'Surface pressure distribution across the quadcopter geometry.', featured: true }
-            ]},
-            { title: 'Initial Study Boundary', description: 'The simulation intentionally stops at flow trajectories and surface pressure so the basic behavior can be understood before evaluating forces, alternative rotor speeds, propeller variations, or additional operating conditions.' }
         ],
         futureSections: [
             { title: 'Next Steps', bullets: ['Compare different rotor speeds and propeller designs.', 'Evaluate effects on airflow and aerodynamic forces.', 'Refine the mechanical design and simulation setup through additional iterations.', 'Develop a carrying case with the folded main frame on one side and removable propellers stored separately.'] }
         ],
-        downloads: [
-            { label: 'Download STEP', format: 'STEP Model', path: 'Assets/Cad Model/Quadcopter/Quadcopter v1.STEP', primary: true },
-            { label: 'Download SolidWorks Assembly', format: 'SLDASM', path: 'Assets/Cad Model/Quadcopter/Quadcopter v1.SLDASM' }
-        ]
+        downloads: []
     },
 
     /*{
@@ -1839,10 +1844,10 @@ function openCADModal(index) {
     const overlay = document.getElementById('project-modal');
     const box = document.getElementById('modal-content');
     const images = (model.images || []).map(image => `
-        <section class="project-visual-section cad-detail-view ${image.portrait ? 'cad-detail-side' : ''}">
+        <section class="project-visual-section cad-detail-view">
             <h3 class="project-visual-title">${image.title}</h3>
             <div class="project-media-grid">
-                <figure class="featured">
+                <figure class="media-${image.role || (image.primary ? 'hero' : 'landscape')}">
                     <a href="${repositoryPath(image.src)}" target="_blank" rel="noopener" aria-label="Open full-size image: ${image.alt}">
                         <img src="${repositoryPath(image.src)}" alt="${image.alt}" loading="lazy">
                     </a>
@@ -1938,7 +1943,7 @@ function openModal(p) {
         ).join('');
         const renderVisualSections = sections => (sections || []).map(section => {
             const images = (section.images || []).map(item => `
-                <figure class="${item.featured ? 'featured' : ''}">
+                <figure class="media-${item.role || (item.featured ? 'hero' : 'landscape')}">
                     <a href="${repositoryPath(item.src)}" target="_blank" rel="noopener" aria-label="Open full-size image: ${item.alt}">
                         <img src="${repositoryPath(item.src)}" alt="${item.alt}" loading="lazy">
                     </a>
@@ -1949,10 +1954,15 @@ function openModal(p) {
             ).join('');
             const videos = (section.videos || []).map(video => `
                 <figure>
-                    <video controls muted playsinline preload="metadata">
-                        <source src="${repositoryPath(video.src)}" type="video/mp4">
-                        Your browser does not support HTML5 video.
-                    </video>
+                    ${video.fallback ? `
+                        <div class="cad-media-fallback">
+                            <span>Flow trajectory animation available as project media.</span>
+                            <a class="btn-ghost" href="${repositoryPath(video.src)}" target="_blank" rel="noopener">Open / Download AVI</a>
+                        </div>` : `
+                        <video controls muted playsinline preload="metadata">
+                            <source src="${repositoryPath(video.src)}" type="${video.type || 'video/mp4'}">
+                            Your browser does not support HTML5 video.
+                        </video>`}
                     <figcaption>${video.caption}</figcaption>
                 </figure>`).join('');
             return `<section class="project-visual-section">
@@ -1966,6 +1976,7 @@ function openModal(p) {
         const overviewVisuals = renderVisualSections(p.overviewSections);
         const approachVisuals = renderVisualSections(p.approachSections);
         const resultVisuals = renderVisualSections(p.resultSections);
+        const detailVisuals = renderVisualSections(p.detailSections);
         const futureVisuals = (p.futureSections || []).map(section => `
             <section class="project-visual-section">
                 <h3 class="project-visual-title">${section.title}</h3>
@@ -1983,6 +1994,16 @@ function openModal(p) {
                 <span class="cat-pill ${cat.cls}" style="margin-bottom:0.9rem;display:inline-block;">${cat.label}</span>
                 <h2 style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;color:#111118;line-height:1.3;margin-bottom:1.6rem;">${p.title}</h2>
 
+                ${detailVisuals ? `
+                <div style="margin-bottom:1.4rem;">
+                    <p class="modal-label">Overview</p>
+                    <p style="font-size:0.81rem;color:#2e3340;line-height:1.8;">${p.problem || ''}</p>
+                </div>
+                ${detailVisuals}
+                <div style="margin-bottom:1.4rem;">
+                    <p class="modal-label">Tools Used</p>
+                    <div style="display:flex;flex-wrap:wrap;gap:0.35rem;">${toolsHTML}</div>
+                </div>` : `
                 <div style="margin-bottom:1.4rem;">
                     <p class="modal-label">Problem</p>
                     <p style="font-size:0.81rem;color:#2e3340;line-height:1.8;">${p.problem || ''}</p>
@@ -2011,7 +2032,7 @@ function openModal(p) {
                 <div style="padding:1rem;border-radius:8px;background:#eef0f3;border:1px solid rgba(0,0,0,0.08);margin-bottom:1.25rem;">
                     <p class="modal-label">Key Learning</p>
                     <p style="font-size:0.8rem;color:#4a5260;line-height:1.8;font-style:italic;">${p.learning || ''}</p>
-                </div>
+                </div>`}
 
                 ${futureVisuals}
 
